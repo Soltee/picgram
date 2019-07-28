@@ -1,0 +1,33 @@
+img, svg{
+	object-fit: cover;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.post_image{
+	height: 200px;
+	width: 200px;
+}
+
+.user-img{
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+}
+
+.user-img-sm{
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+
+.single_post_image{
+	height: 300px;
+	width: 300px;
+}
+
+.comment_icon{
+	position: absolute;
+	right: 10%;
+	height: 35px;
+	width: 35px;
+}
