@@ -21,21 +21,12 @@ class ProfileController extends Controller
         $profile = $user->profile;
         $following = $user->following;
         $followers = $user->profile->followers;
+
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         
-        return view('profile', compact('posts', 'user', 'profile', 'following', 'followers'));
+        return view('profile', compact('posts', 'user', 'profile', 'following', 'followers', 'follows'));
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -85,14 +76,5 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }

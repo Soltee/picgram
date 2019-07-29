@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Comment;
+use App\User;
+
 
 class HomeController extends Controller
 {
@@ -20,31 +22,41 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {   
-        $posts = auth()->user()->posts()->latest()->paginate(10);;
-        return view('home', compact('posts'));
+     * Home View
+    **/
+    public function home(){ return view('home'); }
+
+    public function postByF()
+    {
+        $users = auth()->user()->following->pluck('user_id');
+        if(count($users) > 0){
+            $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(1);
+            return response()->json(['posts' => $posts], 200);       
+        } else {
+            return response()->json(['posts' => []], 200); 
+        }
+        // $posts = ($users) ? Post::whereIn('user_id', '$users')->with('user')->latest()->paginate(1) : [] ;
+
     }
 
     /**
-
-     * Browse all posts
-
+     * Search users
     **/
 
-    public function browse($category="")
+    public function search()
     {   
-        if($category){
-            dd($category);
-        }
-        $categories = Category::latest()->get();
-        $posts = Post::latest()->paginate(10);
-        
-        return view('browse', compact('categories', 'posts'));
+        // $users = User::search($request->input('key'), null, true)->with('posts')->paginate(20);
+        $users = User::where('name', 'LIKE', '%'. request('name') .'%')->with('posts', 'profile')->paginate(20);
+        return response()->json(['users' => $users], 200);
+    }
+
+    /**
+     * Browse all posts
+    **/
+
+    public function browse()
+    {   
+        return view('browse');
     }
 
 

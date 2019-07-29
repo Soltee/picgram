@@ -22,9 +22,6 @@
                      <img class="post_image"  :src="'/storage/'+ p.post_image">
                    </a>
                 </div>
-                <div class="alert alert-error">
-                    No Posts Yet;
-                </div>
 
             </div>
 

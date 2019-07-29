@@ -6,18 +6,33 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SearchableTrait;
 
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        'columns' => [
+            'users.name' => 10,
+        ],
+        'joins' => [
+            'posts' => ['users.id','posts.user_id'],
+        ],
+    ];
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-       'avatar', 'name', 'email', 'password',
+       'name', 'email', 'password',
     ];
 
     /**

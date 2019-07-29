@@ -21,7 +21,13 @@
                 @endif
               </div>
               <div class="col-md-10 d-flex flex-column">
-                <h4>{{ $user->name }}</h4>
+                <div class="d-flex flex-row mb-2 justify-items-center">
+                  <h4 class="mr-2 ">{{ $user->name }}</h4>
+                  @if(auth()->user()->id === $user->id)
+                  @else
+                    <follow-profile user="{{ $user->id }}" follows="{{ $follows }}"></follow-profile>
+                  @endif
+                </div>
                 <div class="d-flex flex-row mb-2">
                   <div class="d-flex flex-column align-items-center mr-2">
                     <button class="btn btn-primary">Posts</button>
@@ -47,8 +53,8 @@
                 </div>
                 <!--Follow and posts ends-->
                 <div class="d-flex flex-column">
-                  <p>{{ str_limit('Lorem ipsum dolor sit amet, consectetur adipisicing elit, tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '150', '...') }}</p>
-                  <a href="" class="disabled">https::/www.wwww.com</a>
+                  <p>{{ str_limit($profile->about, '150', '...') }}</p>
+                  <a href="" class="disabled">{{ $profile->url }}</a>
                 </div>
               </div>
               <!--right ends-->
