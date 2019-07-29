@@ -24,7 +24,11 @@ class HomeController extends Controller
     /**
      * Home View
     **/
-    public function home(){ return view('home'); }
+    public function home(){ 
+        // $users = auth()->user()->following->pluck('user_id');
+        // $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(1);
+        // dd($posts);
+        return view('home'); }
 
     public function postByF()
     {

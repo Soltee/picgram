@@ -2065,29 +2065,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+var param = "";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'home',
   props: [],
   data: function data() {
     return {
       posts: [],
+      currentPage: null,
+      nextPage: null,
+      prevPage: null,
       error: null,
       count: null
     };
   },
   mounted: function mounted() {
-    this.getPosts();
+    this.getPosts(param);
   },
   methods: {
-    getPosts: function getPosts() {
+    getPosts: function getPosts(param) {
       var _this = this;
 
-      axios.get('/u/p').then(function (res) {
-        console.log(res.data.posts.data);
-        _this.posts = res.data.posts.data;
-      })["catch"](function (err) {
-        return _this.error = err.response;
-      });
+      if (param) {
+        this.post = [];
+        this.currentPage = null;
+        this.nextPage = null;
+        this.prevPage = null;
+        axios.get("".concat(param)).then(function (res) {
+          _this.posts = res.data.posts.data;
+          _this.currentPage = res.data.posts.current_page;
+          _this.nextPage = res.data.posts.next_page_url;
+          _this.prevPage = res.data.posts.prev_page_url;
+        })["catch"](function (err) {
+          _this.error = err.data;
+        });
+      } else {
+        axios.get('/u/p').then(function (res) {
+          console.log(res.data.posts.data);
+          _this.posts = res.data.posts.data;
+          _this.currentPage = res.data.posts.current_page;
+          _this.nextPage = res.data.posts.next_page_url;
+          _this.prevPage = res.data.posts.prev_page_url;
+        })["catch"](function (err) {
+          return _this.error = err.response;
+        });
+      }
     }
   },
   computed: {
@@ -2129,11 +2158,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'search-model',
   props: [],
   data: function data() {
     return {
+      searchStatus: false,
       searchKey: '',
       users: [],
       error: null
@@ -2159,6 +2194,10 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         return _this.error = err.response;
       });
+    },
+    enlargeSearch: function enlargeSearch(e) {
+      console.log(e.target);
+      return this.searchStatus = !this.searchStatus;
     }
   }
 });
@@ -20038,24 +20077,72 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.count
-      ? _c(
-          "div",
-          _vm._l(_vm.posts, function(p) {
-            return _c("div", [
-              _c("a", { attrs: { href: "/p/" + p.id + "-" + p.caption } }, [
-                _c("img", {
-                  staticClass: "post_image",
-                  attrs: { src: "/storage/" + p.post_image }
-                })
-              ])
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "d-flex flex-row mb-4" }, [
+        _vm.prevPage
+          ? _c("div", { staticClass: "mr-2" }, [
+              _c(
+                "a",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.getPosts(_vm.prevPage)
+                    }
+                  }
+                },
+                [
+                  _c("button", { staticClass: "btn btn-primary" }, [
+                    _vm._v("Prev")
+                  ])
+                ]
+              )
             ])
-          }),
-          0
-        )
-      : _c("div", [_vm._v("\n\t\t\tNo\n\t\t")])
-  ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "mr-2" }, [
+          _c("button", { staticClass: "btn btn-primary" }, [
+            _vm._v(_vm._s(_vm.currentPage))
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.nextPage
+          ? _c("div", { staticClass: "mr-2" }, [
+              _c(
+                "a",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.getPosts(_vm.nextPage)
+                    }
+                  }
+                },
+                [
+                  _c("button", { staticClass: "btn btn-primary" }, [
+                    _vm._v("Next")
+                  ])
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.posts, function(p) {
+        return _c("div", [
+          _c("a", { attrs: { href: "/p/" + p.id + "-" + p.caption } }, [
+            _c("img", {
+              staticClass: "post_image",
+              attrs: { src: "/storage/" + p.post_image }
+            })
+          ])
+        ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -20083,43 +20170,133 @@ var render = function() {
     "div",
     {},
     [
-      _c("div", { staticClass: "d-flex flex-row" }, [
-        _c("input", {
-          directives: [
+      _c(
+        "div",
+        {
+          staticClass:
+            "lg:hidden md:hidden flex absolute left-0 w-full mt-10 pt-2 bg-gray-400 w-full p-2"
+        },
+        [
+          _vm.searchStatus
+            ? _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchKey,
+                    expression: "searchKey"
+                  }
+                ],
+                staticClass:
+                  "relative w-42 text-gray-700 rounded-full px-4 py-1 pr-10",
+                attrs: { type: "text" },
+                domProps: { value: _vm.searchKey },
+                on: {
+                  keyup: function($event) {
+                    $event.preventDefault()
+                    return _vm.searchUser($event)
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.searchKey = $event.target.value
+                  }
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.searchStatus
+            ? _c(
+                "svg",
+                {
+                  staticClass:
+                    "absolute right-0 z-10 mr-1 h-8 w-8 text-gray-700 pr-2",
+                  attrs: {
+                    fill: "currentColor",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.enlargeSearch($event)
+                    }
+                  }
+                },
+                [
+                  _c("polygon", {
+                    attrs: {
+                      points:
+                        "16.172 9 10.101 2.929 11.515 1.515 20 10 19.293 10.707 11.515 18.485 10.101 17.071 16.172 11 0 11 0 9"
+                    }
+                  })
+                ]
+              )
+            : _vm._e()
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "lg:relative md:relative  flex flex-row items-center" },
+        [
+          _vm.searchStatus
+            ? _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchKey,
+                    expression: "searchKey"
+                  }
+                ],
+                staticClass:
+                  "absolute right-0 lg:block md:block hidden lg:w-48 md:w-48 text-gray-700 rounded-full px-4 py-1 pr-10",
+                attrs: { type: "text" },
+                domProps: { value: _vm.searchKey },
+                on: {
+                  keyup: function($event) {
+                    $event.preventDefault()
+                    return _vm.searchUser($event)
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.searchKey = $event.target.value
+                  }
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "svg",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.searchKey,
-              expression: "searchKey"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text" },
-          domProps: { value: _vm.searchKey },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+              staticClass: "z-10 mr-1 h-8 w-8 text-gray-700 pr-2",
+              attrs: {
+                fill: "currentColor",
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: "0 0 20 20"
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.enlargeSearch($event)
+                }
               }
-              _vm.searchKey = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.searchUser($event)
-              }
-            }
-          },
-          [_vm._v("Search")]
-        )
-      ]),
+            },
+            [
+              _c("path", {
+                attrs: {
+                  d:
+                    "M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"
+                }
+              })
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _vm._l(_vm.users, function(u) {
         return _c("div", [
