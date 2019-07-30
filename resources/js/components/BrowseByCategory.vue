@@ -1,30 +1,35 @@
 <template>
-	<div>
-		<div v-for="c in categories" class="d-flex flex-row">
-            <button @click.prevent="getPosts(`/p/${c.id}`)" class="btn btn-primary mr-2">{{ c.name }}</button>
+	<div class="w-auto">
+		<div class="flex flex-row items-center flex-wrap w-auto">
+			<div v-for="c in categories" class="mr-2 mb-2">
+            	<button @click.prevent="getPosts(`/p/${c.id}`)" class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">{{ c.name }}</button>
+			</div>
         </div>
-        <div class="mt-4">
-        	<div class="d-flex flex-row mb-4">
-        		<div v-if="prevPage" class="mr-2">
-            	    <a @click.prevent="getPosts(prevPage)"><button class="btn btn-primary">Prev</button></a> 
-        		</div>
-        		<div class="mr-2">
-            	    <button class="btn btn-primary">{{ currentPage }}</button></a>    
-        		</div>
-        		<div v-if="nextPage" class="mr-2">
-            	    <a @click.prevent="getPosts(nextPage)"><button class="btn btn-primary">Next</button></a> 
-        		</div>
-            </div>
-            <div class="d-flex flex-row mb-4 text-center" v-for="p in posts">
+        <div class="flex flex-col justify-between items-center w-auto">
+        	
+            <div class="flex flex-row mb-4 text-center flex-1 flex-wrap w-auto" >
                 
-                <div class="mr-3">
+                <div v-for="p in posts" class="mr-3 mt-3 w-auto">
                    <a  :href="`${p.id}-${p.caption}`">
-                     <img class="post_image"  :src="'/storage/'+ p.post_image">
+                     <img class="lg:post_image md:post_image w-auto"  :src="'/storage/'+ p.post_image">
                    </a>
                 </div>
 
             </div>
 
+            <!-- Pagination starts-->
+            <div class="mt-auto flex flex-row w-auto">
+        		<div v-if="prevPage" class="mr-2">
+            	    <a @click.prevent="getPosts(prevPage)"><button class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">Prev</button></a> 
+        		</div>
+        		<div class="mr-2">
+            	    <button class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">{{ currentPage }}</button></a>    
+        		</div>
+        		<div v-if="nextPage" class="mr-2">
+            	    <a @click.prevent="getPosts(nextPage)"><button class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">Next</button></a> 
+        		</div>
+            </div>
+            <!--- Pagination Ends-->
         </div>
 	</div>
 </template>

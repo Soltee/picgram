@@ -1,19 +1,26 @@
 <template>
 	<div>
-		<div class="d-flex flex-row mb-4">
+		<div class="flex flex-row mb-4">
     		<div v-if="prevPage" class="mr-2">
-        	    <a @click.prevent="getPosts(prevPage)"><button class="btn btn-primary">Prev</button></a> 
+        	    <a @click.prevent="getPosts(prevPage)"><button class="px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12">Prev</button></a> 
     		</div>
-    		<div class="mr-2">
-        	    <button class="btn btn-primary">{{ currentPage }}</button></a>    
+    		<div class="mr-2" v-if="nextPage">
+        	    <button class="px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12">{{ currentPage }}</button></a>    
     		</div>
     		<div v-if="nextPage" class="mr-2">
-        	    <a @click.prevent="getPosts(nextPage)"><button class="btn btn-primary">Next</button></a> 
+        	    <a @click.prevent="getPosts(nextPage)"><button class="px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12">Next</button></a> 
     		</div>
         </div>
-		<div v-for="p in posts">
+		<div class="flex flex-col " v-for="p in posts">
+			<div class="flex flex-row mb-2">
+				<a :href="`/profile/${p.user.id}`" class="flex flex-row">
+					<img v-if="p.user.profile.avatar" class="user-img-sm mr-2" :src="'/storage/'+ p.user.profile.avatar">
+					<img v-else class="user-img-sm" :src="'/storage/users/default.jpg'">
+					<span class="text-gray-500 font-semibold">{{ p.user.name }}</span>
+				</a>
+			</div>
 			<a  :href="`/p/${p.id}-${p.caption}`">
-                <img class="post_image"  :src="'/storage/'+ p.post_image">
+                <img class="w-full"  :src="'/storage/'+ p.post_image">
             </a>
 		</div>
 		

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button @click.prevent="followPost" class="btn btn-primary" v-text="followStatus">Follow</button>
+		<button @click.prevent="followPost" class="px-1 text-white font-medium py-1 rounded w-24 bg-blue-700 hover:bg-blue-600" v-text="followStatus">Follow</button>
 	</div>
 </template>
 

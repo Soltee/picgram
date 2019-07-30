@@ -1869,6 +1869,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var category = "";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'browse-post',
@@ -1936,6 +1941,11 @@ var category = "";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2072,6 +2082,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var param = "";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'home',
@@ -2141,6 +2158,16 @@ var param = "";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19825,15 +19852,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
+  return _c("div", { staticClass: "w-auto" }, [
+    _c(
+      "div",
+      { staticClass: "flex flex-row items-center flex-wrap w-auto" },
       _vm._l(_vm.categories, function(c) {
-        return _c("div", { staticClass: "d-flex flex-row" }, [
+        return _c("div", { staticClass: "mr-2 mb-2" }, [
           _c(
             "button",
             {
-              staticClass: "btn btn-primary mr-2",
+              staticClass: "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400",
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -19845,83 +19873,98 @@ var render = function() {
           )
         ])
       }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "mt-4" },
-        [
-          _c("div", { staticClass: "d-flex flex-row mb-4" }, [
-            _vm.prevPage
-              ? _c("div", { staticClass: "mr-2" }, [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.getPosts(_vm.prevPage)
-                        }
-                      }
-                    },
-                    [
-                      _c("button", { staticClass: "btn btn-primary" }, [
-                        _vm._v("Prev")
-                      ])
-                    ]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "mr-2" }, [
-              _c("button", { staticClass: "btn btn-primary" }, [
-                _vm._v(_vm._s(_vm.currentPage))
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "flex flex-col justify-between items-center w-auto" },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "flex flex-row mb-4 text-center flex-1 flex-wrap w-auto"
+          },
+          _vm._l(_vm.posts, function(p) {
+            return _c("div", { staticClass: "mr-3 mt-3 w-auto" }, [
+              _c("a", { attrs: { href: p.id + "-" + p.caption } }, [
+                _c("img", {
+                  staticClass: "lg:post_image md:post_image w-auto",
+                  attrs: { src: "/storage/" + p.post_image }
+                })
               ])
-            ]),
-            _vm._v(" "),
-            _vm.nextPage
-              ? _c("div", { staticClass: "mr-2" }, [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.getPosts(_vm.nextPage)
-                        }
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-auto flex flex-row w-auto" }, [
+          _vm.prevPage
+            ? _c("div", { staticClass: "mr-2" }, [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.getPosts(_vm.prevPage)
                       }
-                    },
-                    [
-                      _c("button", { staticClass: "btn btn-primary" }, [
-                        _vm._v("Next")
-                      ])
-                    ]
-                  )
-                ])
-              : _vm._e()
+                    }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                      },
+                      [_vm._v("Prev")]
+                    )
+                  ]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "mr-2" }, [
+            _c(
+              "button",
+              {
+                staticClass: "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+              },
+              [_vm._v(_vm._s(_vm.currentPage))]
+            )
           ]),
           _vm._v(" "),
-          _vm._l(_vm.posts, function(p) {
-            return _c(
-              "div",
-              { staticClass: "d-flex flex-row mb-4 text-center" },
-              [
-                _c("div", { staticClass: "mr-3" }, [
-                  _c("a", { attrs: { href: p.id + "-" + p.caption } }, [
-                    _c("img", {
-                      staticClass: "post_image",
-                      attrs: { src: "/storage/" + p.post_image }
-                    })
-                  ])
-                ])
-              ]
-            )
-          })
-        ],
-        2
-      )
-    ],
-    2
-  )
+          _vm.nextPage
+            ? _c("div", { staticClass: "mr-2" }, [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.getPosts(_vm.nextPage)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                      },
+                      [_vm._v("Next")]
+                    )
+                  ]
+                )
+              ])
+            : _vm._e()
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19947,8 +19990,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "w-full" },
     [
-      _c("div", { staticClass: "d-flex flex-row" }, [
+      _c("div", { staticClass: "relative flex flex-row w-full" }, [
         _c("input", {
           directives: [
             {
@@ -19958,7 +20002,7 @@ var render = function() {
               expression: "comment"
             }
           ],
-          staticClass: "form-control",
+          staticClass: "w-full px-2 py-1 rounded bg-gray-500 pr-10 pl-4",
           attrs: { type: "text", placeholder: "comment" },
           domProps: { value: _vm.comment },
           on: {
@@ -19974,9 +20018,9 @@ var render = function() {
         _c(
           "svg",
           {
-            staticClass: "comment_icon",
+            staticClass: "absolute right-0 mt-1 mr-2 w-6 h-6 text-gay-500",
             attrs: {
-              fill: "blue",
+              fill: "currentColor",
               xmlns: "http://www.w3.org/2000/svg",
               viewBox: "0 0 512 512"
             },
@@ -19999,16 +20043,29 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.comments, function(c) {
-        return _c("div", { staticClass: "d-flex flex-col" }, [
-          _c("div", { staticClass: "comment" }, [
-            _c("img", {
-              staticClass: "user-img-sm",
-              attrs: { src: "/storage/" + c.user.profile.avatar }
-            }),
+        return _c("div", { staticClass: "flex flex-col mt-4" }, [
+          _c("div", { staticClass: "flex" }, [
+            _c(
+              "a",
+              { staticClass: "mr-2", attrs: { href: "/profile/" + c.user.id } },
+              [
+                c.user.profile.avatar
+                  ? _c("img", {
+                      staticClass: "user-img-sm",
+                      attrs: { src: "/storage/" + c.user.profile.avatar }
+                    })
+                  : _c("img", {
+                      staticClass: "user-img-sm",
+                      attrs: { src: "/storage/users/default.jpg" }
+                    })
+              ]
+            ),
             _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(c.user.name))]),
-            _vm._v(" "),
-            _c("p", {}, [_vm._v(_vm._s(c.comment))])
+            _c("div", [
+              _c("span", [_vm._v(_vm._s(c.user.name))]),
+              _vm._v(" "),
+              _c("p", {}, [_vm._v(_vm._s(c.comment))])
+            ])
           ])
         ])
       })
@@ -20042,7 +20099,8 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-primary",
+        staticClass:
+          "px-1 text-white font-medium py-1 rounded w-24 bg-blue-700 hover:bg-blue-600",
         domProps: { textContent: _vm._s(_vm.followStatus) },
         on: {
           click: function($event) {
@@ -20080,7 +20138,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "d-flex flex-row mb-4" }, [
+      _c("div", { staticClass: "flex flex-row mb-4" }, [
         _vm.prevPage
           ? _c("div", { staticClass: "mr-2" }, [
               _c(
@@ -20094,19 +20152,31 @@ var render = function() {
                   }
                 },
                 [
-                  _c("button", { staticClass: "btn btn-primary" }, [
-                    _vm._v("Prev")
-                  ])
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                    },
+                    [_vm._v("Prev")]
+                  )
                 ]
               )
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "mr-2" }, [
-          _c("button", { staticClass: "btn btn-primary" }, [
-            _vm._v(_vm._s(_vm.currentPage))
-          ])
-        ]),
+        _vm.nextPage
+          ? _c("div", { staticClass: "mr-2" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                },
+                [_vm._v(_vm._s(_vm.currentPage))]
+              )
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _vm.nextPage
           ? _c("div", { staticClass: "mr-2" }, [
@@ -20121,9 +20191,14 @@ var render = function() {
                   }
                 },
                 [
-                  _c("button", { staticClass: "btn btn-primary" }, [
-                    _vm._v("Next")
-                  ])
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                    },
+                    [_vm._v("Next")]
+                  )
                 ]
               )
             ])
@@ -20131,10 +20206,35 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.posts, function(p) {
-        return _c("div", [
+        return _c("div", { staticClass: "flex flex-col " }, [
+          _c("div", { staticClass: "flex flex-row mb-2" }, [
+            _c(
+              "a",
+              {
+                staticClass: "flex flex-row",
+                attrs: { href: "/profile/" + p.user.id }
+              },
+              [
+                p.user.profile.avatar
+                  ? _c("img", {
+                      staticClass: "user-img-sm mr-2",
+                      attrs: { src: "/storage/" + p.user.profile.avatar }
+                    })
+                  : _c("img", {
+                      staticClass: "user-img-sm",
+                      attrs: { src: "/storage/users/default.jpg" }
+                    }),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-gray-500 font-semibold" }, [
+                  _vm._v(_vm._s(p.user.name))
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
           _c("a", { attrs: { href: "/p/" + p.id + "-" + p.caption } }, [
             _c("img", {
-              staticClass: "post_image",
+              staticClass: "w-full",
               attrs: { src: "/storage/" + p.post_image }
             })
           ])
@@ -20166,19 +20266,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {},
-    [
-      _c(
-        "div",
-        {
-          staticClass:
-            "lg:hidden md:hidden flex absolute left-0 w-full mt-10 pt-2 bg-gray-400 w-full p-2"
-        },
-        [
-          _vm.searchStatus
-            ? _c("input", {
+  return _c("div", {}, [
+    _c("div", {}, [
+      _vm.searchStatus
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "lg:hidden md:hidden inline-flex absolute top-8 left-0 w-full mt-0 z-20 pt-2 bg-gray-400 w-full p-2"
+            },
+            [
+              _c("input", {
                 directives: [
                   {
                     name: "model",
@@ -20188,7 +20286,7 @@ var render = function() {
                   }
                 ],
                 staticClass:
-                  "relative w-42 text-gray-700 rounded-full px-4 py-1 pr-10",
+                  "relative w-full text-gray-700 rounded-full px-4 py-1 pr-10",
                 attrs: { type: "text" },
                 domProps: { value: _vm.searchKey },
                 on: {
@@ -20203,11 +20301,9 @@ var render = function() {
                     _vm.searchKey = $event.target.value
                   }
                 }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.searchStatus
-            ? _c(
+              }),
+              _vm._v(" "),
+              _c(
                 "svg",
                 {
                   staticClass:
@@ -20233,9 +20329,9 @@ var render = function() {
                   })
                 ]
               )
-            : _vm._e()
-        ]
-      ),
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -20296,23 +20392,38 @@ var render = function() {
             ]
           )
         ]
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.users, function(u) {
-        return _c("div", [
-          _c("a", { attrs: { href: "/profile/" + u.id } }, [
-            _c("img", {
-              staticClass: "user-img-sm",
-              attrs: { src: "/storage/" + u.profile.avatar }
-            }),
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "relative" }, [
+      _c(
+        "div",
+        { staticClass: "absolute right-0  mt-4 m-2 w-48 bg-gray-400 rounded" },
+        _vm._l(_vm.users, function(u) {
+          return _c("div", { staticClass: "flex items-end w-full mb-2" }, [
+            _c(
+              "a",
+              { staticClass: "mr-2", attrs: { href: "/profile/" + u.id } },
+              [
+                u.profile.avatar
+                  ? _c("img", {
+                      staticClass: "user-img-sm",
+                      attrs: { src: "/storage/" + u.profile.avatar }
+                    })
+                  : _c("img", {
+                      staticClass: "user-img-sm",
+                      attrs: { src: "/storage/users/default.jpg" }
+                    })
+              ]
+            ),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(u.name))])
+            _c("div", [_c("span", [_vm._v(_vm._s(u.name))])])
           ])
-        ])
-      })
-    ],
-    2
-  )
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

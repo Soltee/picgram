@@ -34,7 +34,7 @@ class HomeController extends Controller
     {
         $users = auth()->user()->following->pluck('user_id');
         if(count($users) > 0){
-            $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(1);
+            $posts = Post::whereIn('user_id', $users)->with('user.profile')->latest()->paginate(1);
             return response()->json(['posts' => $posts], 200);       
         } else {
             return response()->json(['posts' => []], 200); 
