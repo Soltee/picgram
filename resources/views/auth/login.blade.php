@@ -22,7 +22,7 @@
 
         
             <div class="max-w-sm mb-4">
-              <label class="block text-white-700 text-md font-semibold mb-2    " for="emails">
+              <label class="block text-white-700 text-md font-semibold mb-2    " for="password">
                 {{ __('Password') }}
               </label>
               <input class="@error('password') is-invalid @enderror shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus placeholder="**********">
