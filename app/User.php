@@ -11,6 +11,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 class User extends Authenticatable
 {
     use Notifiable, SearchableTrait;
+    // ;
 
 
     /**
@@ -21,9 +22,6 @@ class User extends Authenticatable
     protected $searchable = [
         'columns' => [
             'users.name' => 10,
-        ],
-        'joins' => [
-            'posts' => ['users.id','posts.user_id'],
         ],
     ];
     /**

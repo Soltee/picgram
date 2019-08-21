@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Intervention\Image\Exception\NotReadableException;
 
 class ProfileController extends Controller
 {
@@ -63,9 +64,13 @@ class ProfileController extends Controller
         if($request->file('avatar'))
         {
             $imagePath = $request->file('avatar')->store('users', 'public');
-
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-            $image->save();
+            
+            try{
+                $resize = Image::make(public_path('storage/{$image}'))->fit(1200, 1200);
+                $resize->save(); 
+            } catch(NotReadableException $e){
+            
+            }
 
             $imagearray = ['avatar' => $imagePath];
         }

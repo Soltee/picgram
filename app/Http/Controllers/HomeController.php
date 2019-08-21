@@ -49,8 +49,10 @@ class HomeController extends Controller
 
     public function search()
     {   
-        // $users = User::search($request->input('key'), null, true)->with('posts')->paginate(20);
-        $users = User::where('name', 'LIKE', '%'. request('name') .'%')->with('posts', 'profile')->paginate(20);
+        // $users = User::search(request('name'))
+        //     ->with('posts', 'profile')
+        //     ->get();
+        $users = User::where('name', 'LIKE', '%'. request('name') .'%')->with('posts', 'profile')->get();
         return response()->json(['users' => $users], 200);
     }
 

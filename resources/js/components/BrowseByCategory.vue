@@ -5,7 +5,8 @@
             	<button @click.prevent="getPosts(`/p/${c.id}`)" class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">{{ c.name }}</button>
 			</div>
         </div>
-        <div class="flex flex-col justify-between items-center w-auto">
+
+        <div v-if="posts.length"  class="flex flex-col justify-between items-center w-auto">
         	
             <div class="flex flex-row mb-4 text-center flex-1 flex-wrap w-auto" >
                 
@@ -31,6 +32,10 @@
             </div>
             <!--- Pagination Ends-->
         </div>
+
+        <div v-else class="p-2 border-2 rounded border-blue-800 mb-2">
+			No follwing Posts.
+		</div>
 	</div>
 </template>
 

@@ -7,6 +7,7 @@ use App\Category;
 use Auth;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Intervention\Image\Exception\NotReadableException;
 
 class PostsController extends Controller
 {
@@ -43,17 +44,21 @@ class PostsController extends Controller
             'category' => 'required|int',
             'file' => 'required|image',
             'caption' => 'string|min:4',
-        ]);
+        ]); 
+        $image = $request->file('file')->store('posts', 'public');
 
-        $imagePath = $request->file('file')->store('posts', 'public');
-
-        $storeImage = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-        $storeImage->save();
+        try{
+            $resize = Image::make(public_path('storage/{$image}'))->fit(1200, 1200);
+            $resize->save(); 
+        } catch(NotReadableException $e){
+        
+        }
+          
 
         auth()->user()->posts()->create([
             'category_id' => $data['category'],
             'caption' => $data['caption'],
-            'post_image' => $imagePath
+            'post_image' => $image
         ]);
 
         return redirect()->route('home')->with('success', 'Post uploaded.');
