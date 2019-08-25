@@ -50,7 +50,7 @@
         </nav>
         <main class="">
             <div class="container flex flex-col mx-auto lg:px-56 md:px-24 px-4 py-4">
-                @include('_partials.messages')
+                    @include('_partials.messages')
                 <div class="">
                     @yield('content')
                 </div>
