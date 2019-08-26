@@ -12,11 +12,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register(UrlGenerator $url)
+    public function register()
     {
-        if(env('REDIRECT_HTTPS')){
-            $url->formatScheme('https');
-        }
+        // if(env('REDIRECT_HTTPS')){
+        //     $url->formatScheme('https');
+        // }
     }
 
     /**

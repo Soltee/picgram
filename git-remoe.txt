@@ -34,3 +34,9 @@ This error means that the remote you tried to delete doesn't exist:
 
 $ git remote rm sofake
 > error: Could not remove config section 'remote.sofake'
+
+
+
+
+//POSTGRESql HEROKU
+heroku addons:create heroku-postgresql:hobby-dev
