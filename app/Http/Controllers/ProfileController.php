@@ -65,12 +65,12 @@ class ProfileController extends Controller
         {
             $imagePath = $request->file('avatar')->store('users', 'public');
             
-            try{
-                $resize = Image::make(public_path('storage/{$image}'))->fit(1200, 1200);
-                $resize->save(); 
-            } catch(NotReadableException $e){
+            // try{
+            //     $resize = Image::make(public_path('storage/{$image}'))->fit(1200, 1200);
+            //     $resize->save(); 
+            // } catch(NotReadableException $e){
             
-            }
+            // }
 
             $imagearray = ['avatar' => $imagePath];
         }

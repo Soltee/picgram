@@ -47,12 +47,12 @@ class PostsController extends Controller
         ]); 
         $image = $request->file('file')->store('posts', 'public');
 
-        try{
-            $resize = Image::make(public_path('storage/{$image}'))->fit(1200, 1200);
-            $resize->save(); 
-        } catch(NotReadableException $e){
+        // try{
+        //     $resize = Image::make(public_path('storage/{$image}'))->fit(1200, 1200);
+        //     $resize->save(); 
+        // } catch(NotReadableException $e){
         
-        }
+        // }
           
 
         auth()->user()->posts()->create([
