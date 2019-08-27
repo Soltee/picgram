@@ -23,7 +23,7 @@
         		<div v-if="prevPage" class="mr-2">
             	    <a @click.prevent="getPosts(prevPage)"><button class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">Prev</button></a> 
         		</div>
-        		<div class="mr-2">
+        		<div v-if="() => { return posts.length > 0 }" class="mr-2">
             	    <button class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">{{ currentPage }}</button></a>    
         		</div>
         		<div v-if="nextPage" class="mr-2">
@@ -34,7 +34,7 @@
         </div>
 
         <div v-else class="p-2 border-2 rounded border-blue-800 mb-2">
-			No follwing Posts.
+			No  Posts.
 		</div>
 	</div>
 </template>

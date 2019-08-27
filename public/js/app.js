@@ -19935,16 +19935,20 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "mr-2" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
-                  },
-                  [_vm._v(_vm._s(_vm.currentPage))]
-                )
-              ]),
+              function() {
+                return _vm.posts.length > 0
+              }
+                ? _c("div", { staticClass: "mr-2" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                      },
+                      [_vm._v(_vm._s(_vm.currentPage))]
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.nextPage
                 ? _c("div", { staticClass: "mr-2" }, [
@@ -19977,7 +19981,7 @@ var render = function() {
       : _c(
           "div",
           { staticClass: "p-2 border-2 rounded border-blue-800 mb-2" },
-          [_vm._v("\n\t\t\tNo follwing Posts.\n\t\t")]
+          [_vm._v("\n\t\t\tNo  Posts.\n\t\t")]
         )
   ])
 }
@@ -20261,7 +20265,7 @@ var render = function() {
       : _c(
           "div",
           { staticClass: "p-2 border-2 rounded border-blue-800 mb-2" },
-          [_vm._v("\n\t\t\tNo follwing Posts.\n\t\t")]
+          [_vm._v("\n\t\t\tNo Posts.\n\t\t")]
         )
   ])
 }

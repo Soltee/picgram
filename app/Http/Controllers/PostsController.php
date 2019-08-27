@@ -6,6 +6,7 @@ use App\Post;
 use App\Category;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\Exception\NotReadableException;
 
@@ -41,27 +42,25 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'category' => 'required|int',
-            'file' => 'required|image',
+            // 'category' => '',
+            'file' => 'required|image|between:0, 2000',
             'caption' => 'string|min:4',
         ]); 
-        $image = $request->file('file')->store('posts', 'public');
-
-        // try{
-        //     $resize = Image::make(public_path('storage/{$image}'))->fit(1200, 1200);
-        //     $resize->save(); 
-        // } catch(NotReadableException $e){
+        $ext = $request->file('file')->extension();
+        // dd($ext);
+        $imagePath = $request->file('file')->storeAs('posts',Str::random(10) . ".jpg", 'public');
         
-        // }
-          
+        $resize = Image::make(public_path('storage/'.$imagePath))->fit(1200, 1200);
+        $resize->save(); 
+                  
 
         auth()->user()->posts()->create([
-            'category_id' => $data['category'],
+            'category_id' => $data['category'] ?? '',
             'caption' => $data['caption'],
-            'post_image' => $image
+            'post_image' => $imagePath
         ]);
 
-        return redirect()->route('home')->with('success', 'Post uploaded.');
+        return redirect()->route('browse')->with('success', 'Post uploaded.');
     }
 
     /**

@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div v-else class="p-2 border-2 rounded border-blue-800 mb-2">
-			No follwing Posts.
+			No Posts.
 		</div>
 			
 	</div>
