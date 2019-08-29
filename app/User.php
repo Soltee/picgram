@@ -6,16 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
-use Lorisleiva\LaravelSearchString\Concerns\SearchString;
 
 class User extends Authenticatable
 {
-    use Notifiable, SearchString;
-    // ;
+    use Notifiable;
 
-    protected $searchStringColumns = [
-        'name', 'email',
-    ];
 
     /**
      * The attributes that are mass assignable.
