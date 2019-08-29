@@ -67,7 +67,7 @@ class ProfileController extends Controller
             // dd(storage_path());
             $ext = $request->file('avatar')->extension();
             // dd($ext);
-            $imagePath = $request->file('avatar')->storeAs('users',Str::random(10) . ".jpg", 'public');
+            $imagePath = $request->file('avatar')->storeAs('users',Str::random(10) . ".jpg", 'local');
             
             $resize = Image::make(public_path('storage/'.$imagePath))->fit(1200, 1200);
             $resize->save(); 
