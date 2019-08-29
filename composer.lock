@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98b653a479ee950136b36c97f65c8dcf",
+    "content-hash": "817b043466ae52cc086fa5e78798972a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -902,51 +902,6 @@
                 "storage"
             ],
             "time": "2019-08-24T11:17:19+00:00"
-        },
-        {
-            "name": "lorisleiva/laravel-search-string",
-            "version": "v0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lorisleiva/laravel-search-string.git",
-                "reference": "620a3ccaa7d94fa7e7a78a68966a0ccb0267068b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lorisleiva/laravel-search-string/zipball/620a3ccaa7d94fa7e7a78a68966a0ccb0267068b",
-                "reference": "620a3ccaa7d94fa7e7a78a68966a0ccb0267068b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Lorisleiva\\LaravelSearchString\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lorisleiva\\LaravelSearchString\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Loris LEIVA",
-                    "email": "loris.leiva@gmail.com"
-                }
-            ],
-            "time": "2019-05-07T18:08:26+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5173,7 +5128,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1.2"
+        "php": "^7.1.2",
+        "ext-gd": "*"
     },
     "platform-dev": []
 }
