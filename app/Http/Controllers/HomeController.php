@@ -28,7 +28,8 @@ class HomeController extends Controller
         // $users = auth()->user()->following->pluck('user_id');
         // $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(1);
         // dd($posts);
-        return view('home'); }
+        return view('home'); 
+    }
 
     public function postByF()
     {
@@ -39,7 +40,6 @@ class HomeController extends Controller
         } else {
             return response()->json(['posts' => []], 200); 
         }
-        // $posts = ($users) ? Post::whereIn('user_id', '$users')->with('user')->latest()->paginate(1) : [] ;
 
     }
 
@@ -49,10 +49,9 @@ class HomeController extends Controller
 
     public function search()
     {   
-        // $users = User::search(request('name'))
-        //     ->with('posts', 'profile')
-        //     ->get();
-        $users = User::where('name', 'LIKE', '%'. request('name') .'%')->with('posts', 'profile')->get();
+        $query = request('term');
+        $users = User::where('name', 'LIKE', '%'. $query .'%')->with('posts', 'profile')->get();
+
         return response()->json(['users' => $users], 200);
     }
 

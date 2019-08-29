@@ -2222,10 +2222,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.users = null;
-      axios.post('/search', {
-        key: this.searchKey
-      }).then(function (res) {
-        console.log(res.data);
+      axios.get("/search?term=".concat(this.searchKey)).then(function (res) {
+        _this.searchKey = '';
         _this.users = res.data.users;
       })["catch"](function (err) {
         return _this.error = err.response;

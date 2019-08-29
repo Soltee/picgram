@@ -8,18 +8,12 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.1.3",
-        "consoletvs/charts": "6.*",
-        "darryldecode/cart": "~4.0",
+        "php": "^7.1.2",
         "fideloper/proxy": "^4.0",
-        "fzaninotto/faker": "^1.8",
         "intervention/image": "^2.5",
-        "intervention/imagecache": "^2.3",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "lorisleiva/laravel-search-string": "^0.1.3",
-        "lukepolo/laracart": "1.4.*",
-        "nicolaslopezj/searchable": "1.*"
+        "lorisleiva/laravel-search-string": "^0.1.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

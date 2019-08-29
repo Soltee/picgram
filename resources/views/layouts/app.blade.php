@@ -32,8 +32,8 @@
 
                 <div class="flex flex-row items-center">
                     @guest
-                        <a class="ml-2" href="{{ route('register') }}">
-                            <button class="px-2 py-1 w-24 rounded-full bg-blue-500 hover:bg-blue-700 text-white font-semibold">{{ __('Sign Up') }}</button>
+                        <a class="ml-2" href="{{ route(Route::currentRouteName() == 'login' ? 'register' : 'login') }}">
+                            <button class="px-2 py-1 w-24 rounded-full bg-blue-500 hover:bg-blue-700 text-white font-semibold">{{ Route::currentRouteName() == 'login' ? 'SignUp' : 'SignIn' }}</button>
                         </a>
                     @else
                         <search-model></search-model>

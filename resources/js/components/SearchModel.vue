@@ -50,12 +50,11 @@ export default {
 	methods:{
 		searchUser(){
 			this.users = null;
-			axios.post('/search', {
-				key : this.searchKey
-			})
+			axios.get(`/search?term=${this.searchKey}`)
 			.then((res) => {
-				console.log(res.data);
+				this.searchKey = '';
 				this.users = res.data.users;
+
 			}).catch(err => this.error = err.response);
 		},
 		enlargeSearch(e){

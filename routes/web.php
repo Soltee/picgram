@@ -25,4 +25,4 @@ Route::post('/follow/{user}/profile', 'FollowController@store')->name('follow.pr
 Route::get('/p/{post}/comments', 'CommentController@index')->name('comment.index');
 Route::post('/p/{post}/comment', 'CommentController@store')->name('comment.store');
 
-Route::post('/search', 'HomeController@search')->name('search.users');
+Route::get('/search', 'HomeController@search')->name('search.users');
