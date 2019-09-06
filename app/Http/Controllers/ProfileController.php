@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
-use Intervention\Image\Exception\NotReadableException;
+use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Str;
 
 class ProfileController extends Controller
@@ -64,16 +63,15 @@ class ProfileController extends Controller
 
         if($request->hasFile('avatar'))
         {
-            // dd(storage_path());
-            $ext = $request->file('avatar')->extension();
-            // dd($ext);
-            $imagePath = $request->file('avatar')->storeAs('users',Str::random(10) . ".jpg", 'local');
-            
-            $resize = Image::make(public_path('storage/'.$imagePath))->fit(1200, 1200);
-            $resize->save(); 
+            Cloudder::upload($request->file('avatar'), null,  
+            [
+                "folder" => "picgram/users/"
+            ],  []);
+
+            $c = Cloudder::getResult();
             
 
-            $imagearray = ['avatar' => $imagePath];
+            $imagearray = ['avatar' => $c['url']];
         }
 
         auth()->user()->profile->update(array_merge($data, $imagearray ?? []));

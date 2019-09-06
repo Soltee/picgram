@@ -31,25 +31,7 @@
                     @enderror
                 </div>
 
-                <div class="max-w-md mb-6">
-                    <label for="category" class="block text-white-700 text-md mb-3 font-semibold">{{ __('Category') }}</label>
-
-                    <div class="flex flex-col"> 
-                        <select id="category" class="shadow appearance-none border rounded border-gray-400 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="category">
-                            @forelse($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @empty
-                                <option value="">None</option>
-                            @endforelse
-                        </select>
-
-                        @error('category')
-                            <p style="color:red;" class="mt-2 px-1 py-1  border-2 rounded" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </p>
-                        @enderror
-                    </div>
-                </div>
+                
 
                 <div class="max-w-md mb-6">
                     <label for="caption" class="block text-white-700 text-md mb-3 font-semibold">{{ __('Caption') }}</label>

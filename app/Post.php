@@ -12,7 +12,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-      'category_id', 'user_id',  'post_image', 'caption', 'description', 'url',
+      'user_id',  'post_image', 'caption', 'description', 'url',
     ];
 
     /**
@@ -34,11 +34,6 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
     }
 
     public function comments()

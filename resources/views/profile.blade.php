@@ -8,7 +8,7 @@
             <div class="block  lg:mr-2 md:mr-2 mr-2">
                 <div class="">
                   @if($profile->avatar)
-                    <img class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" src="{{ url('storage/'. $profile->avatar) }}">
+                    <img class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" src="{{  $profile->avatar }}">
                   @else
                     <svg class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-12 w-12 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
                   @endif
@@ -73,7 +73,7 @@
                 @forelse($posts as $post)
                 <div class="mr-3 mb-3">
                   <a href="{{ url('p', $post->id . '-' .$post->caption) }}">
-                      <img class="lg:w-24 lg:h-24 md:h-24 md:w-24 w-auto"  src="{{ asset('storage/'. $post->post_image ) }}">
+                      <img class="lg:w-24 lg:h-24 md:h-24 md:w-24 w-auto"  src="{{ $post->post_image }}">
                   </a>
                 </div>
                @empty

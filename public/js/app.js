@@ -1878,59 +1878,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var category = "";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'browse-post',
   data: function data() {
     return {
-      categories: [],
       posts: [],
       currentPage: null,
       nextPage: null,
       prevPage: null,
-      error: null
+      error: null,
+      loading: true
     };
   },
   mounted: function mounted() {
-    this.getCategories(), this.getPosts(category);
+    this.getPosts(category);
   },
   methods: {
-    getCategories: function getCategories() {
+    getPosts: function getPosts(c) {
       var _this = this;
 
-      axios.get('/c').then(function (res) {
-        _this.categories = res.data.categories;
+      axios.get('/p/').then(function (res) {
+        _this.loading = false;
+        _this.posts = res.data.posts.data;
+        _this.currentPage = res.data.posts.current_page;
+        _this.nextPage = res.data.posts.next_page_url;
+        _this.prevPage = res.data.posts.prev_page_url;
       })["catch"](function (err) {
         _this.error = err.data;
       });
-    },
-    getPosts: function getPosts(c) {
-      var _this2 = this;
-
-      if (c) {
-        this.post = [];
-        this.currentPage = null;
-        this.nextPage = null;
-        this.prevPage = null;
-        axios.get("".concat(c)).then(function (res) {
-          _this2.posts = res.data.posts.data;
-          _this2.currentPage = res.data.posts.current_page;
-          _this2.nextPage = res.data.posts.next_page_url;
-          _this2.prevPage = res.data.posts.prev_page_url;
-        })["catch"](function (err) {
-          _this2.error = err.data;
-        });
-      } else {
-        axios.get('/p/').then(function (res) {
-          _this2.posts = res.data.posts.data;
-          _this2.currentPage = res.data.posts.current_page;
-          _this2.nextPage = res.data.posts.next_page_url;
-          _this2.prevPage = res.data.posts.prev_page_url;
-        })["catch"](function (err) {
-          _this2.error = err.data;
-        });
-      }
     }
   }
 });
@@ -2099,6 +2075,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var param = "";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'home',
@@ -2110,7 +2095,8 @@ var param = "";
       nextPage: null,
       prevPage: null,
       error: null,
-      count: null
+      count: null,
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -2130,6 +2116,7 @@ var param = "";
           _this.currentPage = res.data.posts.current_page;
           _this.nextPage = res.data.posts.next_page_url;
           _this.prevPage = res.data.posts.prev_page_url;
+          _this.loading = false;
         })["catch"](function (err) {
           _this.error = err.data;
         });
@@ -2140,6 +2127,7 @@ var param = "";
           _this.currentPage = res.data.posts.current_page;
           _this.nextPage = res.data.posts.next_page_url;
           _this.prevPage = res.data.posts.prev_page_url;
+          _this.loading = false;
         })["catch"](function (err) {
           return _this.error = err.response;
         });
@@ -2197,6 +2185,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'search-model',
   props: [],
@@ -2205,26 +2203,24 @@ __webpack_require__.r(__webpack_exports__);
       searchStatus: false,
       searchKey: '',
       users: null,
-      error: null
+      error: null,
+      loading: false,
+      totalRes: null
     };
-  },
-  computed: {
-    usersCount: function usersCount() {
-      if (this.users.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }
   },
   methods: {
     searchUser: function searchUser() {
       var _this = this;
 
+      this.loading = true;
       this.users = null;
       axios.get("/search?term=".concat(this.searchKey)).then(function (res) {
         _this.searchKey = '';
-        _this.users = res.data.users;
+        _this.loading = false;
+
+        if (res.data.users.length > 0) {
+          _this.users = res.data.users;
+        }
       })["catch"](function (err) {
         return _this.error = err.response;
       });
@@ -19859,128 +19855,114 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "w-auto" }, [
-    _c(
-      "div",
-      { staticClass: "flex flex-row items-center flex-wrap w-auto" },
-      _vm._l(_vm.categories, function(c) {
-        return _c("div", { staticClass: "mr-2 mb-2" }, [
-          _c(
-            "button",
-            {
-              staticClass: "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400",
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.getPosts("/p/" + c.id)
-                }
-              }
-            },
-            [_vm._v(_vm._s(c.name))]
-          )
+    _vm.loading
+      ? _c("div", { staticClass: "font-semibold text-lg" }, [
+          _vm._v("\n\t\t\tLoading ...\n\t\t")
         ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.posts.length
-      ? _c(
-          "div",
-          { staticClass: "flex flex-col justify-between items-center w-auto" },
-          [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex flex-row mb-4 text-center flex-1 flex-wrap w-auto"
-              },
-              _vm._l(_vm.posts, function(p) {
-                return _c("div", { staticClass: "mr-3 mt-3 w-auto" }, [
-                  _c("a", { attrs: { href: p.id + "-" + p.caption } }, [
-                    _c("img", {
-                      staticClass: "lg:post_image md:post_image w-auto",
-                      attrs: { src: "/storage/" + p.post_image }
-                    })
+      : _c("div", [
+          _vm.posts.length
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "flex flex-col justify-between items-center w-auto"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "flex flex-row mb-4 text-center flex-1 flex-wrap w-auto"
+                    },
+                    _vm._l(_vm.posts, function(p) {
+                      return _c("div", { staticClass: "mr-3 mt-3 w-auto" }, [
+                        _c("a", { attrs: { href: p.id + "-" + p.caption } }, [
+                          _c("img", {
+                            staticClass: "lg:post_image md:post_image w-auto",
+                            attrs: { src: p.post_image }
+                          })
+                        ])
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mt-auto flex flex-row w-auto" }, [
+                    _vm.prevPage
+                      ? _c("div", { staticClass: "mr-2" }, [
+                          _c(
+                            "a",
+                            {
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.getPosts(_vm.prevPage)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                                },
+                                [_vm._v("Prev")]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    function() {
+                      return _vm.posts.length > 0
+                    }
+                      ? _c("div", { staticClass: "mr-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                            },
+                            [_vm._v(_vm._s(_vm.currentPage))]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.nextPage
+                      ? _c("div", { staticClass: "mr-2" }, [
+                          _c(
+                            "a",
+                            {
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.getPosts(_vm.nextPage)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                                },
+                                [_vm._v("Next")]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
                   ])
-                ])
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "mt-auto flex flex-row w-auto" }, [
-              _vm.prevPage
-                ? _c("div", { staticClass: "mr-2" }, [
-                    _c(
-                      "a",
-                      {
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.getPosts(_vm.prevPage)
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
-                          },
-                          [_vm._v("Prev")]
-                        )
-                      ]
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              function() {
-                return _vm.posts.length > 0
-              }
-                ? _c("div", { staticClass: "mr-2" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
-                      },
-                      [_vm._v(_vm._s(_vm.currentPage))]
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.nextPage
-                ? _c("div", { staticClass: "mr-2" }, [
-                    _c(
-                      "a",
-                      {
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.getPosts(_vm.nextPage)
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
-                          },
-                          [_vm._v("Next")]
-                        )
-                      ]
-                    )
-                  ])
-                : _vm._e()
-            ])
-          ]
-        )
-      : _c(
-          "div",
-          { staticClass: "p-2 border-2 rounded border-blue-800 mb-2" },
-          [_vm._v("\n\t\t\tNo  Posts.\n\t\t")]
-        )
+                ]
+              )
+            : _c(
+                "div",
+                { staticClass: "p-2 border-2 rounded border-blue-800 mb-2" },
+                [_vm._v("\n\t\t\t\tNo  Posts.\n\t\t\t")]
+              )
+        ])
   ])
 }
 var staticRenderFns = []
@@ -20069,12 +20051,26 @@ var render = function() {
                 c.user.profile.avatar
                   ? _c("img", {
                       staticClass: "user-img-sm",
-                      attrs: { src: "/storage/" + c.user.profile.avatar }
+                      attrs: { src: c.user.profile.avatar }
                     })
-                  : _c("img", {
-                      staticClass: "user-img-sm",
-                      attrs: { src: "/storage/users/default.jpg" }
-                    })
+                  : _c(
+                      "svg",
+                      {
+                        staticClass: "user-img-sm  bg-cover rounded-full",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          viewBox: "0 0 20 20"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"
+                          }
+                        })
+                      ]
+                    )
               ]
             ),
             _vm._v(" "),
@@ -20153,118 +20149,145 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "flex flex-row mb-4" }, [
-      _vm.prevPage
-        ? _c("div", { staticClass: "mr-2" }, [
-            _c(
-              "a",
-              {
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.getPosts(_vm.prevPage)
-                  }
-                }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
-                  },
-                  [_vm._v("Prev")]
-                )
-              ]
-            )
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.nextPage
-        ? _c("div", { staticClass: "mr-2" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
-              },
-              [_vm._v(_vm._s(_vm.currentPage))]
-            )
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.nextPage
-        ? _c("div", { staticClass: "mr-2" }, [
-            _c(
-              "a",
-              {
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.getPosts(_vm.nextPage)
-                  }
-                }
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
-                  },
-                  [_vm._v("Next")]
-                )
-              ]
-            )
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _vm.posts
-      ? _c(
-          "div",
-          _vm._l(_vm.posts, function(p) {
-            return _c("div", { staticClass: "flex flex-col " }, [
-              _c("div", { staticClass: "flex flex-row mb-2" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "flex flex-row",
-                    attrs: { href: "/profile/" + p.user.id }
-                  },
-                  [
-                    p.user.profile.avatar
-                      ? _c("img", {
-                          staticClass: "user-img-sm mr-2",
-                          attrs: { src: "/storage/" + p.user.profile.avatar }
-                        })
-                      : _c("img", {
-                          staticClass: "user-img-sm",
-                          attrs: { src: "/storage/users/default.jpg" }
-                        }),
+    _vm.loading
+      ? _c("div", { staticClass: "font-semibold text-lg p-2" }, [
+          _vm._v("\n\t\tLoading ...\n\t")
+        ])
+      : _c("div", [
+          _vm.posts
+            ? _c(
+                "div",
+                _vm._l(_vm.posts, function(p) {
+                  return _c("div", { staticClass: "flex flex-col " }, [
+                    _c("div", { staticClass: "flex flex-row mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "flex flex-row",
+                          attrs: { href: "/profile/" + p.user.id }
+                        },
+                        [
+                          p.user.profile.avatar
+                            ? _c("img", {
+                                staticClass: "user-img-sm mr-2",
+                                attrs: { src: p.user.profile.avatar }
+                              })
+                            : _c(
+                                "svg",
+                                {
+                                  staticClass:
+                                    "user-img-sm bg-cover rounded-full",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"
+                                    }
+                                  })
+                                ]
+                              ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "text-gray-500 font-semibold" },
+                            [_vm._v(_vm._s(p.user.name))]
+                          )
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "text-gray-500 font-semibold" }, [
-                      _vm._v(_vm._s(p.user.name))
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/p/" + p.id + "-" + p.caption } }, [
-                _c("img", {
-                  staticClass: "w-full",
-                  attrs: { src: "/storage/" + p.post_image }
-                })
-              ])
-            ])
-          }),
-          0
-        )
-      : _c(
-          "div",
-          { staticClass: "p-2 border-2 rounded border-blue-800 mb-2" },
-          [_vm._v("\n\t\t\tNo Posts.\n\t\t")]
-        )
+                    _c(
+                      "a",
+                      { attrs: { href: "/p/" + p.id + "-" + p.caption } },
+                      [
+                        _c("img", {
+                          staticClass: "w-full",
+                          attrs: { src: "/storage/" + p.post_image }
+                        })
+                      ]
+                    )
+                  ])
+                }),
+                0
+              )
+            : _c(
+                "div",
+                { staticClass: "p-2 border-2 rounded border-blue-800 mb-2" },
+                [_vm._v("\n\t\t\tNo Posts.\n\t\t")]
+              ),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-row mb-4" }, [
+            _vm.prevPage
+              ? _c("div", { staticClass: "mr-2" }, [
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.getPosts(_vm.prevPage)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                        },
+                        [_vm._v("Prev")]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.nextPage
+              ? _c("div", { staticClass: "mr-2" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                    },
+                    [_vm._v(_vm._s(_vm.currentPage))]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.nextPage
+              ? _c("div", { staticClass: "mr-2" }, [
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.getPosts(_vm.nextPage)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                        },
+                        [_vm._v("Next")]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e()
+          ])
+        ])
   ])
 }
 var staticRenderFns = []
@@ -20433,37 +20456,76 @@ var render = function() {
       _c(
         "div",
         { staticClass: "absolute right-0  mt-4 m-2 w-48 bg-gray-400 rounded" },
-        _vm._l(_vm.users, function(u) {
-          return _c(
-            "div",
-            { staticClass: "flex flex-row items-end w-full px-2 py-2" },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "mr-2 flex flex-row justify-between items-top",
-                  attrs: { href: "/profile/" + u.id }
-                },
-                [
-                  u.profile.avatar
-                    ? _c("img", {
-                        staticClass: "user-img-sm mr-2",
-                        attrs: { src: "/storage/" + u.profile.avatar }
-                      })
-                    : _c("img", {
-                        staticClass: "user-img-sm mr-2",
-                        attrs: { src: "/storage/users/default.jpg" }
-                      }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "hover:text-gray-600" }, [
-                    _vm._v(_vm._s(u.name))
-                  ])
-                ]
+        [
+          _vm.loading
+            ? _c("div", { staticClass: "font-semibold text-lg p-2" }, [
+                _vm._v("\n\t\t\t\tLoading ...\n\t\t\t")
+              ])
+            : _c(
+                "div",
+                _vm._l(_vm.users, function(u) {
+                  return _vm.users.length
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "flex flex-row items-end w-full px-2 py-2"
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "mr-2 flex flex-row justify-between items-top",
+                              attrs: { href: "/profile/" + u.id }
+                            },
+                            [
+                              u.profile.avatar
+                                ? _c("img", {
+                                    staticClass: "user-img-sm mr-2",
+                                    attrs: { src: u.profile.avatar }
+                                  })
+                                : _c(
+                                    "svg",
+                                    {
+                                      staticClass:
+                                        "user-img-sm bg-cover rounded-full",
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 20 20"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"
+                                        }
+                                      })
+                                    ]
+                                  ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "hover:text-gray-600" },
+                                [_vm._v(_vm._s(u.name))]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _c(
+                        "div",
+                        {
+                          staticClass:
+                            "p-2 border-2 rounded border-blue-800 mb-2"
+                        },
+                        [_vm._v("\n\t\t\t\t\tNo  match found.\n\t\t\t\t")]
+                      )
+                }),
+                0
               )
-            ]
-          )
-        }),
-        0
+        ]
       )
     ])
   ])

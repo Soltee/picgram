@@ -9,8 +9,8 @@
 		<div class="flex flex-col mt-4" v-for="c in comments">
 			<div class="flex">
 				<a :href="`/profile/${c.user.id}`" class="mr-2">
-					<img v-if="c.user.profile.avatar" class="user-img-sm" :src="'/storage/'+ c.user.profile.avatar">
-					<img v-else class="user-img-sm" :src="'/storage/users/default.jpg'">
+					<img v-if="c.user.profile.avatar" class="user-img-sm" :src="c.user.profile.avatar">
+					<svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 				</a>
 				<div>
 					<span>{{ c.user.name }}</span>

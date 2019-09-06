@@ -13,12 +13,22 @@
 		</div>
 		<div class="relative">
 			<div class="absolute right-0  mt-4 m-2 w-48 bg-gray-400 rounded"  >
-				<div class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
-					<a :href="`/profile/${u.id}`" class="mr-2 flex flex-row justify-between items-top">
-						<img v-if="u.profile.avatar" class="user-img-sm mr-2" :src="'/storage/'+ u.profile.avatar">
-						<img v-else class="user-img-sm mr-2" :src="'/storage/users/default.jpg'">
-						<span class="hover:text-gray-600">{{ u.name }}</span>
-					</a>
+				<div v-if="loading" class="font-semibold text-lg p-2">
+					Loading ...
+				</div>
+				<div v-else>
+					<div v-if="users.length" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
+
+						<a :href="`/profile/${u.id}`" class="mr-2 flex flex-row justify-between items-top">
+							<img v-if="u.profile.avatar" class="user-img-sm mr-2" :src="u.profile.avatar">
+							<svg v-else class="user-img-sm bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
+							<span class="hover:text-gray-600">{{ u.name }}</span>
+						</a>
+						
+					</div>
+					<div v-else class="p-2 border-2 rounded border-blue-800 mb-2">
+						No  match found.
+					</div>
 				</div>
 			</div>
 		</div>
@@ -36,24 +46,23 @@ export default {
 			searchStatus: false,
 			searchKey: '',
 			users:null,
-			error: null
-		}
-	},
-	computed:{
-
-		usersCount(){
-			if(this.users.length > 0){
-				return true;
-			} else {return false;}
+			error: null,
+			loading: false,
+			totalRes:null
 		}
 	},
 	methods:{
 		searchUser(){
+			this.loading = true;
 			this.users = null;
 			axios.get(`/search?term=${this.searchKey}`)
 			.then((res) => {
 				this.searchKey = '';
-				this.users = res.data.users;
+				this.loading = false;
+				if (res.data.users.length > 0) {
+					this.users = res.data.users;
+				} 
+
 
 			}).catch(err => this.error = err.response);
 		},

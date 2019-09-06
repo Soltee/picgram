@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Category;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
-use Intervention\Image\Exception\NotReadableException;
+use JD\Cloudder\Facades\Cloudder;
 
 class PostsController extends Controller
 {
@@ -29,8 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $categories = Category::latest()->get();
-        return view('posts.create', compact('categories'));
+        return view('posts.create');
     }
 
     /**
@@ -42,22 +39,20 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            // 'category' => '',
-            'file' => 'required|image|between:0, 2000',
+            'file' => 'required|image|max:2240',
             'caption' => 'string|min:4',
         ]); 
-        $ext = $request->file('file')->extension();
-        // dd($ext);
-        $imagePath = $request->file('file')->storeAs('posts',Str::random(10) . ".jpg", 'public');
-        
-        $resize = Image::make(public_path('storage/'.$imagePath))->fit(1200, 1200);
-        $resize->save(); 
-                  
+       
+        Cloudder::upload($request->file('file'), null,  
+            [
+                "folder" => "picgram/posts/"
+            ],  []);
+
+        $c = Cloudder::getResult();
 
         auth()->user()->posts()->create([
-            'category_id' => $data['category'] ?? '',
             'caption' => $data['caption'],
-            'post_image' => $imagePath
+            'post_image' => $c['url']
         ]);
 
         return redirect()->route('browse')->with('success', 'Post uploaded.');
