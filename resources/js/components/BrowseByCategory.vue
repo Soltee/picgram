@@ -21,7 +21,7 @@
 	        		<div v-if="prevPage" class="mr-2">
 	            	    <a @click.prevent="getPosts(prevPage)"><button class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">Prev</button></a> 
 	        		</div>
-	        		<div v-if="() => { return posts.length > 0 }" class="mr-2">
+	        		<div v-if="() => posts.length > 2" class="mr-2">
 	            	    <button class="px-2 py-2 bg-gray-600 rounded hover:bg-gray-400">{{ currentPage }}</button></a>    
 	        		</div>
 	        		<div v-if="nextPage" class="mr-2">
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-let category = "";
+let paginate = "";
 export default {
 	name: 'browse-post',
 	data(){
@@ -53,24 +53,39 @@ export default {
 		}
 	},
 	mounted(){
-		this.getPosts(category)
+		this.getPosts(paginate)
 	},
 	methods:{
-		getPosts(c)
+		getPosts(paginate)
 		{
-
-			
-			axios.get('/p/').then(res => {
-				this.loading = false;
-				this.posts = res.data.posts.data;
-				this.currentPage = res.data.posts.current_page;
-				this.nextPage = res.data.posts.next_page_url;
-				this.prevPage = res.data.posts.prev_page_url;
-				
-				
-			}).catch((err => {
-				this.error = err.data;
-			}));
+			if(paginate){
+				this.posts = [];
+				this.currentPage = null;
+				this.nextPage = null;
+				this.prevPage = null;
+				axios.get(`${paginate}`).then(res => {
+					this.loading = false;
+					this.posts = res.data.posts.data;
+					this.currentPage = res.data.posts.current_page;
+					this.nextPage = res.data.posts.next_page_url;
+					this.prevPage = res.data.posts.prev_page_url;
+					
+				}).catch((err => {
+					this.error = err.data;
+				}));
+			} else {
+				axios.get('/p/').then(res => {
+					this.loading = false;
+					this.posts = res.data.posts.data;
+					this.currentPage = res.data.posts.current_page;
+					this.nextPage = res.data.posts.next_page_url;
+					this.prevPage = res.data.posts.prev_page_url;
+					
+					
+				}).catch((err => {
+					this.error = err.data;
+				}));
+			}
 			
 		}
 

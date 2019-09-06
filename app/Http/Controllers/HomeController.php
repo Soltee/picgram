@@ -24,18 +24,19 @@ class HomeController extends Controller
     /**
      * Home View
     **/
-    public function home(){ 
-        // $users = auth()->user()->following->pluck('user_id');
-        // $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(1);
-        // dd($posts);
+    public function home()
+    { 
         return view('home'); 
     }
 
+    /**
+        * Home Posts By following only
+    **/
     public function postByF()
     {
         $users = auth()->user()->following->pluck('user_id');
         if(count($users) > 0){
-            $posts = Post::whereIn('user_id', $users)->with('user.profile')->latest()->paginate(1);
+            $posts = Post::whereIn('user_id', $users)->with('user.profile')->latest()->paginate(2);
             return response()->json(['posts' => $posts], 200);       
         } else {
             return response()->json(['posts' => []], 200); 

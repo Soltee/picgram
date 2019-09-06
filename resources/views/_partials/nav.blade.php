@@ -7,7 +7,7 @@
         </a>
     </li>
     <li class="nav-item  mb-3 lg:mr-0 md:mr-0 mr-2">
-        <a class="nav-link hover:bg-gray-500 p-2 rounded flex items-end lg:flex-row md:flex-row flex-col {{ Route::currentRouteName() == 'post.create' ? 'bg-gray-500' : '' }}" href="{{ route('posts.create') }}">
+        <a class="nav-link hover:bg-gray-500 p-2 rounded flex items-end lg:flex-row md:flex-row flex-col {{ Route::currentRouteName() == 'posts.create' ? 'bg-gray-500' : '' }}" href="{{ route('posts.create') }}">
             <svg class="w-6 h-6 mr-2 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 10v6H7v-6H2l8-8 8 8h-5zM0 18h20v2H0v-2z"/></svg>
             <span class="">Upload</span>
         </a>

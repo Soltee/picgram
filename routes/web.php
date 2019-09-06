@@ -13,9 +13,8 @@ Route::post('/p', 'PostsController@store')->name('posts.store');
 Route::get('/p/{post}-{slug}', 'PostsController@show')->name('posts.show');
 
 Route::get('/p/browse', 'HomeController@browse')->name('browse');
-Route::get('/c', 'HomeController@categories')->name('browse.categories');
 Route::get('/p/', 'HomeController@posts')->name('browse.posts');
-Route::get('/p/{category}', 'HomeController@postsByCategory')->name('browse.posts');
+
 
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
 Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');

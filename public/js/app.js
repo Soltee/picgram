@@ -1878,7 +1878,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var category = "";
+var paginate = "";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'browse-post',
   data: function data() {
@@ -1892,21 +1892,37 @@ var category = "";
     };
   },
   mounted: function mounted() {
-    this.getPosts(category);
+    this.getPosts(paginate);
   },
   methods: {
-    getPosts: function getPosts(c) {
+    getPosts: function getPosts(paginate) {
       var _this = this;
 
-      axios.get('/p/').then(function (res) {
-        _this.loading = false;
-        _this.posts = res.data.posts.data;
-        _this.currentPage = res.data.posts.current_page;
-        _this.nextPage = res.data.posts.next_page_url;
-        _this.prevPage = res.data.posts.prev_page_url;
-      })["catch"](function (err) {
-        _this.error = err.data;
-      });
+      if (paginate) {
+        this.posts = [];
+        this.currentPage = null;
+        this.nextPage = null;
+        this.prevPage = null;
+        axios.get("".concat(paginate)).then(function (res) {
+          _this.loading = false;
+          _this.posts = res.data.posts.data;
+          _this.currentPage = res.data.posts.current_page;
+          _this.nextPage = res.data.posts.next_page_url;
+          _this.prevPage = res.data.posts.prev_page_url;
+        })["catch"](function (err) {
+          _this.error = err.data;
+        });
+      } else {
+        axios.get('/p/').then(function (res) {
+          _this.loading = false;
+          _this.posts = res.data.posts.data;
+          _this.currentPage = res.data.posts.current_page;
+          _this.nextPage = res.data.posts.next_page_url;
+          _this.prevPage = res.data.posts.prev_page_url;
+        })["catch"](function (err) {
+          _this.error = err.data;
+        });
+      }
     }
   }
 });
@@ -19915,7 +19931,7 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     function() {
-                      return _vm.posts.length > 0
+                      return _vm.posts.length > 2
                     }
                       ? _c("div", { staticClass: "mr-2" }, [
                           _c(
@@ -20158,7 +20174,7 @@ var render = function() {
             ? _c(
                 "div",
                 _vm._l(_vm.posts, function(p) {
-                  return _c("div", { staticClass: "flex flex-col " }, [
+                  return _c("div", { staticClass: "flex flex-col mb-3" }, [
                     _c("div", { staticClass: "flex flex-row mb-2" }, [
                       _c(
                         "a",
@@ -20207,7 +20223,7 @@ var render = function() {
                       [
                         _c("img", {
                           staticClass: "w-full",
-                          attrs: { src: "/storage/" + p.post_image }
+                          attrs: { src: p.post_image }
                         })
                       ]
                     )
@@ -20221,7 +20237,7 @@ var render = function() {
                 [_vm._v("\n\t\t\tNo Posts.\n\t\t")]
               ),
           _vm._v(" "),
-          _c("div", { staticClass: "flex flex-row mb-4" }, [
+          _c("div", { staticClass: "mt-2 flex flex-row mb-4" }, [
             _vm.prevPage
               ? _c("div", { staticClass: "mr-2" }, [
                   _c(
@@ -20239,7 +20255,7 @@ var render = function() {
                         "button",
                         {
                           staticClass:
-                            "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                            "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-16"
                         },
                         [_vm._v("Prev")]
                       )
@@ -20248,7 +20264,9 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm.nextPage
+            function() {
+              return _vm.posts.length > 2
+            }
               ? _c("div", { staticClass: "mr-2" }, [
                   _c(
                     "button",
@@ -20278,7 +20296,7 @@ var render = function() {
                         "button",
                         {
                           staticClass:
-                            "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12"
+                            "px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-16"
                         },
                         [_vm._v("Next")]
                       )
