@@ -80,7 +80,7 @@ export default {
 					this.error = err.data;
 				}));
 			} else {
-				axios.get('/p/').then(res => {
+				axios.get('/posts_browse').then(res => {
 					this.loading = false;
 					this.posts = res.data.posts.data;
 					this.currentPage = res.data.posts.current_page;

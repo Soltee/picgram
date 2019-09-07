@@ -1878,6 +1878,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var paginate = "";
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'browse-post',
@@ -1913,7 +1919,7 @@ var paginate = "";
           _this.error = err.data;
         });
       } else {
-        axios.get('/p/').then(function (res) {
+        axios.get('/posts_browse').then(function (res) {
           _this.loading = false;
           _this.posts = res.data.posts.data;
           _this.currentPage = res.data.posts.current_page;
@@ -19901,83 +19907,83 @@ var render = function() {
                       ])
                     }),
                     0
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mt-auto flex flex-row w-auto" }, [
-                    _vm.prevPage
-                      ? _c("div", { staticClass: "mr-2" }, [
-                          _c(
-                            "a",
-                            {
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.getPosts(_vm.prevPage)
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
-                                },
-                                [_vm._v("Prev")]
-                              )
-                            ]
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    function() {
-                      return _vm.posts.length > 2
-                    }
-                      ? _c("div", { staticClass: "mr-2" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
-                            },
-                            [_vm._v(_vm._s(_vm.currentPage))]
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.nextPage
-                      ? _c("div", { staticClass: "mr-2" }, [
-                          _c(
-                            "a",
-                            {
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.getPosts(_vm.nextPage)
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
-                                },
-                                [_vm._v("Next")]
-                              )
-                            ]
-                          )
-                        ])
-                      : _vm._e()
-                  ])
+                  )
                 ]
               )
             : _c(
                 "div",
                 { staticClass: "p-2 border-2 rounded border-blue-800 mb-2" },
                 [_vm._v("\n\t\t\t\tNo  Posts.\n\t\t\t")]
-              )
+              ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mt-auto flex flex-row w-auto" }, [
+            _vm.prevPage
+              ? _c("div", { staticClass: "mr-2" }, [
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.getPosts(_vm.prevPage)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                        },
+                        [_vm._v("Prev")]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            function() {
+              return _vm.posts.length > 2
+            }
+              ? _c("div", { staticClass: "mr-2" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                    },
+                    [_vm._v(_vm._s(_vm.currentPage))]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.nextPage
+              ? _c("div", { staticClass: "mr-2" }, [
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.getPosts(_vm.nextPage)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "px-2 py-2 bg-gray-600 rounded hover:bg-gray-400"
+                        },
+                        [_vm._v("Next")]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e()
+          ])
         ])
   ])
 }

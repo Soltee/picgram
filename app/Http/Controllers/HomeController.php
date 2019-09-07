@@ -67,20 +67,6 @@ class HomeController extends Controller
 
 
     /**
-
-     * Get all categories
-
-    **/
-
-    public function categories()
-    {   
-
-        $categories = Category::latest()->get();
-        
-        return response()->json(['categories' => $categories], 200);
-    }
-
-    /**
      * Get all posts
     **/
 
@@ -89,12 +75,5 @@ class HomeController extends Controller
         return response()->json(['posts' => Post::latest()->paginate(2)], 200);
     }
 
-     /**
-     * Get all posts by category
-    **/
 
-    public function postsByCategory(Category $category)
-    {   
-        return response()->json(['posts' => Post::where('category_id', $category->id)->latest()->paginate(1)], 200);
-    }
 }
