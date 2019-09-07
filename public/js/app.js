@@ -2217,6 +2217,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'search-model',
   props: [],
@@ -2227,7 +2237,7 @@ __webpack_require__.r(__webpack_exports__);
       users: null,
       error: null,
       loading: false,
-      totalRes: null
+      search: true
     };
   },
   methods: {
@@ -2241,7 +2251,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
 
         if (res.data.users.length > 0) {
+          _this.search = true;
           _this.users = res.data.users;
+        } else {
+          _this.search = false;
         }
       })["catch"](function (err) {
         return _this.error = err.response;
@@ -20485,72 +20498,71 @@ var render = function() {
             ? _c("div", { staticClass: "font-semibold text-lg p-2" }, [
                 _vm._v("\n\t\t\t\tLoading ...\n\t\t\t")
               ])
-            : _c(
-                "div",
-                _vm._l(_vm.users, function(u) {
-                  return function() {
-                    return _vm.users.length > 0
-                  }
-                    ? _c(
-                        "div",
-                        {
-                          staticClass:
-                            "flex flex-row items-end w-full px-2 py-2"
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "mr-2 flex flex-row justify-between items-top",
-                              attrs: { href: "/profile/" + u.id }
-                            },
-                            [
-                              u.profile.avatar
-                                ? _c("img", {
-                                    staticClass: "user-img-sm mr-2",
-                                    attrs: { src: u.profile.avatar }
-                                  })
-                                : _c(
-                                    "svg",
-                                    {
-                                      staticClass:
-                                        "user-img-sm bg-cover rounded-full",
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 20 20"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
+            : _c("div", [
+                _vm.search
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.users, function(u) {
+                        return _c(
+                          "div",
+                          {
+                            staticClass:
+                              "flex flex-row items-end w-full px-2 py-2"
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "mr-2 flex flex-row justify-between items-top",
+                                attrs: { href: "/profile/" + u.id }
+                              },
+                              [
+                                u.profile.avatar
+                                  ? _c("img", {
+                                      staticClass: "user-img-sm mr-2",
+                                      attrs: { src: u.profile.avatar }
+                                    })
+                                  : _c(
+                                      "svg",
+                                      {
+                                        staticClass:
+                                          "user-img-sm bg-cover rounded-full",
                                         attrs: {
-                                          d:
-                                            "M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 20 20"
                                         }
-                                      })
-                                    ]
-                                  ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "hover:text-gray-600" },
-                                [_vm._v(_vm._s(u.name))]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    : _c(
-                        "div",
-                        {
-                          staticClass:
-                            "p-2 border-2 rounded border-blue-800 mb-2"
-                        },
-                        [_vm._v("\n\t\t\t\t\tNo  match found.\n\t\t\t\t")]
-                      )
-                }),
-                0
-              )
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "hover:text-gray-600" },
+                                  [_vm._v(_vm._s(u.name))]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  : _c(
+                      "div",
+                      {
+                        staticClass: "p-2 border-2 rounded border-red-800 mb-2"
+                      },
+                      [_vm._v("\n\t\t\t\t\tNo user match.\n\t\t\t\t")]
+                    )
+              ])
         ]
       )
     ])
