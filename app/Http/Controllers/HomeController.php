@@ -50,10 +50,10 @@ class HomeController extends Controller
 
     public function search()
     {   
-        $query = request('term');
-        $users = User::where('name', 'LIKE', ''. $query . '%')->with('posts', 'profile')->get();
+        $query = request("term");
+        $users = User::where("name", "LIKE", $query . "%")->with("posts", "profile")->get();
 
-        return response()->json(['users' => $users], 200);
+        return response()->json(["users" => $users], 200);
     }
 
     /**

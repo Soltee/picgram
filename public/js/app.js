@@ -2252,7 +2252,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
 
         if (res.data.users.length > 0) {
-          _this.search = true;
           _this.users = res.data.users;
         } else {
           _this.search = false;

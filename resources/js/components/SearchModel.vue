@@ -70,7 +70,7 @@ export default {
 				this.searchKey = '';
 				this.loading = false;
 				if (res.data.users.length > 0) {
-					this.search = true;
+
 					this.users = res.data.users;
 				} else {
 					this.search = false;
