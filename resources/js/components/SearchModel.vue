@@ -17,7 +17,7 @@
 					Loading ...
 				</div>
 				<div v-else>
-					<div v-if="users.length" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
+					<div v-if="() => users.length > 0" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
 
 						<a :href="`/profile/${u.id}`" class="mr-2 flex flex-row justify-between items-top">
 							<img v-if="u.profile.avatar" class="user-img-sm mr-2" :src="u.profile.avatar">

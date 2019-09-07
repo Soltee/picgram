@@ -20488,7 +20488,9 @@ var render = function() {
             : _c(
                 "div",
                 _vm._l(_vm.users, function(u) {
-                  return _vm.users.length
+                  return function() {
+                    return _vm.users.length > 0
+                  }
                     ? _c(
                         "div",
                         {
