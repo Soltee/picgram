@@ -81,7 +81,6 @@ export default {
 			} else {
 				axios.get('/u/p')
 				.then((res) => {
-					console.log(res.data.posts.data);
 					this.posts = res.data.posts.data;
 					this.currentPage = res.data.posts.current_page;
 					this.nextPage = res.data.posts.next_page_url;

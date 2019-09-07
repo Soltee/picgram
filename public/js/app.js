@@ -2144,7 +2144,6 @@ var param = "";
         });
       } else {
         axios.get('/u/p').then(function (res) {
-          console.log(res.data.posts.data);
           _this.posts = res.data.posts.data;
           _this.currentPage = res.data.posts.current_page;
           _this.nextPage = res.data.posts.next_page_url;
