@@ -7,6 +7,7 @@
 		<div v-else>
 			
 			<div v-if="posts">
+
 				<div class="flex flex-col mb-3" v-for="p in posts">
 					<div class="flex flex-row mb-2">
 						<a :href="`/profile/${p.user.id}`" class="flex flex-row">
@@ -19,6 +20,7 @@
 		                <img class="w-full"  :src="p.post_image">
 		            </a>
 				</div>
+				
 			</div>
 			<div v-else class="p-2 border-2 rounded border-blue-800 mb-2">
 				No Posts.
