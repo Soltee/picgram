@@ -11,14 +11,18 @@
     },
     "devDependencies": {
         "axios": "^0.19",
-        "cross-env": "^5.1",
-        "laravel-mix": "^4.0.7",
+        "cross-env": "^6.0.3",
+        "laravel-mix": "^5.0.0",
         "lodash": "^4.17.5",
-        "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
-        "sass-loader": "^7.1.0",
-        "tailwindcss": "^1.0.5",
+        "resolve-url-loader": "^3.1.1",
+        "sass": "^1.23.7",
+        "sass-loader": "^8.0.0",
+        "tailwindcss": "^1.1.4",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "loadash": "^1.0.0",
+        "loadsh": "0.0.4"
     }
 }
