@@ -44,7 +44,7 @@ class LoginController extends Controller
         $this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($this->redirectPath())->with('success', 'Logged in successfully.');
+                ?: redirect()->intended($this->redirectPath())->with('toast_success', 'Logged in successfully.');
     }
 
     public function logout(Request $request)
@@ -53,6 +53,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect('/')->with('success', 'Logged out successfully.');
+        return $this->loggedOut($request) ?: redirect('/')->with('toast_success', 'Logged out successfully.');
     }
 }

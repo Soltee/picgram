@@ -80,6 +80,6 @@ class RegisterController extends Controller
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath())->with('success', 'Your account has been registered.');
+                        ?: redirect($this->redirectPath())->with('toast_success', 'Your account has been registered.');
     }
 }
