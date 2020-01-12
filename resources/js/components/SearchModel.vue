@@ -64,14 +64,16 @@ export default {
 	methods:{
 		searchUser(){
 			this.loading = true;
+			this.search = true;
 			this.users = null;
 			axios.get(`/search?term=${this.searchKey}`)
 			.then((res) => {
 				this.searchKey = '';
 				this.loading = false;
-				if (res.data.users.length > 0) {
+				let data = res.data.users;
+				if (data.length > 0) {
 
-					this.users = res.data.users;
+					this.users = data;
 				} else {
 					this.search = false;
 				}

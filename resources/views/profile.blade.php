@@ -59,7 +59,9 @@
                 </div>
                 <!--Follow and posts ends-->
                 <div class="flex flex-col">
+                  @if($profile->about)
                   <p>{{ str_limit($profile->about, '150', '...') }}</p>
+                  @endif
                   <a href="" class="disabled">{{ $profile->url }}</a>
                 </div>
             </div>

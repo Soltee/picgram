@@ -42,13 +42,14 @@ class PostsController extends Controller
             'file' => 'required|image|max:2240',
             'caption' => 'string|min:4',
         ]); 
-       
-        Cloudder::upload($request->file('file'), null,  
-            [
-                "folder" => "picgram/posts/"
-            ],  []);
+        
+        
+        // Cloudder::upload($request->file('file'), null,  
+        //     [
+        //         "folder" => "picgram/posts/"
+        //     ],  []);
 
-        $c = Cloudder::getResult();
+        // $c = Cloudder::getResult();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
