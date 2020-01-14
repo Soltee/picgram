@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-lg mx-auto flex flex-wrap justify-center">
 
-           
+    
     <div class="lg:w-4/5 md:w-3/5 w-full mb-16">
     	<browse-posts></browse-posts>
     </div>

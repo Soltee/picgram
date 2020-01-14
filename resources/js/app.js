@@ -19,6 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('welcome-view', require('./components/Welcome.vue').default);
 Vue.component('home-posts', require('./components/Home.vue').default);
 Vue.component('search-model', require('./components/SearchModel.vue').default);
 Vue.component('browse-posts', require('./components/BrowseByCategory.vue').default);

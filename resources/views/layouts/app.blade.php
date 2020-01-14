@@ -7,14 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <title>{{ config('app.name', 'PicGram') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,6 +16,7 @@
 <body>
     <div id="app">
 
+        @auth
         <nav class="bg-gray-300">
             <div class="container flex justify-between items-center mx-auto lg:px-56 md:px-24 px-4 py-4 border-white border-b-2">
                 <a class="flex flex-row items-center" href="{{ url('/') }}">
@@ -48,16 +42,16 @@
                 
             </div>
         </nav>
+        @endauth
+
         @include('sweetalert::alert')
-        <main class="">
-            <div class="container flex flex-col mx-auto lg:px-56 md:px-24 px-4 py-4">
-                @include('_partials.messages')
-                <div class="">
-                    @yield('content')
-                </div>
-            </div>
-        </main>
+        @yield('content')
+        
     </div>
+    
+    <script src="{{ mix('js/app.js') }}"></script>
+
 
 </body>
 </html>
+
