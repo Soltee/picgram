@@ -45,10 +45,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email|min:4',
-            'password' => 'required|string|min:8',            
-        ]);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -79,7 +75,7 @@ class LoginController extends Controller
         $this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
-                ?: response()->json(['success' => 'Ok'], 200);
+                ?: redirect()->route('home')->with('toast_success', 'You are logged in.');
     }
 
     public function logout(Request $request)

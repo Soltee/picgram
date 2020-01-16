@@ -62,13 +62,7 @@ class HomeController extends Controller
 
     public function browse()
     {   
-        if(request()->login){
-            toast('You are logged in.', 'success');
-        }
-     
-        if(request()->register){
-            toast('Your account has been registered.', 'success');
-        }
+
         return view('browse');
     }
 

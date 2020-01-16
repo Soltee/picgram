@@ -74,17 +74,12 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|min:4|unique:users',
-            'email' => 'required|email|min:4|unique:users',
-            'password' => 'required|string|min:8|confirmed',            
-        ]);
 
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
-                        ?: response()->json(['success' => 'ok'], 201);
+                        ?: redirect()->route('home')->with('toast_success', 'Your account has been registered.');
     }
 }

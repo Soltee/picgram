@@ -9,18 +9,22 @@
 	    		</div>
 	    		<p class="font-serif text-white text-sm font-normal  mt-2">Share Memories</p>
 		    </div>
-		    <form @submit.prevent="authenticate" class="mt-10" >
+		    <form :action="`/login`" :method="`post`"  class="mt-4" id="loginForm">
+		        <input type="hidden" name="_token" :value="csrf">                  
+		        <input type="hidden" name="login">
 		        <div class="md:pl-12">
 		        	
 		        	<div class="mb-4">
 		              <label class="block text-white text-md mb-2 font-semibold   " for="email">
 		                E-Mail 
-		            </label>
-		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" value=""  autocomplete="email" autofocus placeholder="*******@gmail.com">
+		            	</label>
+		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value=""  autocomplete="email" autofocus placeholder="*******@gmail.com">
 		              	
-                        <p  v-if="emailErr.length > 0" v-for="e in emailErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+                        <div v-if="emailErr.length > 0" class="overflow-y-scroll h-12">
+                        	<p   v-for="e in emailErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
                             {{ e }}
-                        </p>
+                        	</p>
+                    	</div>
 		            </div>
 
 		        
@@ -28,10 +32,12 @@
 		              <label class="block text-white text-md font-semibold mb-2    " for="password">
 		                Password
 		              </label>
-		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password"  autocomplete="password" autofocus placeholder="**********">
-		               <p  v-if="passErr.length > 0" v-for="e in passErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password" name="password"  autocomplete="password" autofocus placeholder="**********">
+		               <div v-if="passErr.length > 0" class="overflow-y-scroll h-12">
+		               		<p   v-for="e in passErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
                             {{ e }}
-                        </p>
+                        	</p>
+                    	</div>
 		            </div>
 
 		           
@@ -46,9 +52,8 @@
 		            </div>
 
 		            <div class="flex flex-col my-4">
-		                <button class="w-full mb-3 font-bold text-lg md:w-64 bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded">
+		                <button @click.prevent="validateData()" type="submit" id="logBtn" class="w-full mb-3 font-bold text-lg md:w-64 bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded">
 		                    Login
-
 		                </button>
 
 	                    <a class="btn btn-link w-full md:w-64 text-center text-blue-200" :href="`/password/reset`">
@@ -72,28 +77,34 @@
 	    		</div>
 	    		<p class="font-serif text-white text-sm font-normal  mt-2">Register</p>
 		    </div>
-		    <form method="POST" class="mt-10" @submit.prevent="authenticate">
+		    <form :method="`post`" :action="`/register`" class="mt-4" id="registerForm">
+		        <input type="hidden" name="_token" :value="csrf">
+		        
 		        <input type="hidden" name="register">
 		        <div class="md:pl-12">
 		        	<div class="mb-4">
 		              <label class="block text-white text-md mb-2 font-semibold   " for="name">
 		                Name
 		              </label>
-		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(nameErr.length > 0) ? 'is-invalid' : '' " id="name" v-model="name" autocomplete="name" autofocus placeholder="Hari ....">
-			               <p  v-if="nameErr.length > 0" v-for="e in nameErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
-                            {{ e }}
-                        </p>
+		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(nameErr.length > 0) ? 'is-invalid' : '' " id="name" v-model="name" name="name" autocomplete="name" autofocus placeholder="Hari ....">
+			                <div v-if="nameErr.length > 0" class="overflow-y-scroll h-12">
+			            	   <p  v-for="e in nameErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+                            	{{ e }}
+                        		</p>
+                    		</div>
 		            </div>
 
 		        	<div class="mb-4">
 		              <label class="block text-white text-md mb-2 font-semibold   " for="email">
 		                E-Mail 
 		            </label>
-		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" value=""  autocomplete="email" autofocus placeholder="*******@gmail.com">
+		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value=""  autocomplete="email" autofocus placeholder="*******@gmail.com">
 		              	
-                        <p  v-if="emailErr.length > 0" v-for="e in emailErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+                        <div v-if="emailErr.length > 0"  class="overflow-y-scroll h-12">
+                        	<p  v-for="e in emailErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
                             {{ e }}
-                        </p>
+                        	</p>
+                    	</div>
 		            </div>
 
 		        
@@ -101,10 +112,12 @@
 		              <label class="block text-white text-md font-semibold mb-2    " for="password">
 		                Password
 		              </label>
-		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password"   autocomplete="password" autofocus placeholder="**********">
-		               <p  v-if="passErr.length > 0" v-for="e in passErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+		              <input class=" text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white" :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password" name="password"   autocomplete="password" autofocus placeholder="**********">
+		               <div v-if="passErr.length > 0" class="overflow-y-scroll h-12">
+		               		<p   v-for="e in passErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
                             {{ e }}
-                        </p>
+                        	</p>
+                    	</div>
 		            </div>
 
 
@@ -119,7 +132,7 @@
 		           
 
 		            <div class="flex flex-col my-4">
-		                <button class="w-full mb-3 font-bold text-lg md:w-64 bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded">
+		                <button @click.prevent="validateData()" type="submit" id="regBtn"  class="w-full mb-3 font-bold text-lg md:w-64 bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded">
 		                    Register
 
 		                </button>
@@ -140,6 +153,12 @@
 <script>
 export default {
 	name: 'welcome-view',
+	props: {
+		errors : {
+			type : Object,
+			required : false
+		}
+	},
 	data(){
 		return{
 			loginModal : true,
@@ -151,12 +170,20 @@ export default {
 			nameErr    : [],
 			passErr    : [],
 			emailErr   : [],
+			csrf : ""
 		}
 	},
 	mounted(){
+		this.refreshCsrf();
+
+		if(this.errors.email){
+			this.emailErr = [];
+			this.emailErr = this.errors.email;
+		}
 	},
 	methods:{
 		toggle(){
+			this.refreshCsrf();
 			this.name      = '';
 			this.email     = '';
 			this.password     = '';
@@ -167,31 +194,35 @@ export default {
 			this.passErr     = '';
 			this.loginModal = !this.loginModal;
 		},
-		authenticate()
+		validateData()
 		{
-			let endpoint = "";
 			let formData = new FormData;
 			formData.append('email', this.email);
 			formData.append('password', this.password);
 
 			if(this.loginModal){
 				formData.append('remember', this.remember);
-				endpoint += "/login";
+				formData.append('type', 'login');
 			} else {
 				formData.append('name', this.name);
-				formData.append('password_	confirmation', this.confirm);
-				endpoint += "/register";
+				formData.append('password_confirmation', this.confirm);
+				formData.append('type', 'register');
 			}
-			
-			console.log(endpoint);
-			axios.post(`${endpoint}`, formData).then(res => {
-				console.log(res.status);
-				if(res.status == 201){
-					window.location = '/p/browse?register=true';
-				}
 
+			const logForm =  document.getElementById('loginForm');
+			const regForm =  document.getElementById('registerForm');
+			console.log(logForm, regForm);
+
+			axios.post(`/validateData`, formData).then(res => {
 				if(res.status == 200){
-					window.location = '/p/browse?login=true';
+					if(this.loginModal){
+						console.log(logForm);
+						logForm.submit();
+					} else {
+						console.log(regForm);
+						regForm.submit();
+					} 
+
 				}
 			}).catch((err) => {
 				let errors = err.response.data.errors;
@@ -211,6 +242,9 @@ export default {
 					this.passErr = errors.password;
 				}
 			});
+		},
+		refreshCsrf(){
+			this.csrf = document.head.querySelector('meta[name="csrf-token"]').content;
 		}
 
 	}
