@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UsesUuid;
 
 
     /**

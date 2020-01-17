@@ -14,7 +14,7 @@ class CreateProfileUserPivotTable extends Migration
     public function up()
     {
         Schema::create('profile_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('profile_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

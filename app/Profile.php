@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    use UsesUuid;
     /**
      * The attributes that are mass assignable.
      *

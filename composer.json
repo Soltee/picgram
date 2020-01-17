@@ -9,9 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "brick/math": "^0.8.9",
         "fideloper/proxy": "^4.0",
         "jrm2k6/cloudder": "^0.6.0",
         "laravel/framework": "6.0",
+        "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "realrashid/sweet-alert": "^3.1"
     },

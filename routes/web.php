@@ -8,6 +8,9 @@ Route::post('/validateData', 'ValidationController@index');
 Route::post('/login', 'Auth\LoginController@login');
 Route::post('/register', 'Auth\RegisterController@register');
 
+Route::get('/redirect', 'SocialiteController@redirect');
+Route::get('/callback', 'SocialiteController@callback');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');

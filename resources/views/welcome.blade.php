@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="h-screen w-full flex md:flex-row justify-between items-center overflow-hidden">
+<div class="min-h-screen w-full flex md:flex-row justify-between items-center overflow-hidden">
     <div class="flex-1 h-full flex flex-col items-center justify-center hidden md:block">
 
     	<div class="flex flex-wrap justify-center items-center">

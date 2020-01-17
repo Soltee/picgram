@@ -2525,6 +2525,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'welcome-view',
   props: {
@@ -20930,7 +20949,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "px-4 md:px-0 w-full flex-1 h-full bg-gray-900  flex flex-col items-left justify-center"
+        "min-h-screen px-4 md:px-0 w-full flex-1 h-full bg-gray-900  flex flex-col items-left justify-center"
     },
     [
       _vm.loginModal
@@ -21248,6 +21267,59 @@ var render = function() {
                           "strong",
                           { staticClass: "font-bold text-lg text-gray-400" },
                           [_vm._v("Register Now.")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass:
+                          "block my-2 text-center w-full md:w-64 text-gray-300"
+                      },
+                      [_vm._v(" Or ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "w-full md:w-64  flex flex-row items-center justify-center"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "border-2 bg-gray-300 border-blue-600 rounded-full p-1",
+                            attrs: { href: "/redirect" }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "h-6 w-6 md:w-8 md:h-8 text-blue-600",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 24 24",
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
                         )
                       ]
                     )
@@ -21615,6 +21687,59 @@ var render = function() {
                           "strong",
                           { staticClass: "font-bold text-lg text-gray-400" },
                           [_vm._v("Login Now.")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass:
+                          "block my-2 text-center w-full md:w-64 text-gray-300"
+                      },
+                      [_vm._v(" Or ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "w-full md:w-64  flex flex-row items-center justify-center"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "border-2 bg-gray-300 border-blue-600 rounded-full p-1",
+                            attrs: { href: "/redirect" }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "h-6 w-6 md:w-8 md:h-8 text-blue-600",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 24 24",
+                                  fill: "none",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
                         )
                       ]
                     )
