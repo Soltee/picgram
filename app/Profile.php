@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use UsesUuid;
+
+    protected $casts = [
+        'id' => 'string'
+    ];
     /**
      * The attributes that are mass assignable.
      *
