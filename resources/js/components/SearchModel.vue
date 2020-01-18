@@ -25,11 +25,15 @@
 
 						<div class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
 
-							<a :href="`/profile/${u.id}`" class="mr-2 flex flex-row justify-between items-top">
+							<a onclick="event.preventDefault();document.getElementById('user-profile-form').submit();" :href="`/#`" class="mr-2 flex flex-row justify-between items-top">
 								<img v-if="u.profile.avatar" class="user-img-sm mr-2" :src="u.profile.avatar">
 								<svg v-else class="user-img-sm bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 								<span class="hover:text-gray-600">{{ u.name }}</span>
 							</a>
+							<form id="user-profile-form" :action="`/profile`" :method="GET" style="display: none;">
+		                        <input type="hidden" name="_token" :value="csrf">
+		                        <input type="text" name="user" :value="u.id">
+		                    </form>
 						</div> 
 						
 					</div>
@@ -58,7 +62,8 @@ export default {
 			users:null,
 			error: null,
 			loading: false,
-			search:true
+			search:true,
+			csrf : document.head.querySelector('meta[name="csrf-token"]').content
 		}
 	},
 	methods:{

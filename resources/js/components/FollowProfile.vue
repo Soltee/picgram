@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div class="ml-3">
 		<button @click.prevent="followPost" class="px-1 text-white font-medium py-1 rounded w-24 bg-blue-700 hover:bg-blue-600" v-text="followStatus">Follow</button>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'follow-profile',
+	name: 'followProfile',
 	props:['user', 'follows'],
 	data(){
 		return{
@@ -19,7 +19,7 @@ export default {
 	methods:{
 		followPost()
 		{
-			axios.post(`/follow/${this.user}/profile`)
+			axios.post(`/follow/${this.user.id}/profile`)
 			.then(res => {
 				this.status = ! this.status;
 				console.log(res.data);

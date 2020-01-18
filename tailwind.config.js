@@ -1,6 +1,10 @@
 module.exports = {
   theme: {
-    extend: {}
+    extend: {
+    	screen:{
+    		'cm' : '500px'
+    	}
+    }
   },
   variants: {},
   plugins: []

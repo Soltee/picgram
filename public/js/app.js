@@ -1932,6 +1932,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FollowProfile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FollowProfile */ "./resources/js/components/FollowProfile.vue");
 //
 //
 //
@@ -1971,16 +1972,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'browse-post',
-  components: {},
+  components: {
+    followProfile: _FollowProfile__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       posts: [],
       paginate: [],
+      postImages: [],
       page: null,
-      loading: false,
-      postImage: null
+      loading: false
     };
   },
   mounted: function mounted() {
@@ -2003,6 +2017,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.paginate = data.paginate;
         _this.loading = false;
       })["catch"](function (err) {});
+    },
+    getPostImages: function getPostImages(post) {
+      var img = "";
+      post.images.forEach(function (i) {
+        img = i.url;
+      });
+      return img;
     }
   }
 });
@@ -2097,7 +2118,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'follow-profile',
+  name: 'followProfile',
   props: ['user', 'follows'],
   data: function data() {
     return {
@@ -2109,7 +2130,7 @@ __webpack_require__.r(__webpack_exports__);
     followPost: function followPost() {
       var _this = this;
 
-      axios.post("/follow/".concat(this.user, "/profile")).then(function (res) {
+      axios.post("/follow/".concat(this.user.id, "/profile")).then(function (res) {
         _this.status = !_this.status;
         console.log(res.data);
       })["catch"](function (err) {
@@ -2302,6 +2323,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'search-model',
   props: [],
@@ -2312,7 +2337,8 @@ __webpack_require__.r(__webpack_exports__);
       users: null,
       error: null,
       loading: false,
-      search: true
+      search: true,
+      csrf: document.head.querySelector('meta[name="csrf-token"]').content
     };
   },
   methods: {
@@ -20247,13 +20273,73 @@ var render = function() {
                     _vm._l(_vm.posts, function(p) {
                       return _c(
                         "div",
-                        { staticClass: "w-full md:w-1/3 lg:w-1/4" },
+                        {
+                          staticClass: "w-full cm:w-1/2 md:w-1/3 lg:w-1/4 p-2"
+                        },
                         [
-                          _vm._v(
-                            "\n\n\n\t                \t" +
-                              _vm._s(p.images[0]) +
-                              "\n\t                    "
-                          )
+                          _c("div", { staticClass: "p-2 mb-3" }, [
+                            _c(
+                              "div",
+                              { staticClass: "flex items-center mb-2" },
+                              [
+                                p.user.profile.avatar
+                                  ? _c("img", {
+                                      staticClass:
+                                        "w-6 h-6 md:w-8 md:h-8 rounded-full",
+                                      attrs: {
+                                        src: "/storage/" + p.user.profile.avatar
+                                      }
+                                    })
+                                  : _c(
+                                      "svg",
+                                      {
+                                        staticClass:
+                                          "w-6 h-6 md:w-8 md:h-8 rounded-full object-cover object-center",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 24 24",
+                                          fill: "none",
+                                          stroke: "currentColor",
+                                          "stroke-width": "2",
+                                          "stroke-linecap": "round",
+                                          "stroke-linejoin": "round"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                                          }
+                                        }),
+                                        _c("circle", {
+                                          attrs: { cx: "12", cy: "7", r: "4" }
+                                        })
+                                      ]
+                                    ),
+                                _vm._v(" "),
+                                _c("followProfile", {
+                                  attrs: { user: p.user }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "h3",
+                                  {
+                                    staticClass:
+                                      "text-right text-md text-gray-900"
+                                  },
+                                  [_vm._v(_vm._s(p.user.name))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("img", {
+                              staticClass:
+                                "w-full bg-gray-400 rounded-lg shadow-lg",
+                              attrs: { src: "/storage/" + _vm.getPostImages(p) }
+                            })
+                          ])
                         ]
                       )
                     }),
@@ -20414,7 +20500,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "ml-3" }, [
     _c(
       "button",
       {
@@ -20786,7 +20872,11 @@ var render = function() {
                               {
                                 staticClass:
                                   "mr-2 flex flex-row justify-between items-top",
-                                attrs: { href: "/profile/" + u.id }
+                                attrs: {
+                                  onclick:
+                                    "event.preventDefault();document.getElementById('user-profile-form').submit();",
+                                  href: "/#"
+                                }
                               },
                               [
                                 u.profile.avatar
@@ -20819,6 +20909,29 @@ var render = function() {
                                   { staticClass: "hover:text-gray-600" },
                                   [_vm._v(_vm._s(u.name))]
                                 )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "form",
+                              {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  id: "user-profile-form",
+                                  action: "/profile",
+                                  method: _vm.GET
+                                }
+                              },
+                              [
+                                _c("input", {
+                                  attrs: { type: "hidden", name: "_token" },
+                                  domProps: { value: _vm.csrf }
+                                }),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: { type: "text", name: "user" },
+                                  domProps: { value: u.id }
+                                })
                               ]
                             )
                           ]

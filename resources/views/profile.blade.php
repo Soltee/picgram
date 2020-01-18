@@ -40,17 +40,17 @@
                   <div class="flex">
                     <div class="flex flex-col items-center mr-2">
                       <button class="px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Posts</button>
-                      <span class="font-weight-bold">{{ count($posts) }}</span>
+                      <span class="font-weight-bold"> </span>
                     </div>
 
                     <div class="flex flex-col items-center mr-2">
                       <button class="px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Followers</button>
-                      <span class="font-weight-bold">{{ count($followers) }}</span>
+                      <span class="font-weight-bold"></span>
                     </div>
 
                     <div class="flex flex-col items-center mr-2">
                       <button class="px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Following</button>
-                      <span class="font-weight-bold">{{ count($following) }}</span>
+                      <span class="font-weight-bold"></span>
                     </div>
                   </div>
                   

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Profile;
 use Illuminate\Http\Request;
 use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Str;
+use App\Post;
 
 class ProfileController extends Controller
 {
@@ -15,17 +17,18 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
-        $posts = $user->posts()->latest()->paginate(10);
-        $user = $user;
+        $user = request()->user;
+        $posts = ($user) ? $user->posts()->latest()->paginate(10) : auth()->user()->posts()->latest()->paginate(10);
+        $user = ($user) ? User::findOrfail($user) : auth()->user();
         $profile = $user->profile;
-        $following = $user->following;
-        $followers = $user->profile->followers;
+        $following = $user->followings(Profile::class)->get();
+        // $followers = $user->followers()->get();
 
-        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        
-        return view('profile', compact('posts', 'user', 'profile', 'following', 'followers', 'follows'));
+        // $follows = (auth()->user()) ? auth()->user()->isFollowedBy($user) : false;
+        // dd(auth()->user()->posts());
+        return view('profile', compact('posts', 'user', 'profile', 'following'));
     }
 
 

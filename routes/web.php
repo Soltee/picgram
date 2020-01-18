@@ -24,7 +24,7 @@ Route::get('/browse', 'BrowseController@index')->name('browse');
 Route::get('/posts', 'BrowseController@posts');
 
 
-Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
+Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 Route::patch('/profile/{user}/update', 'ProfileController@update')->name('profile.update');
 
