@@ -7,11 +7,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
 use Overtrue\LaravelFollow\Traits\CanFollow;
-use Overtrue\LaravelFollow\Traits\CanBeFollowed;
 
 class User extends Authenticatable
 {
-    use Notifiable, UsesUuid, CanFollow, CanBeFollowed;
+    use Notifiable, UsesUuid, CanFollow;
 
 
     /**

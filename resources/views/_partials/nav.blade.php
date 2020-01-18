@@ -1,4 +1,4 @@
-<ul class="ml-4 m-0 p-0 w-auto flex lg:flex-col md:flex-col flex-row justify-center items-center">
+<ul class="w-full px-2 py-2 flex lg:flex-col md:flex-col flex-row justify-center items-center">
 
     <li class="nav-item  mb-3 lg:mr-0 md:mr-0 mr-2">
         <a class="nav-link hover:bg-gray-500 p-2 rounded flex items-end lg:flex-row md:flex-row flex-col {{ Route::currentRouteName() == 'home' ? 'bg-gray-500' : '' }}" href="{{ route('home') }}">

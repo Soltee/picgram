@@ -55,26 +55,7 @@ class HomeController extends Controller
 
         return response()->json(["users" => $users], 200);
     }
-
-    /**
-     * Browse all posts
-    **/
-
-    public function browse()
-    {   
-
-        return view('browse');
-    }
-
-
-    /**
-     * Get all posts
-    **/
-
-    public function posts()
-    {   
-        return response()->json(['posts' => Post::latest()->paginate(2)], 200);
-    }
+    
 
 
 }

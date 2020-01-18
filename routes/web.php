@@ -20,8 +20,8 @@ Route::get('/p/create', 'PostsController@create')->name('posts.create');
 Route::post('/p', 'PostsController@store')->name('posts.store');
 Route::get('/p/{post}-{slug}', 'PostsController@show')->name('posts.show');
 
-Route::get('/p/browse', 'HomeController@browse')->name('browse');
-Route::get('/posts_browse', 'HomeController@posts')->name('browse.posts');
+Route::get('/browse', 'BrowseController@index')->name('browse');
+Route::get('/posts', 'BrowseController@posts');
 
 
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile');

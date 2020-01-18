@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-lg mx-auto flex flex-wrap justify-center">
+<div class="flex justify-between  px-3 py-3 md:px-10 ">
 
     
-    <div class="lg:w-4/5 md:w-3/5 w-full mb-16">
+    <div class="w-full flex-1 mb-16">
     	<browse-posts></browse-posts>
     </div>
 
-    <div class="lg:w-1/5 md:w-2/5 w-full lg:static md:static fixed left-0 bottom-0 lg:bg-transparent md:bg-transparent lg:p-0 md:p-0 pb-0 pt-2 bg-gray-400">
+    <div class="md:w-auto w-full bg-gray-400 rounded-lg">
     	@include('_partials.nav')
     </div>
+   {{--   <div class="md:40 w-full lg:static md:static fixed left-0 bottom-0 lg:bg-transparent md:bg-transparent lg:p-0 md:p-0 pb-0 pt-2 bg-gray-400">
+    	@include('_partials.nav')
+    </div> --}}
     
 </div>
 @endsection
