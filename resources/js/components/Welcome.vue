@@ -174,7 +174,7 @@ export default {
 	name: 'welcome-view',
 	props: {
 		errors : {
-			type : Object,
+			type : Array,
 			required : false
 		}
 	},

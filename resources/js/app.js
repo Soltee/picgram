@@ -1,3 +1,4 @@
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -7,6 +8,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+export const serverBus = new Vue();
 
 /**
  * The following block of code may be used to automatically register your

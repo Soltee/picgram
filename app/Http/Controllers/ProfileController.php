@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Str;
 use App\Post;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -19,11 +20,12 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user = request()->user;
-        $posts = ($user) ? $user->posts()->latest()->paginate(10) : auth()->user()->posts()->latest()->paginate(10);
-        $user = ($user) ? User::findOrfail($user) : auth()->user();
-        $profile = $user->profile;
-        $following = $user->followings(Profile::class)->get();
+        $user = User::findorfail(request()->user);
+        $posts = ($user) ? $user->posts()->latest()->paginate(10) : Auth::user();
+        dd($posts);
+        // $user = ($user) ? User::findOrfail($user) : auth()->user();
+        // $profile = $user->profile;
+        // $following = $user->followings(Profile::class)->get();
         // $followers = $user->followers()->get();
 
         // $follows = (auth()->user()) ? auth()->user()->isFollowedBy($user) : false;
