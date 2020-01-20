@@ -1,8 +1,8 @@
 module.exports = {
   theme: {
     extend: {
-    	screen:{
-    		'cm' : '500px'
+    	screens:{
+    		'cm' : '400px'
     	}
     }
   },

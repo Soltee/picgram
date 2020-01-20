@@ -15,7 +15,9 @@ class BrowseController extends Controller
 
     public function posts()
     {   
-    	$posts = Post::latest()->with(['user.profile', 'images'])->paginate(12);
+        $paginate = request()->paginate;
+
+    	$posts = Post::latest()->with(['user.profile', 'images'])->paginate($paginate);
     	
         return response()->json([
         	'posts' => $posts->items(),
