@@ -18,19 +18,21 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user, $slug)
     {
-        $user = User::findorfail(request()->user);
-        $posts = ($user) ? $user->posts()->latest()->paginate(10) : Auth::user();
-        dd($posts);
-        // $user = ($user) ? User::findOrfail($user) : auth()->user();
-        // $profile = $user->profile;
-        // $following = $user->followings(Profile::class)->get();
-        // $followers = $user->followers()->get();
+        // dd($user);
+        // $user = User::findOrfail($user);
+        $posts = $user->posts()->latest()->paginate(10);
+        // dd(Auth::user()->posts());
+        $profile = $user->profile;
+        $followings = $user->followings()->get();
+        $followers = $user->followers()->get();
+        $isFollowing = auth()->user()->isFollowing($user);
+        // dd($isFollowing);  
 
         // $follows = (auth()->user()) ? auth()->user()->isFollowedBy($user) : false;
         // dd(auth()->user()->posts());
-        return view('profile', compact('posts', 'user', 'profile', 'following'));
+        return view('profile', compact('posts', 'user', 'profile', 'isFollowing', 'followings', 'followers'));
     }
 
 

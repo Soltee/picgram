@@ -1,7 +1,7 @@
 <template>
 	<div class="">
 
-		<div class="">
+		<div class="md:relative">
 			
 			<div 
 			v-if="searchStatus" 
@@ -15,7 +15,7 @@
 			    @click="searchStatus=true;" 
 			    class="md:hidden   h-6 w-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
 			</svg>
-			<div class="hidden md:static flex flex-row items-center">
+			<div class="hidden  md:flex md:flex-row md:items-center relative">
 				
 				<input @keyup.enter="searchUser" type="text" class="w-full md:w-48 text-gray-700 rounded-full pl-10 py-1 pr-10 border border-gray-800"  v-model="searchKey">
 				<svg  class="absolute right-0 z-10 pr-2 h-8 w-8 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
@@ -30,7 +30,7 @@
 					<div v-if="getData" class=" h-64 overflow-y-scroll p-2">
 						<div v-if="users.length > 0" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
 
-							<a onclick="event.preventDefault();document.getElementById('user-profile-form').submit();" :href="`/#`" class="mr-2 flex flex-row justify-between items-top">
+							<a  :href="`/profile/${u.id}/${u.name}`" class="mr-2 flex flex-row justify-between items-top">
 								<img v-if="u.profile.avatar" class="user-img-sm mr-2" :src="u.profile.avatar">
 								<svg v-else class="user-img-sm bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 								<span class="ml-3 hover:text-gray-600">{{ u.name }}</span>

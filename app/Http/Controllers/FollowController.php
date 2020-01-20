@@ -17,7 +17,7 @@ class FollowController extends Controller
     {
     	// dd($user);
     	// dd(auth()->user()->following()->toggle(1));
-    	$user->toggleFollow($user->profile);
+    	$user->toggleFollow($user);
     	return response()->json(['success'=>'Ok'], 200);
     }
 }

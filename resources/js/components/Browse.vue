@@ -13,7 +13,7 @@
                 class="w-full cm:w-1/2 md:w-1/3 lg:w-1/4 p-6" 
                	> 
                		<div class="flex items-center my-2" >
-               			<a :href="`/#`" onclick="event.preventDefault();document.getElementById('uF').submit();">
+               			<a :href="`/profile/${p.user.id}/${p.user.name}`">
 		                    <img v-if="p.user.avatar" class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" :src="`/storage/${p.user.avatar}`"
 		                    
 		                    >
@@ -27,11 +27,12 @@
                		</div>
 
                 	<div class="p-2 mb-3">
-                		<carousel :perPage="1" :paginationEnabled="false" :navigationEnabled="true" >
+                		<imageSlider :images="p.images"></imageSlider>
+                		<!-- <carousel :perPage="1" :paginationEnabled="false" :navigationEnabled="true" >
                             <slide v-for="(image, index) in p.images" :key="index">
                                 <img :src="`/storage/${image.url}`" class="w-full bg-gray-400 rounded-lg shadow-lg" alt="...">
                             </slide>
-                        </carousel>
+                        </carousel> -->
 					</div>	                	
                 </div>
 
@@ -53,11 +54,11 @@
 </template>
 
 <script>
-import { Carousel, Slide } from 'vue-carousel';
+import  imageSlider from './Slider';
 export default {
 	name: 'browse-post',
 	components: {
-      Carousel, Slide
+      imageSlider
    	},
 	data(){
 		return{

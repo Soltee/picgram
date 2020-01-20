@@ -24,11 +24,11 @@ Route::get('/browse', 'BrowseController@index')->name('browse');
 Route::get('/posts', 'BrowseController@posts');
 
 
-Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::get('/profile/{user}/{slug}', 'ProfileController@index')->name('profile');
 Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 Route::patch('/profile/{user}/update', 'ProfileController@update')->name('profile.update');
 
-Route::post('/follow/{user}/profile', 'FollowController@store')->name('follow.profile');
+Route::post('/follow/{user}', 'FollowController@store')->name('follow.profile');
 Route::get('/p/{post}/comments', 'CommentController@index')->name('comment.index');
 Route::post('/p/{post}/comment', 'CommentController@store')->name('comment.store');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Auth;
+use App\PostImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use JD\Cloudder\Facades\Cloudder;
@@ -44,11 +45,29 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'file' => 'required|image|max:2240',
+            'file*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'caption' => 'string|min:4',
         ]); 
+            
+        $images      = $request->file('files'); // get the validated filee
+        foreach ($images as $image) {
+            $basename  = Str::random();
+            $original  = 'pd-' . $basename . '.' . $image->getClientOriginalExtension();
+            $paths[] = $image->storeAs('posts', $original, 'public'); 
+        }
+
+        $post = auth()->user()->posts()->create([
+            'caption' => $data['caption']
+        ]);
+
+        foreach ($paths as $path) {
+            PostImage::create([
+                'post_id' => $post->id,
+                'url'   => $path,
+            ]);
+        }
         
-        
+        return response()->json(['success' => 'Ok'], 201);
         // Cloudder::upload($request->file('file'), null,  
         //     [
         //         "folder" => "picgram/posts/"
@@ -56,12 +75,11 @@ class PostsController extends Controller
 
         // $c = Cloudder::getResult();
 
-        auth()->user()->posts()->create([
-            'caption' => $data['caption'],
-            'post_image' => $c['url']
-        ]);
+        // auth()->user()->posts()->create([
+        //     'caption' => $data['caption'],
+        //     'post_image' => $c['url']
+        // ]);
 
-        return redirect()->route('browse')->with('success', 'Post uploaded.');
     }
 
     /**

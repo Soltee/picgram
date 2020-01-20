@@ -24,6 +24,7 @@ export const serverBus = new Vue();
 
 Vue.component('welcome-view', require('./components/Welcome.vue').default);
 Vue.component('home-posts', require('./components/Home.vue').default);
+Vue.component('upload', require('./components/UploadPost.vue').default);
 Vue.component('search-model', require('./components/SearchModel.vue').default);
 Vue.component('browse-posts', require('./components/Browse.vue').default);
 Vue.component('comment-post', require('./components/CommentPost.vue').default);

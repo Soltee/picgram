@@ -7,7 +7,16 @@
 <script>
 export default {
 	name: 'followProfile',
-	props:['user', 'follows'],
+	props:{
+		user : {
+			type : Object,
+			required : true
+		},
+		follows: {
+			type : Boolean,
+			required : true
+		}
+	},
 	data(){
 		return{
 			status: this.follows,
@@ -19,16 +28,26 @@ export default {
 	methods:{
 		followPost()
 		{
-			axios.post(`/follow/${this.user.id}/profile`)
-			.then(res => {
-				this.status = ! this.status;
-				console.log(res.data);
+			console.log("Following..");
+			axios.post(`/follow/${this.user.id}`)
+				.then(res => {
+					this.status = !this.status;
+				}).
+				catch(err => {
+					if(err.response.status == 401) {
+						window.location = "/login";
+					}
+				});
+			// axios.post(`/follow/${this.user.id}`)
+			// .then(res => {
+			// 	this.status = ! this.status;
+			// 	console.log(res.data);
 				
-			}).catch((err => {
-				if(err.response.status == 401) {
-					window.location = "/login";
-				}
-			}));
+			// }).catch((err => {
+			// 	if(err.response.status == 401) {
+			// 		window.location = "/login";
+			// 	}
+			// }));
 		}
 	},
 	computed:{

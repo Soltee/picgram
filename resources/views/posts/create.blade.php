@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-lg mx-auto flex flex-wrap justify-center">
+<div class="flex justify-between  px-3 py-3 md:px-16 ">
 
-           
-    <div class="lg:w-4/5 md:w-3/5 w-full flex flex-col mb-16">
-        
+    
+    <div class="w-full flex-1 mb-16">
+        <upload></upload>
 
-        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+        {{-- <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col mb-6">
                  <div class="flex flex-row items-baseline">
@@ -50,11 +50,12 @@
 
             </div>
 
-        </form>
+        </form> --}}
     </div>
 
-    <div class="lg:w-1/5 md:w-2/5 w-full lg:static md:static fixed left-0 bottom-0 lg:bg-transparent md:bg-transparent lg:p-0 md:p-0 pb-0 pt-2 bg-gray-400">
-        @include('_partials.nav')
+
+    <div class="md:w-auto fixed bottom-0 left-0 w-full md:static  rounded-lg pl-3 flex flex-col items-center">
+            @include('_partials.nav')
     </div>
     
 </div>
