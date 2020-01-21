@@ -28,11 +28,7 @@
 
                 	<div class="p-2 mb-3">
                 		<imageSlider :images="p.images"></imageSlider>
-                		<!-- <carousel :perPage="1" :paginationEnabled="false" :navigationEnabled="true" >
-                            <slide v-for="(image, index) in p.images" :key="index">
-                                <img :src="`/storage/${image.url}`" class="w-full bg-gray-400 rounded-lg shadow-lg" alt="...">
-                            </slide>
-                        </carousel> -->
+                	
 					</div>	                	
                 </div>
 

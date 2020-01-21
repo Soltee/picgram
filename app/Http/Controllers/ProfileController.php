@@ -27,17 +27,14 @@ class ProfileController extends Controller
     {
         // dd($user);
         // $user = User::findOrfail($user);
-        $posts = $user->posts()->latest()->paginate(10);
-        // dd(Auth::user()->posts());
         $profile = $user->profile;
         $followings = $user->followings()->get();
         $followers = $user->followers()->get();
         $isFollowing = auth()->user()->isFollowing($user);
-        // dd($isFollowing);  
 
         // $follows = (auth()->user()) ? auth()->user()->isFollowedBy($user) : false;
         // dd(auth()->user()->posts());
-        return view('profile', compact('posts', 'user', 'profile', 'isFollowing', 'followings', 'followers'));
+        return view('profile', compact('user', 'profile', 'isFollowing', 'followings', 'followers'));
     }
 
 

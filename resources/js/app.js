@@ -20,7 +20,7 @@ export const serverBus = new Vue();
  */
 
 // const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// files.keys().map(key => Vue-pomponent(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('welcome-view', require('./components/Welcome.vue').default);
 Vue.component('home-posts', require('./components/Home.vue').default);
@@ -29,6 +29,7 @@ Vue.component('search-model', require('./components/SearchModel.vue').default);
 Vue.component('browse-posts', require('./components/Browse.vue').default);
 Vue.component('comment-post', require('./components/CommentPost.vue').default);
 Vue.component('follow-profile', require('./components/FollowProfile.vue').default);
+Vue.component('user-profile', require('./components/UserProfile.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
