@@ -9,6 +9,7 @@ use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Str;
 use App\Post;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -44,6 +45,7 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
+        // dd($user);
         $this->authorize('update', $user->profile);
         $profile = $user->profile;
         return view('uprofile', compact('user', 'profile'));
@@ -58,32 +60,59 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        // if(env('APP_ENV') === 'local'){
+        //             dd(env('APP_ENV'));
+        // }
         $this->authorize('update', $user->profile);
 
-        $data = $request->validate([
-            'avatar' => '',
-            'caption' => 'required|string',
-            'about' => 'required',
-            'url' => 'url'
-        ]);
+        if($request->input('type') === 'profile'){
+
+            $data = $request->validate([
+                'name' => '',
+                'caption' => 'required|string',
+                'about' => 'required',
+                'url' => 'url'
+            ]);
 
 
-        if($request->hasFile('avatar'))
-        {
-            Cloudder::upload($request->file('avatar'), null,  
-            [
-                "folder" => "picgram/users/"
-            ],  []);
+            if($request->hasFile('avatar'))
+            {
+                if($user->profile->avatar){
+                    Storage::delete($user->profile->avatar);
+                }
+                if(env('APP_ENV') === 'local'){
+                    $image     = $request->file('avatar');
+                    $basename  = Str::random();
+                    $original  = 'us-' . $basename . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('users', $original, 'public'); 
 
-            $c = Cloudder::getResult();
-            
+                    $imagearray = ['avatar' => $path];
+                } else {
+                    Cloudder::upload($request->file('avatar'), null,  
+                    [
+                        "folder" => "picgram/users/"
+                    ],  []);
 
-            $imagearray = ['avatar' => $c['url']];
+                    $c = Cloudder::getResult();
+                    $imagearray = ['avatar' => $c['url']];
+                }
+
+            }
+
+
+            auth()->user()->profile->update(array_merge($data, $imagearray ?? []));
         }
 
-        auth()->user()->profile->update(array_merge($data, $imagearray ?? []));
+        if($request->input('type') === 'info'){
+            $data = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+            auth()->user()->update($data);
+       }
 
-        return redirect('profile/' . $user->id)->with('success', 'Profile updated.');
+        return redirect('profile/' . $user->id . '/' . $user->name)->with('toast_success', 'Profile updated.');
 
     }
 

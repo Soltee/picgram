@@ -9,7 +9,7 @@
             <div class="block  lg:mr-2 md:mr-2 mr-2">
                 <div class="">
                   @if($profile->avatar)
-                    <img class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" src="{{  $profile->avatar }}">
+                    <img class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" src="/storage/{{  $profile->avatar }}">
                   @else
                     <svg class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-12 w-12 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
                   @endif
@@ -29,7 +29,7 @@
                   </div>
                   @can('update', $profile)
                       <div class="flex absolute top-0 right-0">
-                        <a class="px-1 py-1   text-white rounded text-center" href="{{ route('profile.edit', $user->id ) }}">
+                        <a class="px-1 py-1   text-white rounded text-center" href="/edit/{{$user->id}}">
                           <svg class="h-6 w-6 text-blue-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/></svg>
                         </a>
                       </div>
@@ -61,9 +61,9 @@
                 <!--Follow and posts ends-->
                 <div class="flex flex-col">
                   @if($profile->about)
-                  <p>{{ str_limit($profile->about, '150', '...') }}</p>
+                  <p>{{ Str::limit($profile->about, '150', '...') }}</p>
                   @endif
-                  <a href="" class="disabled">{{ $profile->url }}</a>
+                  <a href="{{ $profile->url }}" class="">{{ $profile->url }}</a>
                 </div>
             </div>
             
