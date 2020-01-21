@@ -10,10 +10,14 @@ use Illuminate\Support\Str;
 use App\Post;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -77,9 +81,10 @@ class ProfileController extends Controller
 
             if($request->hasFile('avatar'))
             {
-                if($user->profile->avatar){
-                    Storage::delete($user->profile->avatar);
+                if(file_exists(public_path() . '/storage/' . $user->profile->avatar)){
+                    Storage::disk('public')->delete($user->profile->avatar);
                 }
+
                 if(env('APP_ENV') === 'local'){
                     $image     = $request->file('avatar');
                     $basename  = Str::random();
