@@ -10,7 +10,7 @@
 	                <!-- Author Top -->
                 <div class="flex flex-row justify-between items-baseline ">
                   	<div class="flex flex-row mb-2 items-baseline">
-	                    <h4 class="mr-3 text-gray-600 font-semibold capatialize">{{ user.name }}</h4>
+	                    <h4 class="mr-3 text-gray-900 font-semibold capatialize">{{ user.name }}</h4>
 	                    <div >
 	                      <follow-profile user="user" follows="false"></follow-profile>                    	
 	                    </div>
@@ -47,6 +47,7 @@
             </div>
         </div>
 
+        <h3 class="text-gray-900 ml-4 mx-4 my-6">My Posts</h3>
 		<div v-if="posts.length > 0"  class="flex flex-col justify-between items-center w-auto">
 			<div class="w-full flex flex-row mb-4 text-center flex-1 flex-wrap w-auto" >
             
@@ -60,12 +61,13 @@
 	            		<imageSlider :images="p.images"></imageSlider>
 					</div>	                	
 	            </div>
-
        	 	</div>
 
 	        <div v-if="loading" class="loader">
 			</div>
-	        <button v-else @click="more = true; getPosts()" class="my-3 text-lg font-bold bg-gray-300 shadow-lg text-gray-800 rounded-lg">Load More ...</button>
+			<div v-else>
+	        	<button v-if="total > 1" @click="more = true; getPosts()" class="my-3 text-lg font-bold bg-gray-300 shadow-lg text-gray-800 rounded-lg">Load More ...</button>	
+			</div>
 
 	    </div>
 	    <div v-else >
@@ -101,7 +103,8 @@ export default {
 			posts      : [],
 			loading    : false,
 			more  : false,
-			page  : null,	
+			page  : null,
+			total : 0,	
 		}
 	},
 	mounted(){
@@ -131,13 +134,14 @@ export default {
 				} else {
 					this.posts    = data.posts;
 				}
+				this.total = data.paginate.total_count;
 				this.loading  = false;				
 			}).catch((err => {
 				
 			}));
 		}
 	}
-}
+};
 </script>
 <style scoped>  
 .loader {

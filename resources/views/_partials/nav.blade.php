@@ -2,7 +2,7 @@
     <div class="hidden md:flex md:items-center">
         @if(Auth::user()->profile->avatar)
             <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                <img class="lg:h-24 lg:w-24 md:w-16 md:h-16  bg-cover rounded-full" src="/storage/{{  $profile->avatar }}">
+                <img class="lg:h-24 lg:w-24 md:w-16 md:h-16  bg-cover rounded-full" src="/storage/{{  Auth::user()->profile->avatar }}">
             </a>
         @else
             <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">

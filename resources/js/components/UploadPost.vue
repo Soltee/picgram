@@ -4,14 +4,12 @@
             <div class="w-full">
                 <div class="flex flex-row justify-between items-center mb-3">
                     <div class="flex items-center">
-                        <a :href="`/admin/products`">
-                            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 md:h-8  md:w-8 text-gray-800"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                        </a>
+  
                         <h1 class="m-0 text-lg font-bold ml-2">New Post</h1>  
                     </div>
                     <div class="flex items-center">
                         <svg @click="reset" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 mr-2 cursor-pointer"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-                        <button type="submit"  class=" hover:bg-gray-300 bg-blue-600 hover:opacity-75 text-gray-100 font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline" >
+                        <button type="submit"  class=" hover:bg-blue-500 bg-blue-600 hover:opacity-75 text-gray-100 font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline" >
                             Save
                         </button> 
                     </div>
@@ -42,6 +40,12 @@
 		        	<div class="flex flex-col  rounded-lg mb-3">
                         <label for="caption" class=" px-2 py-3 text-gray-800 text-md font-semibold ">Caption</label>
                         <input type="text" id="caption" v-model="caption" class="px-3 py-3 rounded-lg  bg-gray-300 text-gray-900">
+
+                        <div v-if="captionErr.length > 0" class="">
+                            <p  v-for="e in captionErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+                                {{ e }}
+                            </p>
+                        </div>
                     </div>
 	        	</div>
 	        </div>
@@ -58,7 +62,8 @@ export default {
 		return{
 			files      : [],
 			fileRead   : [],
-			caption    : ''
+			caption    : '',
+            captionErr : []
 		}
 	},
 	mounted(){
@@ -90,6 +95,7 @@ export default {
                 this.fileRead.splice(file, 1);
             },
             savePost(){
+                this.captionErr = [];
                 let formData = new FormData();
                 for( var i = 0; i < this.files.length; i++ ){
                     let file = this.files[i];
@@ -111,7 +117,7 @@ export default {
 
                         Toast.fire({
                             icon: 'success',
-                            title:   `Product was created successfully!`
+                            title:   `Post uploaded successfully!`
                         });
 
                         this.reset();
@@ -123,7 +129,13 @@ export default {
                     } 
 
                 })
-                .catch((error) => {
+                .catch((err) => {
+                    let errors = err.response.data.errors;
+                    this.captionErr     = [];
+                    console.log(errors);
+                    if(errors.caption){
+                        this.captionErr = errors.caption;
+                    }
                     Toast.fire({
                       icon: 'error',
                       title: 'There was some network error!'

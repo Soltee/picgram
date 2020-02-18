@@ -20,14 +20,17 @@ Route::get('/p/create', 'PostsController@create')->name('posts.create');
 Route::post('/p', 'PostsController@store')->name('posts.store');
 Route::get('/p/{post}-{slug}', 'PostsController@show')->name('posts.show');
 
-Route::get('/browse', 'BrowseController@index')->name('browse');
-Route::get('/posts', 'BrowseController@posts');
+Route::get('/browse', 'BrowseController@index')->name('browse')->middleware('auth');
+Route::get('/posts', 'BrowseController@posts')->middleware('auth');
+Route::get('/posts/{post}/{caption}', 'BrowseController@show')->middleware('auth');
 
+/*Like*/
+Route::post('/like/{post}', 'LikeController@store')->middleware('auth');
 
 Route::get('/profile/{user}/{slug}', 'ProfileController@index')->name('profile');
 Route::get('/edit/{user}', 'ProfileController@edit')->name('profile.edit');
 Route::patch('/profile/{user}/update', 'ProfileController@update')->name('profile.update');
-Route::get('/posts/{user}', 'BrowseController@posts');
+Route::get('/posts/{user}', 'PostsController@index');
 
 
 Route::post('/follow/{user}', 'FollowController@store')->name('follow.profile');

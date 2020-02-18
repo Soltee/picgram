@@ -23,10 +23,10 @@ class PostsController extends Controller
     }
         
 
-    public function index(User, $user){
+    public function index(User $user){
         $paginate = request()->paginate;
 
-        $posts = Post::latest()->where('user_id', $user->id)->paginate($paginate);
+        $posts = Post::latest()->with('images')->where('user_id', $user->id)->paginate($paginate);
         
         return response()->json([
             'posts' => $posts->items(),
@@ -61,11 +61,14 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'file*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
+            'files' => 'required',
+            'files.*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'caption' => 'string|min:4',
         ]); 
             
-        $images      = $request->file('files'); // get the validated filee
+        // dd($data);
+        $images      = $request->file('files');
+         // get the validated filee
         foreach ($images as $image) {
             $basename  = Str::random();
             $original  = 'pd-' . $basename . '.' . $image->getClientOriginalExtension();

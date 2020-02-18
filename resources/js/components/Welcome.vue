@@ -67,8 +67,9 @@
 
 		                <div class="w-full md:w-64  flex flex-row items-center justify-center">
 		                	
-			                <a :href="`/redirect`" class="border-2 bg-gray-300 border-blue-600 rounded-full p-1">
+			                <a :href="`/redirect`" class="flex items-center bg-white rounded-full py-1 px-3">
 			                	<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 md:w-8 md:h-8 text-blue-600"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+			                	<span class="text-blue-600 ml-3">Login with Facebook</span>
 			                </a>
 		                </div>
 		                

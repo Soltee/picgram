@@ -27,7 +27,7 @@ Vue.component('home-posts', require('./components/Home.vue').default);
 Vue.component('upload', require('./components/UploadPost.vue').default);
 Vue.component('search-model', require('./components/SearchModel.vue').default);
 Vue.component('browse-posts', require('./components/Browse.vue').default);
-Vue.component('comment-post', require('./components/CommentPost.vue').default);
+Vue.component('browse-post', require('./components/Post.vue').default);
 Vue.component('follow-profile', require('./components/FollowProfile.vue').default);
 Vue.component('user-profile', require('./components/UserProfile.vue').default);
 

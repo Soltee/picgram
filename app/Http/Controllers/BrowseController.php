@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class BrowseController extends Controller
@@ -31,5 +32,22 @@ class BrowseController extends Controller
                 'total_count'   => $posts->total()
             ]
         ], 200);
+    }
+
+
+    public function show(Post $post)
+    {
+        $user = $post->user;
+        $liked = (auth()->user()->hasLiked($post)) ? true : false;
+        $profile = $user->profile;
+        $images = $post->images;
+        // dd($liked);
+
+        return view('posts.show', compact('post', 'liked', 'user', 'profile', 'images'));
+        // return response()->json([
+        //     'post' => $post,
+        //     'user' => $user,
+        //     'images' => $images
+        // ], 200);
     }
 }

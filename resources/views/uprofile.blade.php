@@ -33,22 +33,7 @@
                         </p>
                     @enderror
                 </div>
-                    
-
-                <div class="mb-6">
-                    <label for="caption" class="block text-white-700 text-md mb-3 font-semibold">{{ __('Caption') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="caption" type="text" class="fshadow appearance-none border rounded border-gray-400 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="caption" value="{{ old('caption') ??  $profile->caption }}" required autocomplete="caption" placeholder="Thinking About....." autofocus>
-
-                        @error('caption')
-                            <p style="color:red;" class="mt-2 px-1 py-1  border-2 rounded" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </p>
-                        @enderror
-                    </div>
-                </div>
-
+                
 
                 
                 <div class="mb-6">

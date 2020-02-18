@@ -27,7 +27,8 @@
                		</div>
 
                 	<div class="p-2 mb-3">
-                		<imageSlider :images="p.images"></imageSlider>
+                		<!-- <img :src="`${p.images[0].url}`" class="w-full bg-gray-400 rounded-lg shadow-lg" alt="..."> -->
+                		<imageSlider :post="p" :images="p.images"></imageSlider>
                 	
 					</div>	                	
                 </div>
@@ -51,6 +52,7 @@
 
 <script>
 import  imageSlider from './Slider';
+import Toast from './Alert';
 export default {
 	name: 'browse-post',
 	components: {
@@ -74,9 +76,9 @@ export default {
 		getPosts()
 		{
 			this.loading = true;
-			let paginate = 10;
+			let paginate = 8;
 			if(this.more){
-				paginate+10;
+				paginate+8;
 			}
 			let endpoint = `/posts?paginate=${paginate}`;
 			if(this.page){
@@ -89,7 +91,7 @@ export default {
 				let data      = res.data;
 				if(this.more){
 					data.posts.forEach((post) => {
-						this.posts.unshift(post);
+						this.posts.push(post);
 					})
 				} else {
 					this.posts    = data.posts;
@@ -108,7 +110,7 @@ export default {
 			return img;
 		}
 	}
-}
+};
 </script>
 <style scoped>  
 .loader {

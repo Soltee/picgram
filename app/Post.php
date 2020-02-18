@@ -3,10 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Overtrue\LaravelFollow\Traits\CanBeLiked;
 class Post extends Model
 {
-    use UsesUuid;
+    use UsesUuid, CanBeLiked;
     /**
      * The attributes that are mass assignable.
      *
