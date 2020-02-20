@@ -2074,7 +2074,6 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     follows: {
-      type: Boolean,
       required: true
     }
   },
@@ -2287,17 +2286,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'browse-post',
   props: {
+    auth: {
+      type: Object,
+      required: true
+    },
+    hasfollowed: {
+      required: true
+    },
     post: {
       type: Object,
       required: true
     },
     liked: {
-      type: Boolean,
+      required: true
+    },
+    likedcount: {
       required: true
     },
     user: {
@@ -2319,7 +2331,8 @@ __webpack_require__.r(__webpack_exports__);
       error: "",
       comments: [],
       profiles: [],
-      isLiked: false
+      likedTotal: Number(this.likedcount),
+      isLiked: this.liked
     };
   },
   components: {
@@ -2346,10 +2359,11 @@ __webpack_require__.r(__webpack_exports__);
     postComment: function postComment() {
       var _this2 = this;
 
-      axios.post("/p/".concat(this.post, "/comment"), {
+      console.log(this.post.id);
+      axios.post("/p/".concat(this.post.id, "/comment"), {
         comment: this.comment
       }).then(function (res) {
-        _this2.getComments("".concat(_this2.post));
+        _this2.getComments("".concat(_this2.post.id));
       })["catch"](function (err) {
         _Alert__WEBPACK_IMPORTED_MODULE_1__["default"].fire({
           icon: 'error',
@@ -2363,6 +2377,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/like/".concat(this.post.id)).then(function (res) {
         if (res.status == 200) {
           _this3.isLiked = !_this3.isLiked;
+          _this3.isLiked ? ++_this3.likedTotal : --_this3.likedTotal;
         }
       })["catch"](function (err) {
         _Alert__WEBPACK_IMPORTED_MODULE_1__["default"].fire({
@@ -2783,6 +2798,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'user-profile',
@@ -2791,12 +2828,21 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     },
+    hasfollowed: {
+      required: true
+    },
     user: {
       type: Object,
       required: true
     },
     profile: {
       type: Object,
+      required: true
+    },
+    followers: {
+      required: true
+    },
+    followings: {
       required: true
     }
   },
@@ -2808,9 +2854,11 @@ __webpack_require__.r(__webpack_exports__);
       csrf: document.head.querySelector('meta[name="csrf-token"]').content,
       posts: [],
       loading: false,
+      hasMore: false,
       more: false,
       page: null,
-      total: 0
+      total: 0,
+      modelStatus: false
     };
   },
   mounted: function mounted() {
@@ -2845,8 +2893,16 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this.total = data.paginate.total_count;
+        data.paginate.next_page_url ? _this.hasMore = true : _this.hasMore = false;
         _this.loading = false;
       })["catch"](function (err) {});
+    },
+    closeModal: function closeModal() {
+      this.modelStatus = false;
+      ;
+    },
+    openModal: function openModal() {
+      this.modelStatus = true;
     }
   }
 });
@@ -24922,7 +24978,19 @@ var render = function() {
                   )
                 ]
               )
-        ])
+        ]),
+        _vm._v(" "),
+        _vm.auth.id !== _vm.user.id
+          ? _c(
+              "div",
+              [
+                _c("follow-profile", {
+                  attrs: { user: _vm.user, follows: _vm.hasfollowed }
+                })
+              ],
+              1
+            )
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c(
@@ -24937,8 +25005,7 @@ var render = function() {
         _vm._l(_vm.images, function(image, index) {
           return _c("slide", { key: index }, [
             _c("img", {
-              staticClass:
-                "w-full cm:w-64 md:w-64 bg-gray-400 rounded-lg shadow-lg",
+              staticClass: "w-full  bg-gray-400 rounded-lg shadow-lg",
               attrs: { src: "/storage/" + image.url, alt: "..." }
             })
           ])
@@ -24946,7 +25013,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "my-3" }, [
+      _c("div", { staticClass: "my-3 flex items-center" }, [
         _c(
           "svg",
           {
@@ -24967,12 +25034,16 @@ var render = function() {
               }
             })
           ]
-        )
+        ),
+        _vm._v(" "),
+        _c("span", { staticClass: "ml-3 text-white " }, [
+          _vm._v(_vm._s(_vm.likedTotal) + " People Liked")
+        ])
       ]),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "w-full px-4 py-12" },
+        { staticClass: "w-full py-12" },
         [
           _c("div", { staticClass: "relative flex flex-row w-64" }, [
             _c("input", {
@@ -24984,7 +25055,7 @@ var render = function() {
                   expression: "comment"
                 }
               ],
-              staticClass: "w-full px-2 py-1 rounded bg-gray-500 pr-10 pl-4",
+              staticClass: "w-full px-2 py-3 rounded bg-gray-500 pr-10 pl-4",
               attrs: { type: "text", placeholder: "comment" },
               domProps: { value: _vm.comment },
               on: {
@@ -25000,7 +25071,7 @@ var render = function() {
             _c(
               "svg",
               {
-                staticClass: "absolute right-0 mt-1 mr-2 w-6 h-6 text-gay-500",
+                staticClass: "absolute right-0 mt-2 mr-2 w-8 h-8 text-gay-500",
                 attrs: {
                   fill: "currentColor",
                   xmlns: "http://www.w3.org/2000/svg",
@@ -25061,9 +25132,13 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", [
-                  _c("span", [_vm._v(_vm._s(c.user.name))]),
+                  _c("span", { staticClass: "text-white font-medium" }, [
+                    _vm._v(_vm._s(c.user.name))
+                  ]),
                   _vm._v(" "),
-                  _c("p", {}, [_vm._v(_vm._s(c.comment))])
+                  _c("p", { staticClass: "text-white font-bold" }, [
+                    _vm._v(_vm._s(c.comment))
+                  ])
                 ])
               ])
             ])
@@ -25835,15 +25910,17 @@ var render = function() {
                 [_vm._v(_vm._s(_vm.user.name))]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                [
-                  _c("follow-profile", {
-                    attrs: { user: "user", follows: "false" }
-                  })
-                ],
-                1
-              )
+              _vm.auth.id !== _vm.user.id
+                ? _c(
+                    "div",
+                    [
+                      _c("follow-profile", {
+                        attrs: { user: _vm.user, follows: _vm.hasfollowed }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
             ]),
             _vm._v(" "),
             _vm.auth.id === _vm.user.id
@@ -25882,7 +25959,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "flex flex-row justify-between mt-2 mb-2" }, [
           _c("div", { staticClass: "flex" }, [
-            _c("div", { staticClass: "flex flex-row items-center mr-2" }, [
+            _c("div", { staticClass: "flex flex-row items-center" }, [
               _c(
                 "button",
                 {
@@ -25897,9 +25974,37 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "flex flex-row items-center ml-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded",
+                  on: { click: _vm.openModal }
+                },
+                [_vm._v("Followers")]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "font-weight-bold" }, [
+                _vm._v(" " + _vm._s(_vm.followers.length) + " ")
+              ])
+            ]),
             _vm._v(" "),
-            _vm._m(1)
+            _c("div", { staticClass: "flex flex-row items-center ml-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded",
+                  on: { click: _vm.openModal }
+                },
+                [_vm._v("Following")]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "font-weight-bold" }, [
+                _vm._v(_vm._s(_vm.followings.length) + "   ")
+              ])
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -25917,8 +26022,8 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("h3", { staticClass: "text-gray-900 ml-4 mx-4 my-6" }, [
-      _vm._v("My Posts")
+    _c("h3", { staticClass: "text-gray-900 text-black mx-6 font-bold my-6" }, [
+      _vm._v("Recent Posts")
     ]),
     _vm._v(" "),
     _vm.posts.length > 0
@@ -25943,7 +26048,11 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "p-2 mb-3" },
-                      [_c("imageSlider", { attrs: { images: p.images } })],
+                      [
+                        _c("imageSlider", {
+                          attrs: { post: p, images: p.images }
+                        })
+                      ],
                       1
                     )
                   ]
@@ -25955,7 +26064,7 @@ var render = function() {
             _vm.loading
               ? _c("div", { staticClass: "loader" })
               : _c("div", [
-                  _vm.total > 1
+                  _vm.total > 1 && _vm.hasMore
                     ? _c(
                         "button",
                         {
@@ -25982,7 +26091,77 @@ var render = function() {
                 [_vm._v("No  Posts.")]
               )
             : _vm._e()
-        ])
+        ]),
+    _vm._v(" "),
+    _vm.modelStatus
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "fixed inset-0  rounded-lg flex flex-col  justify-center rounded-lg z-20"
+          },
+          [
+            _c("div", {
+              staticClass: "h-full w-full bg-gray-300",
+              on: { click: _vm.closeModal }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "absolute  bg-white left-0 right-0  mx-auto  max-w-xl shadow-lg rounded-lg p-6 z-30"
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "flex justify-between items-center" },
+                  [
+                    _c("div"),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: " cursor-pointer",
+                        attrs: {
+                          type: "button",
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        },
+                        on: { click: _vm.closeModal }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current text-gray-900",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "18",
+                              height: "18",
+                              viewBox: "0 0 18 18"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ]
+            )
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -25990,34 +26169,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-row items-center mr-2" }, [
+    return _c("div", {}, [
       _c(
-        "button",
+        "p",
         {
-          staticClass:
-            "mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded"
+          staticClass: "mt-4 text-lg font-semibold text-green-800 text-center"
         },
-        [_vm._v("Followers")]
-      ),
-      _vm._v(" "),
-      _c("span", { staticClass: "font-weight-bold" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-row items-center mr-2" }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            "mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded"
-        },
-        [_vm._v("Following")]
-      ),
-      _vm._v(" "),
-      _c("span", { staticClass: "font-weight-bold" })
+        [_vm._v("Are you sure? You want to delete")]
+      )
     ])
   }
 ]

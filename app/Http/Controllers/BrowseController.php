@@ -39,11 +39,13 @@ class BrowseController extends Controller
     {
         $user = $post->user;
         $liked = (auth()->user()->hasLiked($post)) ? true : false;
+        $likedtotal = count($post->likers()->get());
         $profile = $user->profile;
         $images = $post->images;
-        // dd($liked);
+        $isFollowing  = (auth()->user()->isFollowing($user)) ? true : false;
+        // dd($isFollowing);
 
-        return view('posts.show', compact('post', 'liked', 'user', 'profile', 'images'));
+        return view('posts.show', compact('post', 'liked', 'likedtotal', 'user', 'profile', 'images', 'isFollowing'));
         // return response()->json([
         //     'post' => $post,
         //     'user' => $user,

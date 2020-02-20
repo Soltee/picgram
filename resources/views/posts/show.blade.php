@@ -5,13 +5,18 @@
 
     
     <div class="w-full flex-1 mb-16 bg-gray-800 mr-3">
-       
-        <browse-post :post="{{ $post }}" liked="{{ $liked }}" :user="{{$user}}" :profile="{{$profile}}" :images="{{$images}}"></browse-post>      
-          {{--   <div>
-                <follow-profile user="{{ $user->id }}" follows="{{ $follows }}"></follow-profile>
-            </div>
-        </div> --}}
-           
+  
+        <browse-post
+            :auth="{{ Auth::user() }}" 
+            hasfollowed="{{ $isFollowing }}"
+            :post="{{ $post }}" 
+            liked="{{ $liked }}" 
+            likedCount="{{ $likedtotal }}" 
+            :user="{{$user}}" 
+            :profile="{{$profile}}" 
+            :images="{{$images}}">
+                
+        </browse-post>        
 
     </div>
 

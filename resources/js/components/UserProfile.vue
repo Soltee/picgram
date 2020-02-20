@@ -11,8 +11,9 @@
                 <div class="flex flex-row justify-between items-baseline ">
                   	<div class="flex flex-row mb-2 items-baseline">
 	                    <h4 class="mr-3 text-gray-900 font-semibold capatialize">{{ user.name }}</h4>
-	                    <div >
-	                      <follow-profile user="user" follows="false"></follow-profile>                    	
+	                    <div v-if="auth.id !== user.id">
+
+              				<follow-profile :user="user" :follows="hasfollowed"></follow-profile>                    	
 	                    </div>
 	                    
                   	</div>
@@ -23,19 +24,19 @@
                 <!-- Author Top  ENDS-->
                	<div class="flex flex-row justify-between mt-2 mb-2">
                   <div class="flex">
-                    <div class="flex flex-row items-center mr-2">
+                    <div class="flex flex-row items-center">
                       <button class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Posts</button>
                       <span class="font-weight-bold">{{ posts.length }} </span>
                     </div>
 
-                    <div class="flex flex-row items-center mr-2">
-                      <button class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Followers</button>
-                      <span class="font-weight-bold"> </span>
+                    <div class="flex flex-row items-center ml-4">
+                      <button @click="openModal" class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Followers</button>
+                      <span class="font-weight-bold"> {{ followers.length }} </span>
                     </div>
 
-                    <div class="flex flex-row items-center mr-2">
-                      <button class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Following</button>
-                      <span class="font-weight-bold">  </span>
+                    <div class="flex flex-row items-center ml-4">
+                      <button @click="openModal"  class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Following</button>
+                      <span class="font-weight-bold">{{ followings.length }}   </span>
                     </div>
                   </div>
                 </div> 
@@ -46,8 +47,8 @@
                 </div>
             </div>
         </div>
+        <h3 class="text-gray-900 text-black mx-6 font-bold my-6">Recent Posts</h3>
 
-        <h3 class="text-gray-900 ml-4 mx-4 my-6">My Posts</h3>
 		<div v-if="posts.length > 0"  class="flex flex-col justify-between items-center w-auto">
 			<div class="w-full flex flex-row mb-4 text-center flex-1 flex-wrap w-auto" >
             
@@ -58,7 +59,7 @@
 	           	> 
 
 	            	<div class="p-2 mb-3">
-	            		<imageSlider :images="p.images"></imageSlider>
+	            		<imageSlider :post="p"  :images="p.images"></imageSlider>
 					</div>	                	
 	            </div>
        	 	</div>
@@ -66,13 +67,34 @@
 	        <div v-if="loading" class="loader">
 			</div>
 			<div v-else>
-	        	<button v-if="total > 1" @click="more = true; getPosts()" class="my-3 text-lg font-bold bg-gray-300 shadow-lg text-gray-800 rounded-lg">Load More ...</button>	
+	        	<button v-if="total > 1 && hasMore" @click="more = true; getPosts()" class="my-3 text-lg font-bold bg-gray-300 shadow-lg text-gray-800 rounded-lg">Load More ...</button>	
 			</div>
 
 	    </div>
 	    <div v-else >
 			<p v-if="!loading" class="p-2 border-2 rounded border-blue-800 mb-2">No  Posts.</p>
 		</div>
+
+		<div v-if="modelStatus" class="fixed inset-0  rounded-lg flex flex-col  justify-center rounded-lg z-20">
+	        <div class="h-full w-full bg-gray-300" @click="closeModal">   
+	        </div>
+	        <div class="absolute  bg-white left-0 right-0  mx-auto  max-w-xl shadow-lg rounded-lg p-6 z-30">
+	            <div class="flex justify-between items-center">
+	            	<div>
+	            	</div>
+	                <button @click="closeModal" type="button" class=" cursor-pointer" data-dismiss="modal" aria-label="Close">
+	                    <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+	                      <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+	                    </svg>
+	                </button>
+
+	            </div>
+	            <div class="">
+	                <p class="mt-4 text-lg font-semibold text-green-800 text-center">Are you sure? You want to delete</p>
+	            </div> 
+	        </div>
+
+    	</div>
 	</div>
 </template>
 
@@ -85,12 +107,21 @@ export default {
 			type :Object,
 			required :true
 		},
+		hasfollowed : {
+			required : true
+		},
 		user : {
 			type     : Object,
 			required : true
 		},
 		profile : {
 			type     : Object,
+			required : true
+		},
+		followers : {
+			required : true
+		},
+		followings : {
 			required : true
 		}
 	},
@@ -102,9 +133,11 @@ export default {
 			csrf       : document.head.querySelector('meta[name="csrf-token"]').content,
 			posts      : [],
 			loading    : false,
-			more  : false,
-			page  : null,
-			total : 0,	
+			hasMore    : false,
+			more       : false,
+			page       : null,
+			total      : 0,
+			modelStatus : false,	
 		}
 	},
 	mounted(){
@@ -132,13 +165,20 @@ export default {
 						this.posts.unshift(post);
 					})
 				} else {
-					this.posts    = data.posts;
+					this.posts  = data.posts;
 				}
 				this.total = data.paginate.total_count;
+				(data.paginate.next_page_url) ? (this.hasMore = true) : (this.hasMore = false);
 				this.loading  = false;				
 			}).catch((err => {
 				
 			}));
+		},
+		closeModal(){
+			this.modelStatus = false;;
+		},
+		openModal(){
+			this.modelStatus = true;			
 		}
 	}
 };

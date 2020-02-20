@@ -13,7 +13,6 @@ export default {
 			required : true
 		},
 		follows: {
-			type : Boolean,
 			required : true
 		}
 	},

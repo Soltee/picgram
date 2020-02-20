@@ -25,15 +25,14 @@ class ProfileController extends Controller
      */
     public function index(User $user, $slug)
     {
-        // dd($user);
-        // $user = User::findOrfail($user);
-        $profile = $user->profile;
-        $followings = $user->followings()->get();
-        $followers = $user->followers()->get();
-        $isFollowing = auth()->user()->isFollowing($user);
+
+        $profile      = $user->profile;
+        $followings   = $user->followings()->get();
+        $followers    = $user->followers()->get();
+        $isFollowing  = (auth()->user()->isFollowing($user)) ? true : false;
 
         // $follows = (auth()->user()) ? auth()->user()->isFollowedBy($user) : false;
-        // dd(auth()->user()->posts());
+        // dd($isFollowing);
         return view('profile', compact('user', 'profile', 'isFollowing', 'followings', 'followers'));
     }
 

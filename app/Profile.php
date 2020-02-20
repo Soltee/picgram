@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Overtrue\LaravelFollow\Traits\CanBeFollowed;
+
 
 class Profile extends Model
 {
-    use UsesUuid, CanBeFollowed;
+    use UsesUuid;
 
     protected $casts = [
         'id' => 'string'
