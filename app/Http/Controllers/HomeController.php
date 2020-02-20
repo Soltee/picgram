@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Comment;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 
 class HomeController extends Controller
@@ -34,13 +35,27 @@ class HomeController extends Controller
     **/
     public function postByF()
     {
-        $users = auth()->user()->following->pluck('user_id');
-        if(count($users) > 0){
-            $posts = Post::whereIn('user_id', $users)->with('user.profile')->latest()->paginate(2);
-            return response()->json(['posts' => $posts], 200);       
-        } else {
-            return response()->json(['posts' => []], 200); 
-        }
+
+        $followings   = auth()->user()->followings()->get();
+        $followingsIds = Arr::pluck($followings, 'id');
+        $followers    = auth()->user()->followers()->get();
+        $followersIds = Arr::pluck($followers, 'id');
+
+        $userIds = array_merge($followingsIds, $followersIds);
+
+        $posts = Post::whereIn('user_id', $userIds)->with(['images', 'user.profile'])->latest()->paginate(1);
+        // dd($posts);
+        return response()->json([
+                'posts'    => $posts->items(),
+                'paginate' => [
+                    'previous_page_url' => $posts->previousPageUrl(),
+                    'current_page'      => $posts->currentPage(),
+                    'next_page_url'     => $posts->nextPageUrl(),
+                    'current_count' => $posts->count(),
+                    'total_count'   => $posts->total()
+                ]
+            ], 200);       
+      
 
     }
 

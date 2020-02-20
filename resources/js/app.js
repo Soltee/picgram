@@ -31,6 +31,8 @@ Vue.component('browse-post', require('./components/Post.vue').default);
 Vue.component('follow-profile', require('./components/FollowProfile.vue').default);
 Vue.component('user-profile', require('./components/UserProfile.vue').default);
 
+Vue.component('logout-modal', require('./components/Logout.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
