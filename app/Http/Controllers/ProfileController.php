@@ -27,8 +27,8 @@ class ProfileController extends Controller
     {
 
         $profile      = $user->profile;
-        $followings   = $user->followings()->get();
-        $followers    = $user->followers()->get();
+        $followings   = count($user->followings()->get());
+        $followers    = count($user->followers()->get());
         $isFollowing  = (auth()->user()->isFollowing($user)) ? true : false;
 
         // $follows = (auth()->user()) ? auth()->user()->isFollowedBy($user) : false;

@@ -3,7 +3,7 @@
 		<div class="flex flex-row items-center my-3">
             <div class="mr-3 ">
                 <a v-if="profile.avatar" href="`/profile/${user.id}/${user.name}`">
-                    <img class="user-img-sm" :src="`${profile.avatar}`">
+                    <img class="user-img-sm" :src="`/storage/${profile.avatar}`">
                 </a>
                 <a v-else :href="`/profile/${user.id}/${user.name}`">
                 	<svg class="user-img-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
@@ -33,10 +33,10 @@
 			<div class="flex flex-col mt-4" v-for="c in comments">
 				<div class="flex">
 					<a :href="`/profile/${c.user.id}`" class="mr-2">
-						<img v-if="c.user.profile.avatar" class="user-img-sm" :src="c.user.profile.avatar">
+						<img v-if="c.user.profile.avatar" class="user-img-sm" :src="`/storage/${c.user.profile.avatar}`">
 						<svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 					</a>
-					<div>
+					<div class="ml-3">
 						<span class="text-white font-medium">{{ c.user.name }}</span>
 						<p class="text-white font-bold">{{ c.comment }}</p>
 					</div>

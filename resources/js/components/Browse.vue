@@ -99,7 +99,10 @@ export default {
 				// this.paginate = data.paginate;
 				this.loading  = false;				
 			}).catch((err => {
-				
+				Toast.fire({
+                  icon: 'error',
+                  title: 'There was some network error!'
+                });
 			}));
 		},
 		getPostImages(post){

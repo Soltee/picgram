@@ -9,8 +9,8 @@
             hasfollowed="{{ $isFollowing }}"
       		:user="{{ $user }}"  
       		:profile="{{ $profile }}"
-      		:followers="{{ $followers }}"
-      		:followings="{{ $followings }}"
+      		followers="{{ $followers }}"
+      		followings="{{ $followings }}"
       		> 
       	</user-profile>
     </div>

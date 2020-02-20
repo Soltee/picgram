@@ -30,13 +30,13 @@
                     </div>
 
                     <div class="flex flex-row items-center ml-4">
-                      <button @click="openModal" class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Followers</button>
-                      <span class="font-weight-bold"> {{ followers.length }} </span>
+                      <button @click="type = 'followers'; modelStatus = true; getFollow();" class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Followers</button>
+                      <span class="font-weight-bold"> {{ followers }} </span>
                     </div>
 
                     <div class="flex flex-row items-center ml-4">
-                      <button @click="openModal"  class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Following</button>
-                      <span class="font-weight-bold">{{ followings.length }}   </span>
+                      <button @click="type = 'followings'; modelStatus = true; getFollow();"  class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Following</button>
+                      <span class="font-weight-bold">{{ followings }}   </span>
                     </div>
                   </div>
                 </div> 
@@ -80,8 +80,7 @@
 	        </div>
 	        <div class="absolute  bg-white left-0 right-0  mx-auto  max-w-xl shadow-lg rounded-lg p-6 z-30">
 	            <div class="flex justify-between items-center">
-	            	<div>
-	            	</div>
+	            	
 	                <button @click="closeModal" type="button" class=" cursor-pointer" data-dismiss="modal" aria-label="Close">
 	                    <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
 	                      <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -89,9 +88,34 @@
 	                </button>
 
 	            </div>
-	            <div class="">
-	                <p class="mt-4 text-lg font-semibold text-green-800 text-center">Are you sure? You want to delete</p>
-	            </div> 
+	            <div v-if="type == 'followers'" class="">
+	            	<div v-if="newFollowers.length > 0" class="flex flex-col" v-for="f in newFollowers">
+	            		<div class="w-full flex justify-around items-center mb-3">
+		               		<a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
+								<img v-if="f.profile.avatar" class="user-img-sm" :src="`/storage/${f.profile.avatar}`">
+								<svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
+							</a>
+							<span class="text-gray-900 ml-3 font-medium">{{ f.name }}</span>
+		            	</div> 
+	            	</div>
+	            	<div v-if="newFollowers.length < 1"  class="flex justify-center items-center">
+	            		<p class="text-red-600 text-center font-black">No User Followers.</p>
+	            	</div>
+	            </div> 	
+	            <div v-if="type == 'followings'">
+	            	<div v-if="newFollowings.length > 0" class="flex flex-col" v-for="f in newFollowings">
+	            		<div class="w-full flex justify-around items-center mb-3">
+		               		<a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
+								<img v-if="f.profile.avatar" class="user-img-sm" :src="`/storage/${f.profile.avatar}`">
+								<svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
+							</a>
+							<span class="text-gray-900 ml-3 font-medium">{{ f.name }}</span>
+		            	</div> 
+	            	</div>
+	            	<div v-if="newFollowings.length < 1" class="flex justify-center items-center">
+	            		<p class="text-red-600 text-center font-black">No User Followings.</p>
+	            	</div>
+	            </div>
 	        </div>
 
     	</div>
@@ -100,6 +124,7 @@
 
 <script>
 import  imageSlider from './Slider';
+import Toast from './Alert';
 export default {
 	name: 'user-profile',
 	props: {
@@ -137,12 +162,16 @@ export default {
 			more       : false,
 			page       : null,
 			total      : 0,
-			modelStatus : false,	
+			modelStatus    : false,
+			type           : null,
+			newFollowers   : [],
+			newFollowings  : []	
 		}
 	},
 	mounted(){
 		this.getPosts();
 	},
+
 	methods:{
 		getPosts()
 		{
@@ -171,7 +200,10 @@ export default {
 				(data.paginate.next_page_url) ? (this.hasMore = true) : (this.hasMore = false);
 				this.loading  = false;				
 			}).catch((err => {
-				
+				Toast.fire({
+                  icon: 'error',
+                  title: 'There was some network error!'
+                });
 			}));
 		},
 		closeModal(){
@@ -179,6 +211,19 @@ export default {
 		},
 		openModal(){
 			this.modelStatus = true;			
+		},
+		getFollow(){
+			axios.get(`/userFollow/${this.user.id}`)
+			.then(res => {
+				let data            = res.data;
+				this.newFollowers    = data.followers;
+				this.newFollowings  = data.followings;
+			}).catch((err => {
+				Toast.fire({
+                  icon: 'error',
+                  title: 'There was some network error!'
+                });
+			}));
 		}
 	}
 };
