@@ -1,7 +1,7 @@
 <template>
-	<div class="">
+    <div class="w-full flex-1 mb-16">
 
-		<div class="flex flex-row ">
+		<div class="flex flex-col md:flex-row ">
             <div class="w-16 md:w-64 flex items-center">
 	                <img v-if="profile.avatar" class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" :src="`/storage/${profile.avatar }`">
 	                <svg v-else class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <h3 class="text-gray-900 text-black mx-6 font-bold my-6">Recent Posts</h3>
+        <h3 class="text-gray-900 text-black md:mx-6 font-bold my-6">Recent Posts</h3>
 
 		<div v-if="posts.length > 0"  class="flex flex-col justify-between items-center w-auto">
 			<div class="w-full flex flex-row mb-4 text-center flex-1 flex-wrap w-auto" >
@@ -58,9 +58,11 @@
 	            class="w-full cm:w-1/2 md:w-1/3 lg:w-1/4 p-6" 
 	           	> 
 
-	            	<div class="p-2 mb-3">
+	            	<div class="p-2 mb-3 flex flex-col ">
 	            		<imageSlider :post="p"  :images="p.images"></imageSlider>
-					</div>	                	
+	            		<svg @click="dropPost(p.id);" v-if="auth.id === user.id" xmlns="http://www.w3.org/2000/svg" class="text-red-600 h-8 w-8 text-center flex items-center" fill="currentColor" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
+
+					</div>
 	            </div>
        	 	</div>
 
@@ -117,7 +119,6 @@
 	            	</div>
 	            </div>
 	        </div>
-
     	</div>
 	</div>
 </template>
@@ -218,6 +219,25 @@ export default {
 				let data            = res.data;
 				this.newFollowers    = data.followers;
 				this.newFollowings  = data.followings;
+			}).catch((err => {
+				Toast.fire({
+                  icon: 'error',
+                  title: 'There was some network error!'
+                });
+			}));
+		},
+		dropPost(id){
+			axios.delete(`/p/${id}/delete`)
+			.then(res => {
+				if(res.status == 204){
+					Toast.fire({
+                  		icon: 'succcess',
+                  		title: 'Post deleted successfully!'
+                	});
+                	this.posts = this.posts.filter((state) => {
+                        return state.id !== id;
+                    });
+				}
 			}).catch((err => {
 				Toast.fire({
                   icon: 'error',

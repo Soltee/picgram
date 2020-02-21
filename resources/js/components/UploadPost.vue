@@ -21,10 +21,15 @@
 		                <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
 		                    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
 		                </svg>
-		                <span class="mt-2 text-lg">Choose Product Images</span>
+		                <span class="mt-2 text-lg">Click to Upload Images</span>
 		                <input type='file' id="files" ref="files"  class="hidden" multiple @change="handleFileUpload" />
 		            </label>
 		        	</div>
+                    <div v-if="fileErr.length > 0" class="">
+                            <p  v-for="e in fileErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+                                {{ e }}
+                            </p>
+                    </div>
 		        	<div v-if="files.length > 0" class=" w-full h-48 overflow-y-scroll">
 		                <div v-for="(file) in fileRead" class="w-full flex flex-row flex-wrap  items-center justify-between">
 		                    <div class="w-1/3 flex flex-col items-center rounded-lg">
@@ -63,6 +68,7 @@ export default {
 			files      : [],
 			fileRead   : [],
 			caption    : '',
+            fileErr : [],
             captionErr : []
 		}
 	},
@@ -135,6 +141,10 @@ export default {
                     console.log(errors);
                     if(errors.caption){
                         this.captionErr = errors.caption;
+                    }
+                    this.fileErr = [];
+                    if(errors.files[0]){
+                        this.fileErr = errors.files[0];
                     }
                     Toast.fire({
                       icon: 'error',

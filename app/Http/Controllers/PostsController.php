@@ -9,6 +9,8 @@ use App\PostImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use JD\Cloudder\Facades\Cloudder;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -62,7 +64,7 @@ class PostsController extends Controller
     {
         $data = $request->validate([
             'files' => 'required',
-            'files.*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
+            'files*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'caption' => 'string|min:4',
         ]); 
             
@@ -116,5 +118,12 @@ class PostsController extends Controller
         return view('posts.show', compact('post', 'profile', 'user', 'follows'));
     }
 
-
+    public function destroy(Post $post){
+        $post->delete();
+        foreach ($post->images as $image) {
+            $image->delete();
+            ($image->url) ?? Storage::disk('public')->delete($image->url);            
+        }
+        return response()->json(['success' => 'Ok!'], 204);
+    }
 }

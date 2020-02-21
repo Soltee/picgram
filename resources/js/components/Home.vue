@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<div v-if="loading" class="font-semibold text-lg p-2">
-			Loading ...
+		<div v-if="loading" class="loader">
 		</div>
 		
 		<div v-else>
@@ -11,7 +10,7 @@
 				<div class="flex flex-col mb-3" v-for="p in posts">
 					<div class="flex flex-row mb-2">
 						<a :href="`/profile/${p.user.id}`" class="flex flex-row">
-							<img v-if="p.user.profile.avatar" class="user-img-sm mr-2" :src="p.user.profile.avatar">
+							<img v-if="p.user.profile.avatar" class="user-img-sm mr-2" :src="`/storage/${p.user.profile.avatar}`">
 							<svg v-else class="user-img-sm bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 							<span class="text-gray-500 font-semibold ml-4">{{ p.user.name }}</span>
 						</a>
@@ -23,7 +22,7 @@
 				
 			</div>
 			<div v-if="posts.length < 1" class="p-2 border-2 rounded border-blue-800 mb-2">
-				No Posts.
+				Please follow somebody or be followed to see on your feeds.
 			</div>
 
 			<div v-if="posts.length > 0" class="mt-2 flex flex-row mb-4">

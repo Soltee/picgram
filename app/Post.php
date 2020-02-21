@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFollow\Traits\CanBeLiked;
+use Illuminate\Support\Facades\Storage;
+
 class Post extends Model
 {
     use UsesUuid, CanBeLiked;
@@ -23,6 +25,16 @@ class Post extends Model
      */
     protected $hidden = [
     ];
+
+    // public static function boot() {
+    //     parent::boot();
+
+    //     static::deleting(function($post) { 
+    //     // before delete() method call this
+    //          $post->images()->delete();
+    //          // do the rest of the cleanup...
+    //     });
+    // }
 
     /**
      * The attributes that should be cast to native types.
