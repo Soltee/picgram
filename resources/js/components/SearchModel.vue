@@ -31,7 +31,7 @@
 						<div v-if="users.length > 0" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
 
 							<a  :href="`/profile/${u.id}/${u.name}`" class="mr-2 flex flex-row justify-between items-top">
-								<img v-if="u.profile.avatar" class="w-10 h-10 mr-2" :src="`/storage/${u.profile.avatar}`">
+								<img v-if="u.profile.avatar" class="w-10 h-10 mr-2" :src="`${u.profile.avatar}`">
 								<svg v-else class="w-10 h-10 rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 								<span class="ml-3 hover:text-gray-600">{{ u.name }}</span>
 							</a>

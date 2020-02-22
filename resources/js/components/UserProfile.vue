@@ -3,7 +3,7 @@
 
 		<div class="flex flex-col md:flex-row ">
             <div class="w-16 md:w-64 flex items-center">
-	                <img v-if="profile.avatar" class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" :src="`/storage/${profile.avatar }`">
+	                <img v-if="profile.avatar" class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" :src="`${profile.avatar }`">
 	                <svg v-else class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 	        </div>
             <div class="md:ml-4 flex-1 ">
@@ -94,7 +94,7 @@
 	            	<div v-if="newFollowers.length > 0" class="flex flex-col" v-for="f in newFollowers">
 	            		<div class="w-full flex justify-around items-center mb-3">
 		               		<a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
-								<img v-if="f.profile.avatar" class="user-img-sm" :src="`/storage/${f.profile.avatar}`">
+								<img v-if="f.profile.avatar" class="user-img-sm" :src="`${f.profile.avatar}`">
 								<svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 							</a>
 							<span class="text-gray-900 ml-3 font-medium">{{ f.name }}</span>
@@ -108,7 +108,7 @@
 	            	<div v-if="newFollowings.length > 0" class="flex flex-col" v-for="f in newFollowings">
 	            		<div class="w-full flex justify-around items-center mb-3">
 		               		<a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
-								<img v-if="f.profile.avatar" class="user-img-sm" :src="`/storage/${f.profile.avatar}`">
+								<img v-if="f.profile.avatar" class="user-img-sm" :src="`${f.profile.avatar}`">
 								<svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 							</a>
 							<span class="text-gray-900 ml-3 font-medium">{{ f.name }}</span>

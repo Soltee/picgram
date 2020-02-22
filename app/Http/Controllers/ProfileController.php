@@ -11,7 +11,7 @@ use App\Post;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
+use Image;
 class ProfileController extends Controller
 {
 
@@ -81,12 +81,26 @@ class ProfileController extends Controller
                 }
 
                 if(env('APP_ENV') === 'local'){
+
+                    
+
+                    
+
                     $image     = $request->file('avatar');
                     $basename  = Str::random();
                     $original  = 'us-' . $basename . '.' . $image->getClientOriginalExtension();
-                    $path = $image->storeAs('users', $original, 'public'); 
 
-                    $imagearray = ['avatar' => $path];
+                    $img = Image::make($image->getRealPath());
+                    $img->fit(600, 600, function ($constraint) {
+                        $constraint->upsize();                 
+                    });
+
+                    $img->stream(); // <-- Key point
+
+                    Storage::disk('public')->put('/users/' . $original, $img, 'public');
+                    // $path = $image->storeAs('users', $original, 'public'); 
+
+                    $imagearray = ['avatar' => env('APP_URL') . '/storage/users/' . $original];
                 } else {
                     Cloudder::upload($request->file('avatar'), null,  
                     [

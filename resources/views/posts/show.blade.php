@@ -4,7 +4,7 @@
 <div class="flex justify-between  px-3 py-3 md:px-32 ">
 
     
-    <div class="w-full flex-1 mb-16 bg-gray-800 mr-3">
+    <div class="w-full flex-1 mb-16  mr-3">
   
         <browse-post
             :auth="{{ Auth::user() }}" 

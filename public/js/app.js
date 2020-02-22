@@ -24763,7 +24763,7 @@ var render = function() {
                                 ? _c("img", {
                                     staticClass:
                                       "lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full",
-                                    attrs: { src: "/storage/" + p.user.avatar }
+                                    attrs: { src: "" + p.user.avatar }
                                   })
                                 : _c(
                                     "svg",
@@ -24955,7 +24955,7 @@ var render = function() {
                       p.user.profile.avatar
                         ? _c("img", {
                             staticClass: "user-img-sm mr-2",
-                            attrs: { src: "/storage/" + p.user.profile.avatar }
+                            attrs: { src: "" + p.user.profile.avatar }
                           })
                         : _c(
                             "svg",
@@ -25242,7 +25242,7 @@ var render = function() {
                 [
                   _c("img", {
                     staticClass: "user-img-sm",
-                    attrs: { src: "/storage/" + _vm.profile.avatar }
+                    attrs: { src: "" + _vm.profile.avatar }
                   })
                 ]
               )
@@ -25302,7 +25302,7 @@ var render = function() {
           return _c("slide", { key: index }, [
             _c("img", {
               staticClass: "w-full  bg-gray-400 rounded-lg shadow-lg",
-              attrs: { src: "/storage/" + image.url, alt: "..." }
+              attrs: { src: "" + image.url, alt: "..." }
             })
           ])
         }),
@@ -25314,7 +25314,7 @@ var render = function() {
           "svg",
           {
             staticClass: "h-8 w-8",
-            class: _vm.isLiked ? "text-red-600" : "text-white",
+            class: _vm.isLiked ? "text-red-600" : "text-gray-400",
             attrs: {
               fill: "currentColor",
               xmlns: "http://www.w3.org/2000/svg",
@@ -25332,7 +25332,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("span", { staticClass: "ml-3 text-white " }, [
+        _c("span", { staticClass: "ml-3 text-gray-900 " }, [
           _vm._v(_vm._s(_vm.likedTotal) + " People Liked")
         ])
       ]),
@@ -25404,7 +25404,7 @@ var render = function() {
                     c.user.profile.avatar
                       ? _c("img", {
                           staticClass: "user-img-sm",
-                          attrs: { src: "/storage/" + c.user.profile.avatar }
+                          attrs: { src: "" + c.user.profile.avatar }
                         })
                       : _c(
                           "svg",
@@ -25428,11 +25428,11 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "ml-3" }, [
-                  _c("span", { staticClass: "text-white font-medium" }, [
+                  _c("span", { staticClass: "text-gray-900 font-medium" }, [
                     _vm._v(_vm._s(c.user.name))
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "text-white font-bold" }, [
+                  _c("p", { staticClass: "text-gray-900 font-bold" }, [
                     _vm._v(_vm._s(c.comment))
                   ])
                 ])
@@ -25711,8 +25711,7 @@ var render = function() {
                                         ? _c("img", {
                                             staticClass: "w-10 h-10 mr-2",
                                             attrs: {
-                                              src:
-                                                "/storage/" + u.profile.avatar
+                                              src: "" + u.profile.avatar
                                             }
                                           })
                                         : _c(
@@ -25847,7 +25846,7 @@ var render = function() {
               [
                 _c("img", {
                   staticClass: "w-full bg-gray-400 rounded-lg shadow-lg",
-                  attrs: { src: "/storage/" + image.url, alt: "..." }
+                  attrs: { src: "" + image.url, alt: "..." }
                 })
               ]
             )
@@ -26208,7 +26207,7 @@ var render = function() {
           ? _c("img", {
               staticClass:
                 "w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full",
-              attrs: { src: "/storage/" + _vm.profile.avatar }
+              attrs: { src: "" + _vm.profile.avatar }
             })
           : _c(
               "svg",
@@ -26558,8 +26557,7 @@ var render = function() {
                                           ? _c("img", {
                                               staticClass: "user-img-sm",
                                               attrs: {
-                                                src:
-                                                  "/storage/" + f.profile.avatar
+                                                src: "" + f.profile.avatar
                                               }
                                             })
                                           : _c(
@@ -26650,8 +26648,7 @@ var render = function() {
                                           ? _c("img", {
                                               staticClass: "user-img-sm",
                                               attrs: {
-                                                src:
-                                                  "/storage/" + f.profile.avatar
+                                                src: "" + f.profile.avatar
                                               }
                                             })
                                           : _c(

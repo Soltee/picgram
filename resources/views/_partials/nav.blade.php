@@ -2,7 +2,7 @@
     <div class="hidden md:flex md:flex-col md:items-center">
         @if(Auth::user()->profile->avatar)
             <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                <img class="lg:h-24 lg:w-24 md:w-16 md:h-16  bg-cover rounded-full" src="/storage/{{  Auth::user()->profile->avatar }}">
+                <img class="lg:h-24 lg:w-24 md:w-16 md:h-16  bg-cover rounded-full" src="{{  Auth::user()->profile->avatar }}">
             </a>
         @else
             <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
@@ -16,7 +16,7 @@
     <li class="md:hidden nav-item  mb-3 lg:mr-0 md:mr-0 mr-4">
         @if(Auth::user()->profile->avatar)
             <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                <img class="w-8 h-8 md:w-10 md:h-10   bg-cover rounded-full" src="/storage/{{  Auth::user()->profile->avatar }}">
+                <img class="w-8 h-8 md:w-10 md:h-10   bg-cover rounded-full" src="{{  Auth::user()->profile->avatar }}">
             </a>
         @else
             <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">

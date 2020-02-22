@@ -86,7 +86,7 @@ class PostsController extends Controller
                 $img->stream(); // <-- Key point
 
                 Storage::disk('public')->put('/posts/' . $original, $img, 'public');
-                $paths[] = '/posts/' . $original;
+                $paths[] = env('APP_URL') . '/storage/posts/' . $original;
             } else {
 
                 Cloudder::upload($image, null,  
@@ -95,7 +95,7 @@ class PostsController extends Controller
                 ],  []);
 
                 $c = Cloudder::getResult();
-                $paths[] = '/posts/'.  $c['url'];
+                $paths[] = $c['url'];
             }
 
         }
@@ -115,17 +115,6 @@ class PostsController extends Controller
         }
         
         return response()->json(['success' => 'Ok'], 201);
-        // Cloudder::upload($request->file('file'), null,  
-        //     [
-        //         "folder" => "picgram/posts/"
-        //     ],  []);
-
-        // $c = Cloudder::getResult();
-
-        // auth()->user()->posts()->create([
-        //     'caption' => $data['caption'],
-        //     'post_image' => $c['url']
-        // ]);
 
     }
 

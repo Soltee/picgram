@@ -23,12 +23,14 @@ $factory->define(App\PostImage::class, function (Faker $faker) {
     		$posts = Post::inRandomOrder()->pluck('id')->toArray();
     		return  Arr::random($posts);
     	},
-        'url' => '/posts/1.jpg'
-    	// 'url'  => function(){
-    	// 	foreach ([1,2,3,4,5,6,7,8,9,10, 11] as $n) {
-     //            return '/posts/' . $n . ".jpg";
-     //        }
-    	// },
+        'url' =>  function(){
+            $path =  'posts/1.jpg';
+            if(env('APP_ENV') === 'local'){
+                return 'http://localhost:8000/storage/' . $path;
+            } else {
+                return 'http://localhost:8000/' . $path;
+            }
+        }
         // 'url' => $faker->imageUrl($width = 640, $height = 480) // 'http://lorempixel.com/640/480/'
     ];
 });
