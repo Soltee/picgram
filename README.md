@@ -1,10 +1,10 @@
 # picgram
 A Clone of instagram.
 
-!(/img/picgram1.png)
-!(/img/picgram2.png)
-!(/img/picgram3.png)
-!(/img/picgram4.png)
-!(/img/picgram5.png)
-!/img/picgram6.png)
+![](https://raw.githubusercontent.com/soltee/picgram/master/public/img/picgram1.png)
+![](https://raw.githubusercontent.com/soltee/picgram/master/public/img/picgram2.png)
+![](https://raw.githubusercontent.com/soltee/picgram/master/public/img/picgram3.png)
+![](https://raw.githubusercontent.com/soltee/picgram/master/public/img/picgram4.png)
+![](https://raw.githubusercontent.com/soltee/picgram/master/public/img/picgram5.png)
+![](https://raw.githubusercontent.com/soltee/picgram/master/public/img/picgram6.png)
 
