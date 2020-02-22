@@ -35,15 +35,23 @@
 
             </div>
 
-            <div v-if="loading" class="loader">
-			</div>
-            <button v-else @click="more = true; getPosts()" class="my-3 text-lg font-bold bg-gray-300 shadow-lg text-gray-800 rounded-lg">Load More ...</button>
+            
 
         </div>
-
         <div v-else >
 			<p v-if="!loading" class="p-2 border-2 rounded border-blue-800 mb-2">No  Posts.</p>
 		</div>
+
+		
+        <div class="flex flx-col items-center justify-center">
+      		<div v-if="loading" class="loader">
+			</div>
+			<div v-else>
+	        	<button v-if="!last" @click="getPosts()" class="my-3 text-lg font-bold  shadow-lg text-gray-800 rounded-lg">Load More ...</button>				
+			</div>  	
+        </div>
+      
+        
 
 
 
@@ -64,9 +72,9 @@ export default {
 			posts      : [],
 			paginate   : [],
 			postImages : [],
-			page       : null,
 			loading    : false,
-			more       : false
+			next       : null,
+			last       : false,
 		}
 	},
 	mounted(){
@@ -77,26 +85,28 @@ export default {
 		{
 			this.loading = true;
 			let paginate = 8;
-			if(this.more){
-				paginate+8;
-			}
-			let endpoint = `/posts?paginate=${paginate}`;
-			if(this.page){
-				endpoint = this.page;
+			
+			let endpoint = `/browse/posts?paginate=${paginate}`;
+			if(this.next){
+				endpoint = `${this.next}&paginate=${paginate}`;
 			}
 
 
 			axios.get(`${endpoint}`)
 			.then(res => {
 				let data      = res.data;
-				if(this.more){
+				if(this.next){
 					data.posts.forEach((post) => {
 						this.posts.push(post);
 					})
 				} else {
 					this.posts    = data.posts;
 				}
-				// this.paginate = data.paginate;
+				if(data.paginate.next_page_url){
+				 	this.next     = data.paginate.next_page_url;					
+				} else {
+					this.last = true;
+				}
 				this.loading  = false;				
 			}).catch((err => {
 				Toast.fire({

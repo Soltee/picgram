@@ -24,7 +24,7 @@ Route::group(['middleware' =>  'verified'], function(){
 	Route::delete('/p/{post}/delete', 'PostsController@destroy')->middleware('auth');
 
 	Route::get('/browse', 'BrowseController@index')->name('browse')->middleware('auth');
-	Route::get('/posts', 'BrowseController@posts')->middleware('auth');
+	Route::get('/browse/posts', 'BrowseController@posts')->middleware('auth');
 	Route::get('/posts/{post}/{caption}', 'BrowseController@show')->middleware('auth');
 
 	/*Like*/

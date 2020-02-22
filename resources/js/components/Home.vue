@@ -1,15 +1,11 @@
 <template>
 	<div>
-		<div v-if="loading" class="loader">
-		</div>
-		
-		<div v-else>
 			
 			<div v-if="posts">
 
-				<div class="flex flex-col mb-3" v-for="p in posts">
-					<div class="flex flex-row mb-2">
-						<a :href="`/profile/${p.user.id}`" class="flex flex-row">
+				<div class="flex flex-col mb-6" v-for="p in posts">
+					<div class="flex flex-row mb-4">
+						<a :href="`/profile/${p.user.id}/${p.user.name}`" class="flex flex-row">
 							<img v-if="p.user.profile.avatar" class="user-img-sm mr-2" :src="`/storage/${p.user.profile.avatar}`">
 							<svg v-else class="user-img-sm bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
 							<span class="text-gray-500 font-semibold ml-4">{{ p.user.name }}</span>
@@ -25,19 +21,15 @@
 				Please follow somebody or be followed to see on your feeds.
 			</div>
 
-			<div v-if="posts.length > 0" class="mt-2 flex flex-row mb-4">
-	    		<div v-if="prevPage" class="mr-2">
-	        	    <a @click.prevent="getPosts(prevPage)"><button class="px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-16" :class="(!prevPage) ? 'pointer-events-none' : ''">Prev</button></a> 
-	    		</div>
-	    		<div class="mr-2" v-if="() => posts.length > 2 ">
-	        	    <button class="px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-12">{{ currentPage }}</button></a>    
-	    		</div>
-	    		<div v-if="nextPage" class="mr-2">
-	        	    <a @click.prevent="getPosts(nextPage)"><button class="px-1 py-1 rounded text-white bg-blue-700 hover:bg-blue-600 w-16" :class="(!nextPage) ? 'pointer-events-none' : ''">Next</button></a> 
-	    		</div>
+			<div class="flex flx-col items-center justify-center">
+	      		<div v-if="loading" class="loader">
+				</div>
+				<div v-else>
+		        	<button v-if="!last" @click="getPosts()" class="my-3 text-lg font-bold  shadow-lg text-gray-800 rounded-lg">Load More ...</button>				
+				</div>  	
 	        </div>
+	      
 
-		</div>
 			
 	</div>
 </template>
@@ -45,7 +37,6 @@
 <script>
 import Toast from './Alert';
 import  imageSlider from './Slider';
-let param = null;
 
 export default {
 	name: 'home',
@@ -61,53 +52,46 @@ export default {
 			prevPage: null,
 			error : null,
 			count: null,
-			loading : true
+			loading : true,
+			next : null,
+			last       : false
 		}
 	},
 	mounted(){
-		this.getPosts(param);
+		this.getPosts();
 	},
 	methods:{
-		getPosts(param)
+		getPosts()
 		{
-			if(param){
-				this.post = [];
-				this.currentPage = null;
-				this.nextPage = null;
-				this.prevPage = null;
-				axios.get(`${param}`).then(res => {
-					let data          =   res.data;
-					this.posts        =   data.posts;
-				
-					this.prevPage     =   data.paginate.previous_page_url;
-					this.currentPage  =   data.paginate.current_page;
-					this.nextPage     =   data.paginate.next_page_url;
-					
-					this.loading = false;
-				}).catch((err => {
-					Toast.fire({
-	                  icon: 'error',
-	                  title: 'There was some network error!'
-	                });
-				}));
-			} else {
-				axios.get('/u/p')
-				.then((res) => {
-					let data          =   res.data;
-					this.posts        =   data.posts;
-				
-					this.prevPage     =   data.paginate.previous_page_url;
-					this.currentPage  =   data.paginate.current_page;
-					this.nextPage     =   data.paginate.next_page_url;
+			this.loading = true;
+			let paginate = 1;
 
-					this.loading = false;
-				}).catch(err => {
-					Toast.fire({
-	                  icon: 'error',
-	                  title: 'There was some network error!'
-	                });
-				});
+			let endpoint = `/u/p?paginate=${paginate}`;
+			if(this.next){
+				endpoint = `${this.next}&paginate=${paginate}`;
 			}
+			axios.get(`${endpoint}`)
+			.then((res) => {
+				let data      = res.data;
+				if(this.next){
+					data.posts.forEach((post) => {
+						this.posts.push(post);
+					})
+				} else {
+					this.posts    = data.posts;
+				}
+				if(data.paginate.next_page_url){
+				 	this.next     = data.paginate.next_page_url;					
+				} else {
+					this.last = true;
+				}
+				this.loading = false;
+			}).catch(err => {
+				Toast.fire({
+                  icon: 'error',
+                  title: 'There was some network error!'
+                });
+			});
 		}
 	},
 	computed:{

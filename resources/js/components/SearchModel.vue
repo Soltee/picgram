@@ -1,5 +1,5 @@
 <template>
-	<div class="z-40">
+	<div class="z-30">
 
 		<div class="md:relative">
 			

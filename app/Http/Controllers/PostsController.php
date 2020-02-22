@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class PostsController extends Controller
 {
@@ -64,7 +65,7 @@ class PostsController extends Controller
     {
         $data = $request->validate([
             'files' => 'required',
-            'files*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
+            'files.*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'caption' => 'string|min:4',
         ]); 
             
@@ -72,16 +73,41 @@ class PostsController extends Controller
         $images      = $request->file('files');
          // get the validated filee
         foreach ($images as $image) {
-            $basename  = Str::random();
-            $original  = 'pd-' . $basename . '.' . $image->getClientOriginalExtension();
-            $paths[] = $image->storeAs('posts', $original, 'public'); 
+            if(env('APP_ENV') === 'local'){
+
+                $basename  = Str::random();
+                $original  = 'p-' . $basename . '.' . $image->getClientOriginalExtension();
+
+                $img = Image::make($image->getRealPath());
+                $img->fit(600, 600, function ($constraint) {
+                    $constraint->upsize();                 
+                });
+
+                $img->stream(); // <-- Key point
+
+                Storage::disk('public')->put('/posts/' . $original, $img, 'public');
+                $paths[] = '/posts/' . $original;
+            } else {
+
+                Cloudder::upload($image, null,  
+                [
+                    "folder" => "picgram/posts/"
+                ],  []);
+
+                $c = Cloudder::getResult();
+                $paths[] = '/posts/'.  $c['url'];
+            }
+
         }
 
+        
         $post = auth()->user()->posts()->create([
             'caption' => $data['caption']
         ]);
 
         foreach ($paths as $path) {
+            // dd($path);
+           
             PostImage::create([
                 'post_id' => $post->id,
                 'url'   => $path,
