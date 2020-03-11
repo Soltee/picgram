@@ -3251,6 +3251,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'welcome-view',
   props: {
@@ -3364,7 +3365,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".loader[data-v-70b2ffb5] {\n  border: 16px solid #f3f3f3; /* Light grey */\n  border-top: 16px solid #3498db; /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin-data-v-70b2ffb5 2s linear infinite;\n          animation: spin-data-v-70b2ffb5 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-70b2ffb5 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-70b2ffb5 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n\n", ""]);
+exports.push([module.i, ".loader[data-v-70b2ffb5] {\n  border: 16px solid #f3f3f3; /* Light grey */\n  border-top: 16px solid #3498db; /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin-data-v-70b2ffb5 2s linear infinite;\n          animation: spin-data-v-70b2ffb5 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-70b2ffb5 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-70b2ffb5 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -3383,7 +3384,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".loader {\n  border: 16px solid #f3f3f3; /* Light grey */\n  border-top: 16px solid #3498db; /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin 2s linear infinite;\n          animation: spin 2s linear infinite;\n}\n@-webkit-keyframes spin {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n@keyframes spin {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n\n", ""]);
+exports.push([module.i, ".loader {\n  border: 16px solid #f3f3f3; /* Light grey */\n  border-top: 16px solid #3498db; /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin 2s linear infinite;\n          animation: spin 2s linear infinite;\n}\n@-webkit-keyframes spin {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n@keyframes spin {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -3402,7 +3403,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".loader[data-v-67528743] {\n  border: 16px solid #f3f3f3; /* Light grey */\n  border-top: 16px solid #3498db; /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin-data-v-67528743 2s linear infinite;\n          animation: spin-data-v-67528743 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-67528743 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-67528743 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n\n", ""]);
+exports.push([module.i, ".loader[data-v-67528743] {\n  border: 16px solid #f3f3f3; /* Light grey */\n  border-top: 16px solid #3498db; /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin-data-v-67528743 2s linear infinite;\n          animation: spin-data-v-67528743 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-67528743 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-67528743 {\n0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);\n}\n100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -26742,13 +26743,12 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass:
-        "min-h-screen px-4 md:px-0 w-full flex-1 h-full bg-gray-900  flex flex-col items-left justify-center"
+      staticClass: "min-h-screen overflow-hidden flex-1 bg-gray-800 py-6 z-20"
     },
     [
       _vm.loginModal
-        ? _c("div", {}, [
-            _c("div", { staticClass: " md:pl-12 text-lg my-2 font-semibold" }, [
+        ? _c("div", { staticClass: "z-20" }, [
+            _c("div", { staticClass: " md:pl-12 text-lg  font-semibold" }, [
               _c("div", { staticClass: "flex flex-row items-center" }, [
                 _c(
                   "svg",
@@ -26829,7 +26829,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        " text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white",
+                        " text-gray-800 rounded appearance-none   w-full md:w-64  py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-gray-800",
                       class: _vm.emailErr.length > 0 ? "is-invalid" : "",
                       attrs: {
                         id: "email",
@@ -26865,9 +26865,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n\t                        " +
                                     _vm._s(e) +
-                                    "\n                        \t"
+                                    "\n\t                    \t"
                                 )
                               ]
                             )
@@ -26902,7 +26902,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        " text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white",
+                        " text-gray-800 rounded appearance-none   w-full md:w-64  py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-gray-800",
                       class: _vm.passErr.length > 0 ? "is-invalid" : "",
                       attrs: {
                         id: "password",
@@ -26937,9 +26937,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n\t                        " +
                                     _vm._s(e) +
-                                    "\n                        \t"
+                                    "\n\t                    \t"
                                 )
                               ]
                             )
@@ -27126,8 +27126,8 @@ var render = function() {
               ]
             )
           ])
-        : _c("div", {}, [
-            _c("div", { staticClass: " md:pl-12 text-lg my-2 font-semibold" }, [
+        : _c("div", { staticClass: "z-20" }, [
+            _c("div", { staticClass: " md:pl-12 text-lg font-semibold" }, [
               _c("div", { staticClass: "flex flex-row items-center" }, [
                 _c(
                   "svg",
@@ -27208,7 +27208,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        " text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white",
+                        " text-gray-800 rounded appearance-none   w-full md:w-64  py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-gray-800",
                       class: _vm.nameErr.length > 0 ? "is-invalid" : "",
                       attrs: {
                         id: "name",
@@ -27242,9 +27242,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            \t" +
+                                  "\n\t                        \t" +
                                     _vm._s(e) +
-                                    "\n                        \t\t"
+                                    "\n\t                    \t\t"
                                 )
                               ]
                             )
@@ -27279,7 +27279,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        " text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white",
+                        " text-gray-800 rounded appearance-none   w-full md:w-64  py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-gray-800",
                       class: _vm.emailErr.length > 0 ? "is-invalid" : "",
                       attrs: {
                         id: "email",
@@ -27315,9 +27315,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n\t                        " +
                                     _vm._s(e) +
-                                    "\n                        \t"
+                                    "\n\t                    \t"
                                 )
                               ]
                             )
@@ -27352,7 +27352,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        " text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white",
+                        " text-gray-800 rounded appearance-none   w-full md:w-64  py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-gray-800",
                       class: _vm.passErr.length > 0 ? "is-invalid" : "",
                       attrs: {
                         id: "password",
@@ -27387,9 +27387,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n\t                        " +
                                     _vm._s(e) +
-                                    "\n                        \t"
+                                    "\n\t                    \t"
                                 )
                               ]
                             )
@@ -27424,7 +27424,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        " text-white appearance-none   w-full md:w-64 bg-gray-900 py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-white",
+                        " text-gray-800 rounded appearance-none   w-full md:w-64  py-2 px-3  leading-tight focus:outline-none  border-b-2 border-transparent hover:border-b-2 hover:border-gray-800",
                       class: _vm.passErr.length > 0 ? "is-invalid" : "",
                       attrs: {
                         id: "password-confirm",
@@ -40586,8 +40586,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/soltee/projects/picgram/resources/js/app.js */"./resources/js/app.js");
-!(function webpackMissingModule() { var e = new Error("Cannot find module '/home/soltee/projects/picgram/resources/scss/app.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+__webpack_require__(/*! C:\Users\user\Projects\picgram\resources\js\app.js */"./resources/js/app.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'C:\\Users\\user\\Projects\\picgram\\resources\\scss\\app.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })

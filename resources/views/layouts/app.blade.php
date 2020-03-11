@@ -28,10 +28,7 @@
                 <search-model></search-model>
             </div>
 
-
-            <logout-modal></logout-modal>
-             
-                
+            <logout-modal></logout-modal>           
         </nav>
         @endauth
 
