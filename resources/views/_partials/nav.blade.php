@@ -1,16 +1,4 @@
 <div class="md:hidden">
-{{--     <div class="hidden md:flex md:flex-col md:items-center">
-        @if(Auth::user()->profile->avatar)
-            <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                <img class="lg:h-24 lg:w-24 md:w-16 md:h-16  bg-cover rounded-full" src="{{  Auth::user()->profile->avatar }}">
-            </a>
-        @else
-            <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                <svg class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-12 w-12 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
-            </a>
-        @endif
-
-    </div> --}}
 
     <ul class="w-full flex lg:flex-col md:flex-col flex-row justify-around items-center bg-white">
         <li class="border rounded-full p-1 hover:border-c-blue {{ Route::currentRouteName() == 'profile' ? '' : 'text-c-blue' }}">

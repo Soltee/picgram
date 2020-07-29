@@ -12,6 +12,7 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    @yield('head')
 </head>
 <body class="">
     <div id="app">
@@ -58,10 +59,13 @@
         <div class="lg:max-w-4xl lg:mx-auto">
             @yield('content')
         </div>
+            @yield('authentication')
 
-        <div class="md:hidden fixed bottom-0 w-full bg-white py-3  border-t border-b">
-            @include('_partials.nav')
-        </div>
+        @auth
+            <div class="md:hidden fixed bottom-0 w-full bg-white py-3  border-t border-b">
+                @include('_partials.nav')
+            </div>
+        @endauth
 
         
     </div>

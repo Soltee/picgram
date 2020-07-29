@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
+@section('head')
+	<style>
+		.hero{clip-path: polygon(0 0, 84% 0, 70% 100%, 0% 100%);;}
+	</style>
+@endsection
+@section('authentication')
 
-@section('content')
-
-<div class="relative flex flex-row justify-around min-h-screen overflow-hidden bg-gray-900 lg:bg-gray-300 ">
-      <div class="hidden md:block min-h-screen overflow-hidden flex-1 bg-gray-800 py-6 z-20"  style="background: url('/img/bk.jpg'); background-size: cover; background-position: center center;">
-      </div>
-    <welcome-view :errors="{{ $errors }}"></welcome-view>
+<div class="flex">
+	 <div class="hero hidden md:block md:w-1/2 min-h-screen overflow-hidden  bg-gray-800  z-20"  style="background: url('/img/bk.jpg'); background-size: cover; background-position: center center;"> </div>
+	{{-- </div> --}}
+	     
+	<welcome-view :errors="{{ $errors }}"></welcome-view>
 </div>
   
 @endsection
