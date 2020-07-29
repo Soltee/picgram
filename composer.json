@@ -7,39 +7,46 @@
         "laravel"
     ],
     "license": "MIT",
-    "require": {
-        "php": "^7.2",
+    "require":
+    {
+        "php": "^7.2.5",
         "brick/math": "^0.8.9",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
         "jrm2k6/cloudder": "^0.6.0",
-        "laravel/framework": "6.0",
+        "laravel/framework": "7.0",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.1",
         "overtrue/laravel-follow": "^1.1",
         "realrashid/sweet-alert": "^3.1"
     },
-    "require-dev": {
+    "require-dev":
+    {
         "beyondcode/laravel-dump-server": "^1.0",
-        "facade/ignition": "^1.4",
+        "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.8",
-        "laravel/telescope": "^2.0",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "nunomaduro/collision": "^4.1",
+        "phpunit/phpunit": "^8.5"
     },
-    "config": {
+    "config":
+    {
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "extra": {
-        "laravel": {
+    "extra":
+    {
+        "laravel":
+        {
             "dont-discover": []
         }
     },
-    "autoload": {
-        "psr-4": {
+    "autoload":
+    {
+        "psr-4":
+        {
             "App\\": "app/"
         },
         "classmap": [
@@ -47,14 +54,17 @@
             "database/factories"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
+    "autoload-dev":
+    {
+        "psr-4":
+        {
             "Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "scripts": {
+    "scripts":
+    {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

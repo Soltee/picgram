@@ -1,5 +1,5 @@
-<div>
-    <div class="hidden md:flex md:flex-col md:items-center">
+<div class="md:hidden">
+{{--     <div class="hidden md:flex md:flex-col md:items-center">
         @if(Auth::user()->profile->avatar)
             <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
                 <img class="lg:h-24 lg:w-24 md:w-16 md:h-16  bg-cover rounded-full" src="{{  Auth::user()->profile->avatar }}">
@@ -10,37 +10,36 @@
             </a>
         @endif
 
-    </div>
+    </div> --}}
+
+    <ul class="w-full flex lg:flex-col md:flex-col flex-row justify-around items-center bg-white">
+        <li class="border rounded-full p-1 hover:border-c-blue {{ Route::currentRouteName() == 'profile' ? '' : 'text-c-blue' }}">
+            @if(Auth::user()->profile->avatar)
+                <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
+                    <img class="w-10 h-10     bg-cover rounded-full" src="{{  Auth::user()->profile->avatar }}">
+                </a>
+            @else
+                <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
+                    <svg class="w-10 h-10   bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
+                </a>
+            @endif
+        </li>
+        <li class="border rounded-full p-2 hover:border-c-blue {{ Route::currentRouteName() == 'home' ? '' : 'text-c-blue' }}">
+            <a class="" href="{{ route('home') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-c-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </a>
+        </li>
+        <li class="border rounded-full p-2 hover:border-c-blue {{ Route::currentRouteName() == 'posts.create' ? '' : 'text-c-blue' }}">
+            <a class="" href="{{ route('posts.create') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </a>
+        </li>
+        <li class="border rounded-full p-2 hover:border-c-blue {{ Route::currentRouteName() == 'browse' ? '' : 'text-c-blue' }}">
+            <a class="" href="{{ route('browse') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-c-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-compass"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+            </a>
+        </li>
+       
+    </ul>
+
 </div>
-<ul class="mt-3 w-full px-2 py-2 flex lg:flex-col md:flex-col flex-row justify-center items-center">
-    <li class="md:hidden nav-item  mb-3 lg:mr-0 md:mr-0 mr-4">
-        @if(Auth::user()->profile->avatar)
-            <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                <img class="w-8 h-8 md:w-10 md:h-10   bg-cover rounded-full" src="{{  Auth::user()->profile->avatar }}">
-            </a>
-        @else
-            <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                <svg class="w-8 h-8 md:w-10 md:h-10 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"/></svg>
-            </a>
-        @endif
-    </li>
-    <li class="nav-item  mb-3 lg:mr-0 md:mr-0 mr-2">
-        <a class="" href="{{ route('home') }}">
-            <svg class="w-8 h-8 md:w-10 md:h-10 mr-2 p-2  hover:bg-gray-800 hover:text-gray-300 {{ Route::currentRouteName() == 'home' ? 'bg-gray-800 text-gray-300' : 'text-gray-800' }}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M8 20H3V10H0L10 0l10 10h-3v10h-5v-6H8v6z"/></svg>
-            {{-- <span class="">Home</span> --}}
-        </a>
-    </li>
-    <li class="nav-item  mb-3 lg:mr-0 md:mr-0 mr-2">
-        <a class="" href="{{ route('posts.create') }}">
-            <svg class="w-8 h-8 md:w-10 md:h-10 mr-2 p-2  hover:bg-gray-800 hover:text-gray-300 {{ Route::currentRouteName() == 'posts.create' ? 'bg-gray-800 text-gray-300' : 'text-gray-800' }}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 10v6H7v-6H2l8-8 8 8h-5zM0 18h20v2H0v-2z"/></svg>
-            {{-- <span class="">Upload</span> --}}
-        </a>
-    </li>
-    <li class="nav-item  mb-3 lg:mr-0 md:mr-0 mr-2">
-        <a class="" href="{{ route('browse') }}">
-            <svg class="w-8 h-8 md:w-10 md:h-10 mr-2 p-2  hover:bg-gray-800 hover:text-gray-300 {{ Route::currentRouteName() == 'browse' ? 'bg-gray-800 text-gray-300' : 'text-gray-800' }}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7.88 7.88l-3.54 7.78 7.78-3.54 3.54-7.78-7.78 3.54zM10 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
-            {{-- <span class="">Browse</span> --}}
-        </a>
-    </li>
-   
-</ul>
