@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex justify-between  px-3 py-3 md:px-32 ">
+<div class="px-6 mt-8 lg:px-3 py-3 ">
 
     
     <div class="w-full flex-1 mb-24">

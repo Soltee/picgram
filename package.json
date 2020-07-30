@@ -23,6 +23,8 @@
         "tailwindcss": "^1.6.0",
         "vue": "^2.6.11",
         "vue-carousel": "^0.18.0",
+        "vue-masonry-wall": "^0.2.5",
+        "vue-owl-carousel": "^2.0.3",
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {

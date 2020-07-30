@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('authentication')
 <div class="min-h-screen overflow-hidden  bg-c-white z-20 px-6  md:px-0 flex flex-col justify-center md:items-center mx-auto max-w-6xl">
         <div class="z-20 mt-6 flex flex-col md:items-center">
             <div class="flex flex-row justify-center items-center md:w-88">

@@ -1,46 +1,56 @@
 <template>
     <div class="z-30">
         <div class="md:relative">
-            <div v-if="searchStatus" class="absolute  left-0 right-0 px-3 z-20 md:hidden flex flex-row items-center">
-                <input @keyup.enter="searchUser" type="text" class="relative w-full  text-gray-700 rounded-lg pl-12 py-3 pr-12 border border-gray-800" v-model="searchKey">
+            <div v-if="searchStatus" class="absolute  left-0 top-0 right-0 px-3 z-20 md:hidden flex flex-row items-center mt-3">
+                <input @keyup.enter="searchUser" type="text" class="relative w-full  text-gray-700 rounded-lg pl-12 py-3 pr-12 " v-model="searchKey">
                 <svg class="absolute right-0 z-10 mr-6 h-6 w-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" /></svg>
-                <svg @click="searchStatus=false; getData=false; users=[];" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 z-10  ml-6 h-6 w-6 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg @click="searchStatus=false; getData=false; users=[];" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 z-10  ml-6 h-6 w-6 text-red-500 opacity-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </div>
-            <svg v-else @click="searchStatus=true;" class="md:hidden   h-6 w-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg v-else @click="searchStatus=true;" class="md:hidden   h-6 w-6 text-c-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
             </svg>
             <div class="hidden  md:flex md:flex-row md:items-center relative">
                 <input @keyup.enter="searchUser" type="text" class="w-full md:w-48 text-gray-700 rounded-lg pl-10 py-2 pr-10 " v-model="searchKey">
                 <svg class="absolute right-0 z-10 pr-2 h-8 w-8 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" /></svg>
-                <svg @click="getData=false; users=[];" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 z-10  pl-2 h-8 w-8 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <pathd="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+                </svg>
+                <svg @click="getData=false; users=[];" xmlns="http://www.w3.org/2000/svg" class="absolute left-0 z-10  pl-2 h-8 w-8 text-red-500 opacity-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </div>
-            <div class="absolute right-0 mt-8 md:mt-4 px-3 w-full md:w-48 bg-gray-400 rounded ">
-                <div v-if="loading" class="loader">
+            <div class="absolute right-0 mt-10  px-3 pb-3 w-full md:w-48 bg-c-white md:rounded ">
+                <div v-if="loading" class="flex justify-center items-center">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                 </div>
                 <div v-else>
-                    <div v-if="getData" class=" h-64 overflow-y-scroll p-2">
+                    <div v-if="getData" class=" h-64 overflow-y-scroll overflow-x-hidden px-2 py-6">
                         <div v-if="users.length > 0" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
                             <a :href="`/profile/${u.id}/${u.name}`" class="mr-2 flex flex-row justify-between items-top">
                                 <img v-if="u.profile.avatar" class="w-10 h-10 mr-2" :src="`${u.profile.avatar}`">
                                 <svg v-else class="w-10 h-10 rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
-                                <span class="ml-3 hover:text-gray-600">{{ u.name }}</span>
+                                <span class="ml-3 text-c-blue-dark hover:opacity-75">{{ u.name }}</span>
                             </a>
                             <form id="user-profile-form" :action="`/profile`" :method="`GET`" style="display: none;">
                                 <input type="hidden" name="_token" :value="csrf">
                                 <input type="text" name="user" :value="u.id">
                             </form>
                         </div>
-                        <div v-if="users.length < 1" class="p-2 border-2 rounded border-red-800 mb-2">
-                            No user match.
+                        <div v-if="users.length < 1" class="px-3 py-2  mb-2 flex flex-col items-center">
+                            <svg class="w-12 md:w-16 text-red-500 mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 6H4.34a6 6 0 0 1 11.32 0z" /></svg>
+                            <p class="text-red-500">No user match.</p>
                         </div>
                     </div>
                 </div>
@@ -109,6 +119,73 @@ export default {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    margin: 100px auto;
+    width: 100px;
+    height: 80px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.spinner>div {
+    background-color: #6886c5;
+    height: 100%;
+    width: 6px;
+    /*margin: 0 4px 0 0;*/
+    display: inline-block;
+
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+
+    0%,
+    40%,
+    100% {
+        -webkit-transform: scaleY(0.4)
+    }
+
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes sk-stretchdelay {
+
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
     }
 }
 

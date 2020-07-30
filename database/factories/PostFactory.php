@@ -12,7 +12,8 @@ $factory->define(Post::class, function (Faker $faker) {
     	'user_id' => function(){
     		$users = User::inRandomOrder()->pluck('id')->toArray();
     		return  Arr::random($users);
-    	}
+    	},
+        'caption' => $faker->text(30)
     ];
 });
 
