@@ -49,14 +49,14 @@
                            
                         </ul>
                         
-                        <logout-modal></logout-modal> 
+                        <logout-modal :auth="{{ auth()->user() }}" :profile="{{ auth()->user()->profile }}"></logout-modal> 
 
                     </div>          
                 </div>
 
             </nav>
 
-            <div class="lg:max-w-4xl lg:mx-auto mb-12">
+            <div class="lg:max-w-4xl lg:mx-auto mb-12  px-6 md:px-16 mt-10">
                 @yield('content')
             </div>
 

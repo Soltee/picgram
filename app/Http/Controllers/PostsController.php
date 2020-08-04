@@ -134,11 +134,13 @@ class PostsController extends Controller
     }
 
     public function destroy(Post $post){
-        $post->delete();
         foreach ($post->images as $image) {
-            $image->delete();
-            ($image->url) ?? Storage::disk('public')->delete($image->url);            
+            File::delete([
+                public_path($image->url)
+            ]);
+            // $image->delete();
         }
+        // $post->delete();
         return response()->json(['success' => 'Ok!'], 204);
     }
 }

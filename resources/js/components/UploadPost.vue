@@ -1,16 +1,7 @@
 <template>
     <div class="w-full mt-4 ">
         <form @submit.prevent="savePost" :enctype="`multipart/form-data`">
-            <div class="w-full relative">
-                <div v-if="processing" class="absolute inset-0 bg-gray-100  z-30 flex justify-center items-center">
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
-                </div>
+            <div class="w-full">
                 <div class="flex flex-row justify-between items-center mb-3">
                     <div class="flex items-center">
                         <h1 class="m-0 text-lg text-c-blue font-semibold ml-2">New Post</h1>
@@ -25,8 +16,17 @@
                         </button>
                     </div>
                 </div>
-                <div>
-                    <div class="flex w-full items-center justify-center bg-grey-lighter mb-3">
+                <div class="relative">
+                    <div v-if="processing" class="absolute inset-0 bg-gray-100  z-30 flex justify-center items-center">
+                        <div class="spinner">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full items-center justify-center bg-grey-lighter mb-3">
                         <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue ">
                             <svg class="w-8 h-8 text-c-blue" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
@@ -34,13 +34,13 @@
                             <span class="mt-2 text-lg text-c-blue">Click to Upload Images</span>
                             <input type='file' id="files" ref="files" class="hidden" multiple @change="handleFileUpload" />
                         </label>
+                        <div v-if="fileErr.length > 0" class="">
+                            <p v-for="e in fileErr" class="text-red-500 mt-1 px-1 py-1 rounded" role="alert">
+                                {{ e }}
+                            </p>
+                        </div>
                     </div>
-                    <div v-if="fileErr.length > 0" class="">
-                        <p v-for="e in fileErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
-                            {{ e }}
-                        </p>
-                    </div>
-                    <div v-if="files.length > 0" class=" w-full h-48 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div v-if="files.length > 0" class=" w-full h-64 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div v-for="(file) in fileRead" class="w-full flex flex-row flex-wrap  items-center justify-between">
                             <div class="flex flex-col items-center rounded-lg">
                                 <span class="rounded-lg my-2 text-white font-semibold text-lg  w-full text-center">
@@ -56,9 +56,9 @@
                     </div>
                     <div class="flex flex-col  rounded-lg mb-3">
                         <label for="caption" class=" px-2 py-3 text-c-blue text-sm font-thin ">Caption</label>
-                        <input type="text" id="caption" v-model="caption" class="px-3 py-3 rounded-lg  bg-gray-300 text-gray-900">
+                        <input type="text" id="caption" v-model="caption" class="px-3 py-3 rounded-lg  border border-c-blue text-gray-900">
                         <div v-if="captionErr.length > 0" class="">
-                            <p v-for="e in captionErr" class="text-red-800 mt-2 px-1 py-1 rounded" role="alert">
+                            <p v-for="e in captionErr" class="text-red-500 mt-1 px-1 py-1 rounded" role="alert">
                                 {{ e }}
                             </p>
                         </div>
@@ -113,12 +113,11 @@ export default {
             this.fileRead = this.fileRead.filter((state) => {
                 return state !== file;
             });
-            // this.files.splice(file, 1);
-            // this.fileRead.splice(file, 1);
         },
         savePost() {
             this.processing = true;
             this.captionErr = [];
+            this.fileErr = [];
             let formData = new FormData();
             for (var i = 0; i < this.files.length; i++) {
                 let file = this.files[i];
@@ -152,21 +151,21 @@ export default {
 
                 })
                 .catch((err) => {
+                    this.processing = false;
                     let errors = err.response.data.errors;
                     this.captionErr = [];
-                    console.log(errors);
+                    // console.log(errors.files[0]);
                     if (errors.caption) {
                         this.captionErr = errors.caption;
                     }
                     this.fileErr = [];
-                    if (errors.files[0]) {
-                        this.fileErr = errors.files[0];
+                    if (errors.files) {
+                        this.fileErr = errors.files;
                     }
                     Toast.fire({
                         icon: 'error',
                         title: 'There was some network error!'
                     });
-                    this.processing = false;
                 });
         },
         reset() {

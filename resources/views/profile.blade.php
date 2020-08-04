@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="px-6 lg:px-3 mt-8 ">
+<div class="">
 
     <user-profile 
   		:auth="{{ auth()->user() }}" 

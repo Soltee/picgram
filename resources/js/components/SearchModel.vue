@@ -14,7 +14,7 @@
                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
             </svg>
             <div class="hidden  md:flex md:flex-row md:items-center relative">
-                <input @keyup.enter="searchUser" type="text" class="w-full md:w-48 text-gray-700 rounded-lg pl-10 py-2 pr-10 " v-model="searchKey">
+                <input @keyup.enter="searchUser" type="text" class="w-full md:w-64 text-gray-700 rounded-lg pl-10 py-2 pr-10 " v-model="searchKey">
                 <svg class="absolute right-0 z-10 pr-2 h-8 w-8 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <pathd="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
                 </svg>
@@ -23,7 +23,7 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </div>
-            <div class="absolute right-0 mt-10  px-3 pb-3 w-full md:w-48 bg-c-white md:rounded ">
+            <div class="absolute right-0 mt-10  px-1 pb-3 w-full md:w-64 bg-c-white md:rounded ">
                 <div v-if="loading" class="flex justify-center items-center">
                     <div class="spinner">
                         <div class="rect1"></div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div v-else>
-                    <div v-if="getData" class=" h-64 overflow-y-scroll overflow-x-hidden px-2 py-6">
+                    <div v-if="getData" class=" h-64 overflow-y-scroll overflow-x-hidden px-1 py-6">
                         <div v-if="users.length > 0" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
                             <a :href="`/profile/${u.id}/${u.name}`" class="mr-2 flex flex-row justify-between items-top">
                                 <img v-if="u.profile.avatar" class="w-10 h-10 mr-2" :src="`${u.profile.avatar}`">

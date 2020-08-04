@@ -1,9 +1,9 @@
 <template>
     <div class="w-full">
         <div v-if="posts.length > 0" class="">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3   gap-6
                  mb-4 text-center  flex-wrap w-auto">
-                <div v-for="p in posts" :key="p.id" v-if="p.images.length > 0" class="w-full                     ">
+                <div v-for="p in posts" :key="p.id" class="w-full">
                     <div class="flex items-center my-2">
                         <a :href="`/profile/${p.user.id}/${p.user.name}`">
                             <img v-if="p.user.avatar" class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" :src="`${p.user.avatar}`">
@@ -28,7 +28,7 @@
             <p class="text--red-500">No posts.</p>
         </div>
         <div v-else class="flex flex-col items-center justify-center">
-            <div v-if="loading" class="flex justify-center items-center">
+            <div v-if="loading" class="flex justify-center">
                 <div class="spinner">
                     <div class="rect1"></div>
                     <div class="rect2"></div>
@@ -46,18 +46,18 @@
 <script>
 import imageSlider from './Slider';
 import Toast from './Alert';
-
+import VueMasonryWall from "vue-masonry-wall";
 
 export default {
     name: 'browse-post',
     components: {
-        imageSlider
+        imageSlider,
+        VueMasonryWall
     },
     data() {
         return {
             csrf: document.head.querySelector('meta[name="csrf-token"]').content,
             posts: [],
-
             paginate: [],
             postImages: [],
             loading: false,
@@ -69,10 +69,7 @@ export default {
         this.getPosts();
     },
     methods: {
-        append() {
 
-
-        },
         getPosts() {
             this.loading = true;
             let paginate = 8;
@@ -87,7 +84,6 @@ export default {
                 .then(res => {
                     let data = res.data;
                     if (this.next) {
-                        this.append()
                         data.posts.forEach((post) => {
                             this.posts.push(post);
                         })
@@ -127,7 +123,7 @@ export default {
     /* Blue */
     border-radius: 50%;
     width: 60px;
-    height: 60px;
+    height: 20px;
     animation: spin 2s linear infinite;
 }
 

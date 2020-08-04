@@ -46,11 +46,11 @@
         </div>
         <h3 class="text-gray-900 text-black md:mx-6 font-bold my-6">Recent Posts</h3>
         <div v-if="posts.length > 0" class="flex flex-col justify-between items-center w-auto">
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 mb-4 text-center flex-1 w-auto">
+            <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:grid-cols-4 mb-4 text-center flex-1 w-auto">
                 <div v-for="p in posts" :key="p.id" class="w-full">
-                    <div class="p-2 mb-3 flex flex-col ">
+                    <div class="p-2 mb-3 flex flex-col relative">
                         <imageSlider :post="p" :images="p.images"></imageSlider>
-                        <svg @click="dropPost(p.id);" v-if="auth.id === user.id" xmlns="http://www.w3.org/2000/svg" class="text-red-600 h-8 w-8 text-center flex items-center" fill="currentColor" viewBox="0 0 20 20">
+                        <svg @click="dropPost(p.id);" v-if="auth.id === user.id" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 text-red-600 h-6 w-6 text-center flex items-center" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" /></svg>
                     </div>
                 </div>
@@ -69,15 +69,15 @@
             </div>
             <div class="absolute  bg-white left-0 right-0  mx-auto  max-w-xl shadow-lg rounded-lg p-6 z-30">
                 <div class="flex justify-between items-center">
-                    <button @click="closeModal" type="button" class=" cursor-pointer" data-dismiss="modal" aria-label="Close">
-                        <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                        </svg>
+                    <!-- <button @click="closeModal" type="button" class=" cursor-pointer" data-dismiss="modal" aria-label="Close"> -->
+                    <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                    </svg>
                     </button>
                 </div>
                 <div v-if="type == 'followers'" class="">
                     <div v-if="newFollowers.length > 0" class="flex flex-col" v-for="f in newFollowers">
-                        <div class="w-full flex justify-around items-center mb-3">
+                        <div class="w-full flex justify-between items-center mb-3">
                             <a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
                                 <img v-if="f.profile.avatar" class="user-img-sm" :src="`${f.profile.avatar}`">
                                 <svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -92,7 +92,7 @@
                 </div>
                 <div v-if="type == 'followings'">
                     <div v-if="newFollowings.length > 0" class="flex flex-col" v-for="f in newFollowings">
-                        <div class="w-full flex justify-around items-center mb-3">
+                        <div class="w-full flex justify-between items-center mb-3">
                             <a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
                                 <img v-if="f.profile.avatar" class="user-img-sm" :src="`${f.profile.avatar}`">
                                 <svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

@@ -2,7 +2,7 @@
     <div class=" mx-2 md:mx-10 ">
         <div class="flex flex-row items-center my-3">
             <div class="mr-3 ">
-                <a v-if="profile.avatar" href="`/profile/${user.id}/${user.name}`">
+                <a v-if="profile.avatar" :href="`/profile/${user.id}/${user.name}`">
                     <img class="user-img-sm" :src="`${profile.avatar}`">
                 </a>
                 <a v-else :href="`/profile/${user.id}/${user.name}`">
@@ -24,8 +24,8 @@
                 <path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z" /></svg>
             <span class="ml-3 text-gray-900 ">{{ likedTotal }} People Liked</span>
         </div>
-        <div class="w-full py-8">
-            <span class="text-c-blue ">{{ post.caption }} </span>
+        <div class="w-full mb-8 mt-2">
+            <span class="text-c-blue mt-6">{{ post.caption }} </span>
             <div class="relative flex flex-row w-full">
                 <input @keyup.enter="postComment" type="text" class="w-full px-4 py-3 rounded bg-c-white border border-c-blue text-lg pr-10 pl-4" v-model="comment" placeholder="comment" />
                 <svg @click.prevent="postComment" class="absolute right-0 mt-2 mr-2 w-8 h-8 text-c-blue" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -33,12 +33,12 @@
             </div>
             <div class="flex flex-col my-6" v-for="c in comments">
                 <div class="flex">
-                    <a :href="`/profile/${c.user.id}/${c.user.name}`" class="mr-3">
-                        <img v-if="c.user.profile.avatar" class="user-img-sm" :src="`${c.user.profile.avatar}`">
-                        <svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <a :href="`/profile/${c.user.id}/${c.user.name}`" class="">
+                        <img v-if="c.user.profile.avatar" class="w-8 h-8 md:w-10 md:h-10" :src="`${c.user.profile.avatar}`">
+                        <svg v-else class="w-8 h-8 md:w-10 md:h-10  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
                     </a>
-                    <div class="ml-3">
+                    <div class="ml-3 flex-1">
                         <span class="text-gray-900 font-thin text-sm">{{ c.user.name }}</span>
                         <p class="text-c-blue mt-2 font-bold">{{ c.comment }}</p>
                     </div>

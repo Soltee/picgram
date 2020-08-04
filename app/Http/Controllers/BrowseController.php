@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class BrowseController extends Controller
 {
     public function index(){
+        // $posts = Post::latest()->with(['user.profile', 'images'])->paginate(10);
         return view('browse');
     }    
 
