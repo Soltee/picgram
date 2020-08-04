@@ -138,9 +138,9 @@ class PostsController extends Controller
             File::delete([
                 public_path($image->url)
             ]);
-            // $image->delete();
+            $image->delete();
         }
-        // $post->delete();
+        $post->delete();
         return response()->json(['success' => 'Ok!'], 204);
     }
 }
