@@ -75,32 +75,33 @@ class ProfileController extends Controller
 
 
             if($request->hasFile('avatar'))
-            {
-                if(file_exists(public_path() . '/storage/' . $user->profile->avatar)){
-                    Storage::disk('public')->delete($user->profile->avatar);
-                }
+            {   
+                $avatar = $user->profile->avatar;
+                if(Storage::disk('public')->exists($avatar))
+                {
+                    Storage::disk('public')->delete( $avatar);
+                } 
+              
+                
 
                 if(env('APP_ENV') === 'local'){
 
-                    
-
-                    
 
                     $image     = $request->file('avatar');
                     $basename  = Str::random();
                     $original  = 'us-' . $basename . '.' . $image->getClientOriginalExtension();
 
                     $img = Image::make($image->getRealPath());
-                    $img->fit(600, 600, function ($constraint) {
+                    $img->fit(160, 160, function ($constraint) {
                         $constraint->upsize();                 
                     });
 
                     $img->stream(); // <-- Key point
 
-                    Storage::disk('public')->put('/users/' . $original, $img, 'public');
+                    $path = Storage::disk('public')->put('/users/' . $original, $img, 'public');
                     // $path = $image->storeAs('users', $original, 'public'); 
-
-                    $imagearray = ['avatar' => env('APP_URL') . '/storage/users/' . $original];
+                    // dd($path);
+                    $imagearray = ['avatar' => '/users/'. $original];
                 } else {
                     Cloudder::upload($request->file('avatar'), null,  
                     [
@@ -125,8 +126,9 @@ class ProfileController extends Controller
             ]);
             auth()->user()->update($data);
        }
+        return back()->with('toast_success', 'Profile updated.');
 
-        return redirect('profile/' . $user->id . '/' . $user->name)->with('toast_success', 'Profile updated.');
+        // return redirect('profile/' . $user->id . '/' . $user->name)->with('toast_success', 'Profile updated.');
 
     }
 

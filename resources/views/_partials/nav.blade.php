@@ -3,7 +3,12 @@
     <ul class="w-full flex lg:flex-col md:flex-col flex-row justify-around items-center bg-white">
         <li class="border rounded-full  hover:opacity-75 {{ Route::currentRouteName() == 'profile' ? 'opacity-75' : 'text-c-blue' }}">
                 <a class="" href="/profile/{{ Auth::user()->id }}/{{ Auth::user()->name }}">
-                    <img class="w-8 h-8    bg-cover rounded-full" src="{{  Auth::user()->profile->avatar }}">
+                    @if(Auth::user()->profile->avatar)
+                    <img  class="w-8 h-8    bg-cover rounded-full" src="/storage/{{  Auth::user()->profile->avatar }}">
+                    @else
+                        <svg class="w-8 h-8    bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
+                    @endif
                 </a>
             
         </li>

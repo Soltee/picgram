@@ -49,6 +49,7 @@
                            
                         </ul>
                         
+                        {{-- {{auth()->user()->profile}} --}}
                         <logout-modal :auth="{{ auth()->user() }}" :profile="{{ auth()->user()->profile }}"></logout-modal> 
 
                     </div>          

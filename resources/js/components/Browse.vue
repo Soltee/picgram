@@ -6,7 +6,7 @@
                 <div v-for="p in posts" :key="p.id" class="w-full">
                     <div class="flex items-center my-2">
                         <a :href="`/profile/${p.user.id}/${p.user.name}`">
-                            <img v-if="p.user.avatar" class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" :src="`${p.user.avatar}`">
+                            <img v-if="p.user.profile.avatar" class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" :src="`/storage/${p.user.profile.avatar}`">
                             <svg v-else class="w-6 h-6 md:w-8 md:h-8 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
                         </a>

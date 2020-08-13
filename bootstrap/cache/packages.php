@@ -71,6 +71,17 @@
       0 => 'Laravel\\Ui\\UiServiceProvider',
     ),
   ),
+  'laravolt/avatar' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravolt\\Avatar\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Avatar' => 'Laravolt\\Avatar\\Facade',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 

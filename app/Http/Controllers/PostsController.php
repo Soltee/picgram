@@ -78,15 +78,14 @@ class PostsController extends Controller
                 $basename  = Str::random();
                 $original  = 'p-' . $basename . '.' . $image->getClientOriginalExtension();
 
-                $img = Image::make($image->getRealPath());
-                $img->fit(600, 600, function ($constraint) {
-                    $constraint->upsize();                 
-                });
+                
 
-                $img->stream(); // <-- Key point
-
-                Storage::disk('public')->put('/posts/' . $original, $img, 'public');
+                Storage::disk('public')->put('/posts/' . $original, 'public');
                 $paths[] = env('APP_URL') . '/storage/posts/' . $original;
+
+                
+
+                // dd($paths);
             } else {
 
                 Cloudder::upload($image, null,  
@@ -107,7 +106,15 @@ class PostsController extends Controller
 
         foreach ($paths as $path) {
             // dd($path);
-           
+           // $image->move(public_path('/posts'), $original);
+            // $img = Image::make($path);
+            // $img->fit(600, 600, function ($constraint) {
+            //     $constraint->upsize();                 
+            // });
+
+            // $img->stream(); // <-- Key point
+            // // if()
+            // $img->save();
             PostImage::create([
                 'post_id' => $post->id,
                 'url'   => $path,
@@ -135,9 +142,13 @@ class PostsController extends Controller
 
     public function destroy(Post $post){
         foreach ($post->images as $image) {
-            File::delete([
-                public_path($image->url)
-            ]);
+
+            if(Storage::disk('public')->exists($image->url))
+            {
+                Storage::disk('public')->delete($avatar->url);
+            }
+            
+            // dd($file);
             $image->delete();
         }
         $post->delete();

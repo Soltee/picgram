@@ -2,7 +2,7 @@
     <div class="w-full flex-1 mb-16">
         <div class="flex flex-col md:flex-row ">
             <div class="w-16 md:w-64 flex items-center">
-                <img v-if="profile.avatar" class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" :src="`${profile.avatar }`">
+                <img v-if="profile.avatar" class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" :src="`/storage/${profile.avatar }`">
                 <svg v-else class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
             </div>
@@ -62,7 +62,11 @@
             </div>
         </div>
         <div v-else>
-            <p v-if="!loading" class="p-2 border-2 rounded border-blue-800 mb-2">No Posts.</p>
+            <div v-if="!loading">
+                <svg class="h-16 w-16 text-red-500 mb-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 6H4.34a6 6 0 0 1 11.32 0z" /></svg>
+                <p class="text-red-500">No Posts.</p>
+            </div>
         </div>
         <div v-if="modelStatus" class="fixed inset-0  rounded-lg flex flex-col  justify-center rounded-lg z-40">
             <div class="h-full w-full bg-gray-300" @click="closeModal">

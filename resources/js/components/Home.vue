@@ -4,7 +4,7 @@
             <div class="flex flex-col mb-6" v-for="p in posts">
                 <div class="flex flex-row mb-8">
                     <a :href="`/profile/${p.user.id}/${p.user.name}`" class="flex flex-row">
-                        <img v-if="p.user.profile.avatar" class="user-img-sm mr-2" :src="`${p.user.profile.avatar}`">
+                        <img v-if="p.user.profile.avatar" class="user-img-sm mr-2" :src="`/storage/${p.user.profile.avatar}`">
                         <svg v-else class="user-img-sm bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
                         <span class="text-gray-500 font-semibold ml-4">{{ p.user.name }}</span>
