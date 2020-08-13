@@ -24,49 +24,61 @@ class SocialiteController extends Controller
     public function callback(Request $request, Faker $faker)
     {	
     	$user = Socialite::driver('facebook')->user();
-
+        
         // dd($user);
+        $userEmail = '';
     	if($user->getEmail()){
-            // dd($user->getEmail());
+
             $foundUser = User::where('email', $user->getEmail())->first();
+            $userEmail = $user->getEmail();
 
-            if($foundUser){
-                Auth::login($foundUser);
-            } else {
+    	} elseif($user->getId()) {
 
-                $newUser =  User::create([
-                    'name'                => ($user->getName())?? $faker->name,
-                    'email'               => ($user->getEmail()),
-                    'email_verified_at'   => now(),
-                    'remember_token'      => Str::random(10),
-                    'password           ' => bcrypt(md5(rand(1,10000)))
-                ]);
+            $foundUser = User::where('email', $user->getId() .'@mail.com')->first();  
+            $userEmail = $user->getId()  . '@mail.com';
 
-
-                Profile::create([
-                    'user_id'   => $newUser->id,
-                    'avatar'    => ($user->getAvatar())?? '',
-                ]);
-
-                // dd($newUser->id);
-
-                $social = new Social([
-                    'user_id'       => $newUser->id,
-                    'token'         => $user->token,
-                    'provider_id'   => $user->getId(),
-                    'provider'      => 'facebook',
-                    'expires_on'    => $user->expiresIn
-                ]);
-
-                Auth::login($newUser);
-            }
-            return redirect('/home')->with('toast_success', 'You are logged in.');
-   		
-    	} else {
+        } else {
 
             return back()->with('toast_error', 'Sorry.Your facebook email is not found.');
-        	
+            
         }
+
+
+        if($foundUser){
+
+            Auth::login($foundUser);
+
+        } else {
+
+            $newUser =  User::create([
+                'name'                => ($user->getName())?? $faker->name,
+                'email'               => $userEmail,
+                'remember_token'      => Str::random(10),
+                'password'            => bcrypt(Str::random(12))
+            ]);
+            $newUser->markEmailAsVerified();
+
+            // dd($newUser);
+
+            Profile::create([
+                'user_id'   => $newUser->id,
+                'avatar'    => ($user->getAvatar()) ?? '',
+            ]);
+
+            // dd($newUser->id);
+
+            $social = new Social([
+                'user_id'       => $newUser->id,
+                'token'         => $user->token,
+                'provider_id'   => $user->getId(),
+                'provider'      => 'facebook',
+                'expires_on'    => $user->expiresIn
+            ]);
+
+            Auth::login($newUser);
+        }
+
+        return redirect('/home')->with('toast_success', 'You are logged in.');
 
     }
 

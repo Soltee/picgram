@@ -10,7 +10,7 @@
     <title>Picgram</title>
     {{-- <link rel="shortcut icon" type="image/svg" href="/favicon.png"/> --}}
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @yield('head')
 </head>
@@ -73,7 +73,7 @@
         
     </div>
     
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function(){
