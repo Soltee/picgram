@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Picgram</title>
-    {{-- <link rel="shortcut icon" type="image/svg" href="/favicon.png"/> --}}
+    <link rel="shortcut icon" type="image/svg" href="/img/instagram.svg"/>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
