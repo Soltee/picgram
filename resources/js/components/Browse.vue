@@ -1,21 +1,10 @@
 <template>
     <div class="w-full">
         <div v-if="posts.length > 0" class="">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3   gap-6
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4   gap-6
                  mb-4 text-center  flex-wrap w-auto">
-                <div v-for="p in posts" :key="p.id" class="w-full">
-                    <div class="flex items-center my-2">
-                        <a :href="`/profile/${p.user.id}/${p.user.name}`">
-                            <img v-if="p.user.profile.avatar" class="lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full" :src="`/storage/${p.user.profile.avatar}`">
-                            <svg v-else class="w-6 h-6 md:w-8 md:h-8 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
-                        </a>
-                        <form id="uF" :action="`/profile`" method="GET" style="display: none;">
-                            <input type="hidden" name="_token" :value="csrf">
-                            <input type="hidden" name="user" :value="p.user.id">
-                        </form>
-                        <span class="text-md font-semibold text-gray-800 ml-3">{{p.user.name}}</span>
-                    </div>
+                <div v-for="p in posts" :key="p.id" class="w-full flex flex-col">
+        
                     <div class="p-2 mb-3">
                         <imageSlider :post="p" :images="p.images"></imageSlider>
                     </div>

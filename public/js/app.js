@@ -1945,17 +1945,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2786,7 +2775,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         _this2.processing = false;
         var errors = err.response.data.errors;
-        _this2.captionErr = []; // console.log(errors.files[0]);
+        _this2.captionErr = [];
+        console.log('data', err.response.data.errors);
+        console.log('response', err.response);
 
         if (errors.caption) {
           _this2.captionErr = errors.caption;
@@ -2794,8 +2785,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.fileErr = [];
 
-        if (errors.files) {
-          _this2.fileErr = errors.files;
+        if (err.response.status == 422) {
+          _this2.fileErr = 'Image must be jpg, jpeg, png, gif';
         }
 
         _Alert__WEBPACK_IMPORTED_MODULE_0__["default"].fire({
@@ -3217,9 +3208,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       loginModal: true,
       name: '',
-      email: '',
+      email: 'test@example.com',
       remember: false,
-      password: '',
+      password: 'password',
       confirm: '',
       nameErr: [],
       passErr: [],
@@ -3318,7 +3309,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".loader[data-v-70b2ffb5] {\n  border: 16px solid #f3f3f3;\n  /* Light grey */\n  border-top: 16px solid #3498db;\n  /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 20px;\n  -webkit-animation: spin-data-v-70b2ffb5 2s linear infinite;\n          animation: spin-data-v-70b2ffb5 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-70b2ffb5 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-70b2ffb5 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\nimg[data-v-70b2ffb5] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100%;\n  height: 100%;\n  line-height: 0;\n  display: block;\n}\n.spinner[data-v-70b2ffb5] {\n  margin: 100px auto;\n  width: 50px;\n  height: 40px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div[data-v-70b2ffb5] {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay-data-v-70b2ffb5 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay-data-v-70b2ffb5 1.2s infinite ease-in-out;\n}\n.spinner .rect2[data-v-70b2ffb5] {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3[data-v-70b2ffb5] {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4[data-v-70b2ffb5] {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5[data-v-70b2ffb5] {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay-data-v-70b2ffb5 {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay-data-v-70b2ffb5 {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n\n", ""]);
+exports.push([module.i, ".loader[data-v-70b2ffb5] {\n  border: 16px solid #f3f3f3;\n  /* Light grey */\n  border-top: 16px solid #3498db;\n  /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 20px;\n  -webkit-animation: spin-data-v-70b2ffb5 2s linear infinite;\n          animation: spin-data-v-70b2ffb5 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-70b2ffb5 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-70b2ffb5 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\nimg[data-v-70b2ffb5] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100%;\n  height: 100%;\n  line-height: 0;\n  display: block;\n}\n.spinner[data-v-70b2ffb5] {\n  margin: 100px auto;\n  width: 50px;\n  height: 40px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div[data-v-70b2ffb5] {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay-data-v-70b2ffb5 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay-data-v-70b2ffb5 1.2s infinite ease-in-out;\n}\n.spinner .rect2[data-v-70b2ffb5] {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3[data-v-70b2ffb5] {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4[data-v-70b2ffb5] {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5[data-v-70b2ffb5] {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay-data-v-70b2ffb5 {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay-data-v-70b2ffb5 {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -3337,7 +3328,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".spinner {\n  margin: 100px auto;\n  width: 100px;\n  height: 80px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  /*margin: 0 4px 0 0;*/\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay 1.2s infinite ease-in-out;\n}\n.spinner .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n\n", ""]);
+exports.push([module.i, ".spinner {\n  margin: 100px auto;\n  width: 100px;\n  height: 80px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  /*margin: 0 4px 0 0;*/\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay 1.2s infinite ease-in-out;\n}\n.spinner .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -3356,7 +3347,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".loader {\n  border: 16px solid #f3f3f3;\n  /* Light grey */\n  border-top: 16px solid #3498db;\n  /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin 2s linear infinite;\n          animation: spin 2s linear infinite;\n}\n@-webkit-keyframes spin {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes spin {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n.spinner {\n  margin: 100px auto;\n  width: 100px;\n  height: 80px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  /*margin: 0 4px 0 0;*/\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay 1.2s infinite ease-in-out;\n}\n.spinner .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n\n", ""]);
+exports.push([module.i, ".loader {\n  border: 16px solid #f3f3f3;\n  /* Light grey */\n  border-top: 16px solid #3498db;\n  /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin 2s linear infinite;\n          animation: spin 2s linear infinite;\n}\n@-webkit-keyframes spin {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes spin {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n.spinner {\n  margin: 100px auto;\n  width: 100px;\n  height: 80px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  /*margin: 0 4px 0 0;*/\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay 1.2s infinite ease-in-out;\n}\n.spinner .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -3375,7 +3366,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".spinner[data-v-ce145328] {\n  margin: 100px auto;\n  width: 100px;\n  height: 80px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div[data-v-ce145328] {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  /*margin: 0 4px 0 0;*/\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay-data-v-ce145328 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay-data-v-ce145328 1.2s infinite ease-in-out;\n}\n.spinner .rect2[data-v-ce145328] {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3[data-v-ce145328] {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4[data-v-ce145328] {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5[data-v-ce145328] {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay-data-v-ce145328 {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay-data-v-ce145328 {\n0%,\n    40%,\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n\n", ""]);
+exports.push([module.i, ".spinner[data-v-ce145328] {\n  margin: 100px auto;\n  width: 100px;\n  height: 80px;\n  text-align: center;\n  font-size: 10px;\n}\n.spinner>div[data-v-ce145328] {\n  background-color: #6886c5;\n  height: 100%;\n  width: 6px;\n  /*margin: 0 4px 0 0;*/\n  display: inline-block;\n  -webkit-animation: sk-stretchdelay-data-v-ce145328 1.2s infinite ease-in-out;\n  animation: sk-stretchdelay-data-v-ce145328 1.2s infinite ease-in-out;\n}\n.spinner .rect2[data-v-ce145328] {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.spinner .rect3[data-v-ce145328] {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n.spinner .rect4[data-v-ce145328] {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.spinner .rect5[data-v-ce145328] {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n@-webkit-keyframes sk-stretchdelay-data-v-ce145328 {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\n@keyframes sk-stretchdelay-data-v-ce145328 {\n0%,\r\n    40%,\r\n    100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n}\n20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -3394,7 +3385,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".loader[data-v-67528743] {\n  border: 16px solid #f3f3f3;\n  /* Light grey */\n  border-top: 16px solid #3498db;\n  /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin-data-v-67528743 2s linear infinite;\n          animation: spin-data-v-67528743 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-67528743 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-67528743 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n\n", ""]);
+exports.push([module.i, ".loader[data-v-67528743] {\n  border: 16px solid #f3f3f3;\n  /* Light grey */\n  border-top: 16px solid #3498db;\n  /* Blue */\n  border-radius: 50%;\n  width: 60px;\n  height: 60px;\n  -webkit-animation: spin-data-v-67528743 2s linear infinite;\n          animation: spin-data-v-67528743 2s linear infinite;\n}\n@-webkit-keyframes spin-data-v-67528743 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-67528743 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -27749,80 +27740,25 @@ var render = function() {
             "div",
             {
               staticClass:
-                "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3   gap-6\n             mb-4 text-center  flex-wrap w-auto"
+                "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4   gap-6\n             mb-4 text-center  flex-wrap w-auto"
             },
             _vm._l(_vm.posts, function(p) {
-              return _c("div", { key: p.id, staticClass: "w-full" }, [
-                _c("div", { staticClass: "flex items-center my-2" }, [
+              return _c(
+                "div",
+                { key: p.id, staticClass: "w-full flex flex-col" },
+                [
                   _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: "/profile/" + p.user.id + "/" + p.user.name
-                      }
-                    },
+                    "div",
+                    { staticClass: "p-2 mb-3" },
                     [
-                      p.user.profile.avatar
-                        ? _c("img", {
-                            staticClass:
-                              "lg:h-24 lg:w-24 md:w-16 md:h-16 h-8 w-8 bg-cover rounded-full",
-                            attrs: { src: "/storage/" + p.user.profile.avatar }
-                          })
-                        : _c(
-                            "svg",
-                            {
-                              staticClass:
-                                "w-6 h-6 md:w-8 md:h-8 bg-cover rounded-full",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 20 20"
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z"
-                                }
-                              })
-                            ]
-                          )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      staticStyle: { display: "none" },
-                      attrs: { id: "uF", action: "/profile", method: "GET" }
-                    },
-                    [
-                      _c("input", {
-                        attrs: { type: "hidden", name: "_token" },
-                        domProps: { value: _vm.csrf }
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { type: "hidden", name: "user" },
-                        domProps: { value: p.user.id }
+                      _c("imageSlider", {
+                        attrs: { post: p, images: p.images }
                       })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    { staticClass: "text-md font-semibold text-gray-800 ml-3" },
-                    [_vm._v(_vm._s(p.user.name))]
+                    ],
+                    1
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "p-2 mb-3" },
-                  [_c("imageSlider", { attrs: { post: p, images: p.images } })],
-                  1
-                )
-              ])
+                ]
+              )
             }),
             0
           )
@@ -28840,20 +28776,22 @@ var render = function() {
         "div",
         {
           staticClass:
-            "absolute right-0 mt-10  px-1 pb-3 w-full md:w-64 bg-c-white md:rounded "
+            "absolute right-0 mt-10  px-1 pb-3 w-full md:w-64  md:rounded "
         },
         [
           _vm.loading
-            ? _c("div", { staticClass: "flex justify-center items-center" }, [
-                _vm._m(0)
-              ])
+            ? _c(
+                "div",
+                { staticClass: "flex justify-center items-center bg-c-white" },
+                [_vm._m(0)]
+              )
             : _c("div", [
                 _vm.getData
                   ? _c(
                       "div",
                       {
                         staticClass:
-                          " h-64 overflow-y-scroll overflow-x-hidden px-1 py-6"
+                          " h-64 overflow-y-scroll overflow-x-hidden px-1 py-6 bg-c-white"
                       },
                       [
                         _vm._l(_vm.users, function(u) {
@@ -28949,7 +28887,7 @@ var render = function() {
                               "div",
                               {
                                 staticClass:
-                                  "px-3 py-2  mb-2 flex flex-col items-center"
+                                  "px-3 py-2  mb-2 flex flex-col items-center bg-c-white"
                               },
                               [
                                 _c(
@@ -29051,7 +28989,7 @@ var render = function() {
               },
               [
                 _c("img", {
-                  staticClass: "w-full bg-gray-400 rounded-lg shadow-lg",
+                  staticClass: "w-full bg-gray-400 rounded shadow-lg",
                   attrs: { src: "" + image.url, alt: "..." }
                 })
               ]
@@ -29165,7 +29103,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "flex flex-col w-full items-center justify-center bg-grey-lighter mb-3"
+                  "flex flex-col w-full items-center bg-grey-lighter mb-3"
               },
               [
                 _c(
@@ -29209,27 +29147,23 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _vm.fileErr.length > 0
-                  ? _c(
-                      "div",
-                      {},
-                      _vm._l(_vm.fileErr, function(e) {
-                        return _c(
-                          "p",
-                          {
-                            staticClass: "text-red-500 mt-1 px-1 py-1 rounded",
-                            attrs: { role: "alert" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(e) +
-                                "\n                        "
-                            )
-                          ]
-                        )
-                      }),
-                      0
-                    )
+                  ? _c("div", {}, [
+                      _c(
+                        "p",
+                        {
+                          staticClass:
+                            "text-red-500 mt-1 px-1 py-1 rounded flex ",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(_vm.fileErr) +
+                              "\n                        "
+                          )
+                        ]
+                      )
+                    ])
                   : _vm._e()
               ]
             ),
@@ -29973,7 +29907,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "min-h-screen overflow-hidden flex-1 bg-c-white z-20 px-6 mt-5 md:px-0 flex flex-col"
+        "min-h-screen flex-1  z-20 px-6 mt-5 md:px-0 flex flex-col items-center"
     },
     [
       _vm.loginModal
@@ -44734,8 +44668,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/soltee/projects/picgram/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/soltee/projects/picgram/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laravel\picgram\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laravel\picgram\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

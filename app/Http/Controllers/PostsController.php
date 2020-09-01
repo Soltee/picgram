@@ -65,12 +65,25 @@ class PostsController extends Controller
     {
         $data = $request->validate([
             'files' => 'required',
-            'files.*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
+            'files.*' => 'required|mimes:jpg,jpeg,png,gif|max:2048',
+            // 'files.*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'caption' => 'string|min:4',
         ]); 
             
         // dd($data);
         $images      = $request->file('files');
+        // if($images){
+        //     $allowedfileExtension = ['jpeg','jpg','png','gif'];
+        //     foreach($images as $file){
+        //         $filename = $file->getClientOriginalName();
+
+        //         $extension = $file->getClientOriginalExtension();
+
+        //         $check = in_array($extension, $allowedfileExtension);
+        //         abort_if(!$check, 422);
+        //     }
+        // }
+
          // get the validated filee
         foreach ($images as $image) {
             if(env('APP_ENV') === 'local'){

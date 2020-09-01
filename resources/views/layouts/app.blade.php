@@ -57,7 +57,7 @@
 
             </nav>
 
-            <div class="lg:max-w-4xl lg:mx-auto mb-12  px-6 md:px-16 mt-10">
+            <div class="lg:max-w-4xl lg:mx-auto mb-12  px-6 md:px-8 mt-10">
                 @yield('content')
             </div>
 

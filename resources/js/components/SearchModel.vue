@@ -23,8 +23,8 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </div>
-            <div class="absolute right-0 mt-10  px-1 pb-3 w-full md:w-64 bg-c-white md:rounded ">
-                <div v-if="loading" class="flex justify-center items-center">
+            <div class="absolute right-0 mt-10  px-1 pb-3 w-full md:w-64  md:rounded ">
+                <div v-if="loading" class="flex justify-center items-center bg-c-white">
                     <div class="spinner">
                         <div class="rect1"></div>
                         <div class="rect2"></div>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div v-else>
-                    <div v-if="getData" class=" h-64 overflow-y-scroll overflow-x-hidden px-1 py-6">
+                    <div v-if="getData" class=" h-64 overflow-y-scroll overflow-x-hidden px-1 py-6 bg-c-white">
                         <div v-if="users.length > 0" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
                             <a :href="`/profile/${u.id}/${u.name}`" class="mr-2 flex flex-row justify-between items-top">
                                 <img v-if="u.profile.avatar" class="w-10 h-10 mr-2" :src="`${u.profile.avatar}`">
@@ -47,7 +47,7 @@
                                 <input type="text" name="user" :value="u.id">
                             </form>
                         </div>
-                        <div v-if="users.length < 1" class="px-3 py-2  mb-2 flex flex-col items-center">
+                        <div v-if="users.length < 1" class="px-3 py-2  mb-2 flex flex-col items-center bg-c-white">
                             <svg class="w-12 md:w-16 text-red-500 mb-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 6H4.34a6 6 0 0 1 11.32 0z" /></svg>
                             <p class="text-red-500">No user match.</p>

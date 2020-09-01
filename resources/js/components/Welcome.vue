@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen overflow-hidden flex-1 bg-c-white z-20 px-6 mt-5 md:px-0 flex flex-col">
+    <div class="min-h-screen flex-1  z-20 px-6 mt-5 md:px-0 flex flex-col items-center">
         <div v-if="loginModal" class="z-20  flex flex-col">
             <div class="flex flex-row items-center md:w-88">
                 <svg class="h-10 w-10 text-c-blue pr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -135,9 +135,9 @@ export default {
         return {
             loginModal: true,
             name: '',
-            email: '',
+            email: 'test@example.com',
             remember: false,
-            password: '',
+            password: 'password',
             confirm: '',
             nameErr: [],
             passErr: [],
