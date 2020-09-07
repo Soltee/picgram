@@ -8,8 +8,9 @@
 @section('authentication')
 
 <div class="flex items-cente">
-	 <div class="hero hidden md:block md:w-1/2 bg-gray-400 min-h-screen overflow-hidden  bg-gray-800  z-20"  style="background: url('/img/bk.jpg'); background-size: cover; background-position: center center;"></div>
-	{{-- </div> --}}
+	 <div class="hero hidden md:block md:w-1/2 bg-gray-400 min-h-screen overflow-hidden  bg-gray-800  z-20"  style="background: url('/img/bk.jpg'); background-size: cover; background-position: center center;">
+	 	
+	 </div>
 	     
 	<welcome-view :errors="{{ $errors }}"></welcome-view>
 </div>

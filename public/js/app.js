@@ -3196,6 +3196,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'welcome-view',
   props: {
@@ -29907,11 +29909,11 @@ var render = function() {
     "div",
     {
       staticClass:
-        "min-h-screen flex-1  z-20 px-6 mt-5 md:px-0 flex flex-col items-center"
+        "w-full md:w-1/2 md:p-2 relative flex justify-center items-center "
     },
     [
       _vm.loginModal
-        ? _c("div", { staticClass: "z-20  flex flex-col" }, [
+        ? _c("div", { staticClass: "z-20 w-full  flex flex-col" }, [
             _c("div", { staticClass: "flex flex-row items-center md:w-88" }, [
               _c(
                 "svg",
@@ -30273,7 +30275,7 @@ var render = function() {
               ]
             )
           ])
-        : _c("div", { staticClass: "z-20 flex flex-col" }, [
+        : _c("div", { staticClass: "z-20 w-full flex flex-col" }, [
             _c(
               "a",
               {

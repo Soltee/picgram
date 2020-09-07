@@ -828,10 +828,6 @@ img {
   font-weight: 900;
 }
 
-.h-2 {
-  height: 0.5rem;
-}
-
 .h-6 {
   height: 1.5rem;
 }
@@ -1036,11 +1032,6 @@ img {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.object-center {
-  -o-object-position: center;
-     object-position: center;
 }
 
 .opacity-75 {
@@ -1333,10 +1324,6 @@ img {
   letter-spacing: 0.025em;
 }
 
-.w-2 {
-  width: 0.5rem;
-}
-
 .w-6 {
   width: 1.5rem;
 }
@@ -1518,6 +1505,11 @@ img {
   .md\:py-6 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+  }
+
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .md\:px-16 {
