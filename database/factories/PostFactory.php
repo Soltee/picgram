@@ -32,6 +32,7 @@ $factory->define(App\PostImage::class, function (Faker $faker) {
         //         return 'http://localhost:8000/' . $path;
         //     }
         // }
-        'url' => $faker->imageUrl($width = 360, $height = 360) // 'http://lorempixel.com/640/480/'
+        'url' => $faker->image(storage_path('app/public/images'), 400, 300, null, false)
+        // 'http://lorempixel.com/640/480/'
     ];
 });

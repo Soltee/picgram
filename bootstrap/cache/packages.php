@@ -46,6 +46,13 @@
       'Cloudder' => 'JD\\Cloudder\\Facades\\Cloudder',
     ),
   ),
+  'laravel/legacy-factories' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Illuminate\\Database\\Eloquent\\LegacyFactoryServiceProvider',
+    ),
+  ),
   'laravel/socialite' => 
   array (
     'providers' => 
