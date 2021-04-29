@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",
         "jrm2k6/cloudder": "^0.6.0",
-        "laravel/framework": "8.0",
+        "laravel/framework": "8.40.0",
         "laravel/legacy-factories": "^1.1",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
