@@ -8,13 +8,7 @@
                 </svg>
                 <span class="pl-2 border-white border-l-2 font-serif text-c-blue text-md md:text-xl font-black">PicGram</span>
             </div>
-            <p class="font-serif text-c-blue text-sm font-normal  mt-1">Share Memories</p>
-            <a :href="`/redirect`" class="flex justify-around items-center bg-white rounded-full py-2 w-56 rounded-lg border bg-c-blue border-c-blue px-4  my-4 ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6  text-c-white">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-                <span class="text-c-white text-sm ml-3">Login with Facebook</span>
-            </a>
+            <p class="font-serif text-c-blue lg:text-xs font-normal  mt-1">Share Memories</p>
             <form :action="`/login`" :method="`post`" class="mt-6" id="loginForm">
                 <input type="hidden" name="_token" :value="csrf">
                 <input type="hidden" name="login">
@@ -63,12 +57,6 @@
             </form>
         </div>
         <div v-else class="z-20 w-full flex flex-col">
-            <a :href="`/redirect`" class="flex justify-around items-center bg-white rounded-full py-2 w-56 rounded-lg border bg-c-blue border-c-blue px-4  mt-4 ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6  text-c-white">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-                <span class="text-c-white text-sm ml-3">Login with Facebook</span>
-            </a>
             <form :method="`post`" :action="`/register`" class="mt-6" id="registerForm">
                 <input type="hidden" name="_token" :value="csrf">
                 <input type="hidden" name="register">

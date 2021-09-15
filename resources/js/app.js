@@ -6,7 +6,8 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
+import Vue from "vue";
 import { VueMasonryPlugin } from 'vue-masonry';
 Vue.use(VueMasonryPlugin);
 export const serverBus = new Vue();
@@ -40,5 +41,7 @@ Vue.component('logout-modal', require('./components/Logout.vue').default);
  */
 
 const app = new Vue({
-    el: '#app',
+    el: "#app",
 });
+
+    
