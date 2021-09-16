@@ -35,17 +35,6 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
-  'jrm2k6/cloudder' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'JD\\Cloudder\\CloudderServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Cloudder' => 'JD\\Cloudder\\Facades\\Cloudder',
-    ),
-  ),
   'laravel/legacy-factories' => 
   array (
     'providers' => 

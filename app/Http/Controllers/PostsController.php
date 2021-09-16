@@ -8,7 +8,6 @@ use Auth;
 use App\PostImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Image;
@@ -65,8 +64,7 @@ class PostsController extends Controller
     {
         $data = $request->validate([
             'files' => 'required',
-            'files.*' => 'required|mimes:jpg,jpeg,png,gif|max:2048',
-            // 'files.*' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
+            'files.*' => 'required|mimes:jpg,jpeg,png|max:2048',
             'caption' => 'string|min:4',
         ]); 
             
@@ -86,30 +84,17 @@ class PostsController extends Controller
 
          // get the validated filee
         foreach ($images as $image) {
-            if(env('APP_ENV') === 'local'){
 
-                $basename  = Str::random();
-                $original  = 'p-' . $basename . '.' . $image->getClientOriginalExtension();
+            $basename  = Str::random();
+            $original  = 'p-' . $basename . '.' . $image->getClientOriginalExtension();
 
-                
+            $original   = 'md-' . 
+                        Str::random() . '.' . $image->getClientOriginalExtension();
 
-                Storage::disk('public')->put('/posts/' . $original, 'public');
-                $paths[] = env('APP_URL') . '/storage/posts/' . $original;
-
-                
-
-                // dd($paths);
-            } else {
-
-                Cloudder::upload($image, null,  
-                [
-                    "folder" => "picgram/posts/"
-                ],  []);
-
-                $c = Cloudder::getResult();
-                $paths[] = $c['url'];
-            }
-
+            $image->move(storage_path('app/public/posts'), $original);
+    
+            $paths[] = env('APP_URL') . '/storage/posts/' . $original;
+            
         }
 
         
@@ -118,16 +103,6 @@ class PostsController extends Controller
         ]);
 
         foreach ($paths as $path) {
-            // dd($path);
-           // $image->move(public_path('/posts'), $original);
-            // $img = Image::make($path);
-            // $img->fit(600, 600, function ($constraint) {
-            //     $constraint->upsize();                 
-            // });
-
-            // $img->stream(); // <-- Key point
-            // // if()
-            // $img->save();
             PostImage::create([
                 'post_id' => $post->id,
                 'url'   => $path,
@@ -155,16 +130,12 @@ class PostsController extends Controller
 
     public function destroy(Post $post){
         foreach ($post->images as $image) {
-
-            if(Storage::disk('public')->exists($image->url))
-            {
-                Storage::disk('public')->delete($avatar->url);
-            }
-            
-            // dd($file);
-            $image->delete();
+            $url = str_replace('http://localhost:8000/', '', $image->url);
+            unlink($url);
         }
+        
         $post->delete();
+
         return response()->json(['success' => 'Ok!'], 204);
     }
 }

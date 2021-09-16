@@ -14,7 +14,6 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",
-        "jrm2k6/cloudder": "^0.6.0",
         "laravel/framework": "^8.49.0",
         "laravel/legacy-factories": "^1.1",
         "laravel/socialite": "^5.0",
