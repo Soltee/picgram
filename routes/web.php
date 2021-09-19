@@ -4,15 +4,15 @@
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 
 Route::post('/validateData', 'ValidationController@index');
-
 Route::post('/login', 'Auth\LoginController@login');
 Route::post('/register', 'Auth\RegisterController@register');
 
-Route::get('/redirect', 'SocialiteController@redirect');
-Route::get('/callback', 'SocialiteController@callback');
+// Route::get('/redirect', 'SocialiteController@redirect');
+// Route::get('/callback', 'SocialiteController@callback');
 
 Auth::routes(['verify' => true]);
           
+//Authenticated Section
 Route::group(['middleware' =>  'verified'], function(){
 
 	Route::get('/home', 'HomeController@home')->name('home');
@@ -30,14 +30,18 @@ Route::group(['middleware' =>  'verified'], function(){
 	/*Like*/
 	Route::post('/like/{post}', 'LikeController@store')->middleware('auth');
 
+	//Profile
 	Route::get('/profile/{user}/{slug}', 'ProfileController@index')->name('profile');
 	Route::get('/edit/{user}', 'ProfileController@edit')->name('profile.edit');
 	Route::patch('/profile/{user}/update', 'ProfileController@update')->name('profile.update');
 	Route::get('/posts/{user}', 'PostsController@index');
 
+	//Follow & Unfollow
 	Route::get('/userFollow/{user}', 'UserFollowController@index');
 
 	Route::post('/follow/{user}', 'FollowController@store')->name('follow.profile');
+
+	//Comments
 	Route::get('/p/{post}/comments', 'CommentController@index')->name('comment.index');
 	Route::post('/p/{post}/comment', 'CommentController@store')->name('comment.store');
 

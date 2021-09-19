@@ -4,14 +4,14 @@
             <div class="w-full">
                 <div class="flex flex-row justify-between items-center mb-3">
                     <div class="flex items-center">
-                        <h1 class="m-0 text-lg text-c-blue font-semibold ml-2">New Post</h1>
+                        <h1 class="m-0 text-lg text-blue-light font-semibold ml-2">New Post</h1>
                     </div>
                     <div class="flex items-center">
-                        <svg @click="reset" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 mr-2 cursor-pointer mr-4 text-c-blue-dark">
+                        <svg @click="reset" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 mr-2 cursor-pointer mr-4 text-red-400">
                             <polyline points="23 4 23 10 17 10"></polyline>
                             <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                         </svg>
-                        <button type="submit" class=" hover:bg-blue-500 bg-blue-600 hover:opacity-75 text-gray-100 font-bold py-3 px-8 rounded focus:outline-none focus:shadow-outline">
+                        <button type="submit" class=" hover:bg-blue-dark bg-blue-light hover:opacity-75 text-gray-100 font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline">
                             Save
                         </button>
                     </div>
@@ -26,12 +26,13 @@
                             <div class="rect5"></div>
                         </div>
                     </div>
-                    <div class="flex flex-col w-full items-center bg-grey-lighter mb-3">
+                    <!-- FIle upload -->
+                    <div class="flex flex-col w-full items-center bg-grey-lighter mb-4">
                         <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue ">
-                            <svg class="w-8 h-8 text-c-blue" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <svg class="w-8 h-8 text-blue-light" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                             </svg>
-                            <span class="mt-2 text-lg text-c-blue">Click to Upload Images</span>
+                            <span class="mt-2 text-lg text-blue-light">Click to Upload Images</span>
                             <input type='file' id="files" ref="files" class="hidden" multiple @change="handleFileUpload" />
                         </label>
                         <div v-if="fileErr.length > 0" class="">
@@ -40,7 +41,9 @@
                             </p>
                         </div>
                     </div>
-                    <div v-if="files.length > 0" class=" w-full h-64 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                    <!-- Preview photos -->
+                    <div v-if="files.length > 0" class=" w-full h-64 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                         <div v-for="(file) in fileRead" class="w-full flex flex-row flex-wrap  items-center justify-between">
                             <div class="flex flex-col items-center rounded-lg">
                                 <span class="rounded-lg my-2 text-white font-semibold text-lg  w-full text-center">
@@ -54,9 +57,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col  rounded-lg mb-3">
-                        <label for="caption" class=" px-2 py-3 text-c-blue text-sm font-thin ">Caption</label>
-                        <input type="text" id="caption" v-model="caption" class="px-3 py-3 rounded-lg  border border-c-blue text-gray-900">
+
+                    <!-- Captiion -->
+                    <div class="flex flex-col  rounded-lg mb-4">
+                        <label for="caption" class="text-blue-light text-sm font-thin ">Caption</label>
+                        <input type="text" id="caption" v-model="caption" class="px-3 py-3 rounded-lg  border border-blue-light text-gray-900 focus:outline-none focus:ring-2 focus:border-blue-light focus:ring-opacity-50">
                         <div v-if="captionErr.length > 0" class="">
                             <p v-for="e in captionErr" class="text-red-500 mt-1 px-1 py-1 rounded" role="alert">
                                 {{ e }}

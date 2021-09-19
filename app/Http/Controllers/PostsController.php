@@ -68,7 +68,6 @@ class PostsController extends Controller
             'caption' => 'string|min:4',
         ]); 
             
-        // dd($data);
         $images      = $request->file('files');
         // if($images){
         //     $allowedfileExtension = ['jpeg','jpg','png','gif'];

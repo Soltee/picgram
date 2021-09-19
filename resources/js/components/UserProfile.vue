@@ -3,37 +3,51 @@
         <div class="flex flex-col md:flex-row ">
             <div class="w-16 md:w-64 flex items-center">
                 <img v-if="profile.avatar" class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" :src="`/storage/${profile.avatar }`">
-                <svg v-else class="w-auto h-auto md:w-40 md:h-40 bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
-            </div>
+                <svg 
+                    v-else 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    class="text-blue-light group-hover:text-c-white -auto h-auto md:w-40 md:h-40 bg-cover rounded-full" 
+                    fill="none" 
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                                
+                
+            </div> 
+
+
             <div class="md:ml-4 flex-1 ">
                 <!-- Author Top -->
                 <div class="flex flex-row justify-between items-baseline ">
                     <div class="flex flex-row mb-2 items-baseline">
-                        <h4 class="mr-3 text-gray-900 font-semibold capatialize">{{ user.name }}</h4>
+                        <h4 class="mr-3 text-blue-dark font-semibold capatialize">{{ user.name }}</h4>
                         <div v-if="auth.id !== user.id">
                             <follow-profile :user="user" :follows="hasfollowed"></follow-profile>
                         </div>
                     </div>
-                    <a v-if="auth.id === user.id" class="px-1 py-1  text-right  text-white rounded text-center" :href="`/edit/${user.id}`">
-                        <svg class="h-6 w-6 text-blue-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z" /></svg>
+
+                    <!-- Edit profile icon -->
+                    <a v-if="auth.id === user.id" class="z-0 px-2 py-1  text-right  text-white rounded text-center border border-blue-light group hover:bg-blue-light rounded-lg" :href="`/edit/${user.id}`">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-light group-hover:text-c-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
                     </a>
                 </div>
+
                 <!-- Author Top  ENDS-->
                 <div class="flex flex-row justify-between mt-2 mb-2">
                     <div class="flex">
                         <div class="flex flex-row items-center">
-                            <button class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Posts</button>
-                            <span class="font-weight-bold">{{ posts.length }} </span>
+                            <button class="mr-3 px-1 py-1 bg-blue-light text-white lg:font-semibold md:font-semibold rounded">Posts</button>
+                            <span class="text-blue-light">{{ posts.length }} </span>
                         </div>
                         <div class="flex flex-row items-center ml-4">
-                            <button @click="type = 'followers'; modelStatus = true; getFollow();" class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Followers</button>
-                            <span class="font-weight-bold"> {{ followers }} </span>
+                            <button @click="type = 'followers'; modelStatus = true; getFollow();" class="mr-3 px-1 py-1 bg-blue-light text-white lg:font-semibold md:font-semibold rounded">Followers</button>
+                            <span class="text-blue-light"> {{ followers }} </span>
                         </div>
                         <div class="flex flex-row items-center ml-4">
-                            <button @click="type = 'followings'; modelStatus = true; getFollow();" class="mr-3 px-1 py-1 bg-blue-700 text-white lg:font-semibold md:font-semibold rounded">Following</button>
-                            <span class="font-weight-bold">{{ followings }} </span>
+                            <button @click="type = 'followings'; modelStatus = true; getFollow();" class="mr-3 px-1 py-1 bg-blue-light text-white lg:font-semibold md:font-semibold rounded">Following</button>
+                            <span class="text-blue-light">{{ followings }} </span>
                         </div>
                     </div>
                 </div>
@@ -44,13 +58,18 @@
                 </div>
             </div>
         </div>
-        <h3 class="text-gray-900 text-black md:mx-6 font-bold my-6">Recent Posts</h3>
+
+        <!--- Posts from the USer -->
+        <div class="flex items-center my-6">
+            <h3 class="text-blue-dark text-black font-bold border rounded   border-blue-light px-2 py-1">Recent Posts</h3>
+        </div>
+
         <div v-if="posts.length > 0" class="flex flex-col justify-between items-center w-auto">
             <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:grid-cols-4 mb-4 text-center flex-1 w-auto">
                 <div v-for="p in posts" :key="p.id" class="w-full">
                     <div class="p-2 mb-3 flex flex-col relative">
                         <imageSlider :post="p" :images="p.images"></imageSlider>
-                        <svg @click="dropPost(p.id);" v-if="auth.id === user.id" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 text-red-600 h-6 w-6 text-center flex items-center" fill="currentColor" viewBox="0 0 20 20">
+                        <svg @click="dropPost(p.id);" v-if="auth.id === user.id" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 text-red-400 h-6 w-6 text-center flex items-center" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" /></svg>
                     </div>
                 </div>
@@ -68,45 +87,70 @@
                 <p class="text-red-500">No Posts.</p>
             </div>
         </div>
+
+        <!-- Followers -->
         <div v-if="modelStatus" class="fixed inset-0  rounded-lg flex flex-col  justify-center rounded-lg z-40">
-            <div class="h-full w-full bg-gray-300" @click="closeModal">
+            <div class="h-full w-full bg-gray-100 opacity-70" @click="closeModal">
             </div>
-            <div class="absolute  bg-white left-0 right-0  mx-auto  max-w-xl shadow-lg rounded-lg p-6 z-30">
-                <div class="flex justify-between items-center">
-                    <!-- <button @click="closeModal" type="button" class=" cursor-pointer" data-dismiss="modal" aria-label="Close"> -->
-                    <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            <div class="absolute  bg-white left-0 right-0  mx-auto  max-w-xl shadow-lg rounded-lg p-6 z-30 h-64 overflow-y-scroll overflow-x-hidden">
+                <div class="flex justify-end items-center">
+                    <svg 
+                        @click="closeModal" 
+                        class="fill-current text-red-400 h-8 w-8 -top-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                        <path stroke-width="1" d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
                     </svg>
                     </button>
                 </div>
                 <div v-if="type == 'followers'" class="">
                     <div v-if="newFollowers.length > 0" class="flex flex-col" v-for="f in newFollowers">
                         <div class="w-full flex justify-between items-center mb-3">
-                            <a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
-                                <img v-if="f.profile.avatar" class="user-img-sm" :src="`${f.profile.avatar}`">
-                                <svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
+                            <a 
+                                :href="`/profile/${f.id}/${f.name}`" 
+                                class="mr-2 flex items-center rounded-lg group hover:bg-blue-light px-2 py-1">
+                                <img 
+                                    v-if="f.profile.avatar" 
+                                    class="user-img-sm text-blue-light group-hover:text-c-white" :src="`${f.profile.avatar}`">
+                                <svg 
+                                    v-else 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    class="w-10 h-10    bg-cover rounded-full text-blue-light group-hover:text-c-white" 
+                                    fill="none" 
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="text-blue-light group-hover:text-c-white ml-3 font-medium">{{ f.name }}</span>
                             </a>
-                            <span class="text-gray-900 ml-3 font-medium">{{ f.name }}</span>
+                            
                         </div>
                     </div>
                     <div v-if="newFollowers.length < 1" class="flex justify-center items-center">
-                        <p class="text-red-600 text-center font-black">No User Followers.</p>
+                        <p class="text-red-400 text-center font-black">No User Followers.</p>
                     </div>
                 </div>
                 <div v-if="type == 'followings'">
                     <div v-if="newFollowings.length > 0" class="flex flex-col" v-for="f in newFollowings">
                         <div class="w-full flex justify-between items-center mb-3">
-                            <a :href="`/profile/${f.id}/${f.name}`" class="mr-2">
-                                <img v-if="f.profile.avatar" class="user-img-sm" :src="`${f.profile.avatar}`">
-                                <svg v-else class="user-img-sm  bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
+                            <a 
+                                :href="`/profile/${f.id}/${f.name}`" 
+                                class="mr-2 flex items-center rounded-lg group hover:bg-blue-light px-2 py-1">
+                                <img 
+                                    v-if="f.profile.avatar" 
+                                    class="user-img-smtext-blue-light group-hover:text-c-white" 
+                                    :src="`${f.profile.avatar}`">
+                                <svg 
+                                    v-else 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    class="w-10 h-10    bg-cover rounded-full text-blue-light group-hover:text-c-white" 
+                                    fill="none" 
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="text-blue-light group-hover:text-c-white ml-3 font-medium">{{ f.name }}</span>
                             </a>
-                            <span class="text-gray-900 ml-3 font-medium">{{ f.name }}</span>
                         </div>
                     </div>
                     <div v-if="newFollowings.length < 1" class="flex justify-center items-center">
-                        <p class="text-red-600 text-center font-black">No User Followings.</p>
+                        <p class="text-red-400 text-center font-black">No User Followings.</p>
                     </div>
                 </div>
             </div>

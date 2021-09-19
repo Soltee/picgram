@@ -70,7 +70,8 @@
 
                 <!-- Results -->
                 <div v-else>
-                    <div v-if="getData" class=" h-64 overflow-y-scroll overflow-x-hidden px-1 py-6 bg-c-white shadow-lg">
+                    <div v-if="getData" 
+                        class=" h-64 overflow-y-scroll overflow-x-hidden px-1 py-6 bg-c-white shadow-lg">
                         <div v-if="users.length > 0" class="flex flex-row items-end w-full px-2 py-2" v-for="u in users">
                             <a 
                                 :href="`/profile/${u.id}/${u.name}`" 
