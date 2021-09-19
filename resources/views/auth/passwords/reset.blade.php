@@ -16,6 +16,7 @@
 
            <form method="POST" class="mt-4" action="{{ route('password.update') }}" class="mt-8">
               @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
                 <div class="w-full md:w-88 ">
                     <div class="w-full">
                         @if (session('status'))

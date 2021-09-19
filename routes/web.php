@@ -12,7 +12,7 @@ Route::get('/redirect', 'SocialiteController@redirect');
 Route::get('/callback', 'SocialiteController@callback');
 
 Auth::routes(['verify' => true]);
-
+          
 Route::group(['middleware' =>  'verified'], function(){
 
 	Route::get('/home', 'HomeController@home')->name('home');
