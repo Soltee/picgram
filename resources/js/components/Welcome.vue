@@ -2,7 +2,7 @@
     
     <div class="w-full md:w-1/2 relative flex flex-col justify-center px-2 md:px-0 ">
 
-        <div class="border-blue-100 border-2 rounded-lg px-4 py-4  flex flex-col justify-center md:border-transparent md:border-dashed ">
+        <div class="shadow-2xl md:shadow-none rounded-lg px-4 py-4  flex flex-col justify-center md:border-transparent  ">
             <div class="">
                 <div class="flex flex-row items-center ">
                     <svg class="h-10 w-10 text-blue-light pr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -26,7 +26,7 @@
                                     Email
                                 </label>
                                 <input class=" text-blue-light rounded appearance-none   w-full
-                                    py-2 px-4  leading-tight focus:outline-none  border border-blue-light" :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value="" autocomplete="email" autofocus placeholder="*******@gmail.com">
+                                    py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value="" autocomplete="email" autofocus placeholder="*******@gmail.com">
                                 <div v-if="emailErr.length > 0" class="">
                                     <p v-for="e in emailErr" class="text-red-500 text-sm mt-2 px-1 py-1 rounded" role="alert">
                                         {{ e }}
@@ -37,7 +37,7 @@
                                 <label class="block text-blue-light text-xs font-light " for="password">
                                     Password
                                 </label>
-                                <input class=" text-blue-light rounded appearance-none   w-full   py-2 px-4  leading-tight focus:outline-none  border border-blue-light" :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password" name="password" autocomplete="password" autofocus placeholder="**********">
+                                <input class=" text-blue-light rounded appearance-none   w-full   py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password" name="password" autocomplete="password" autofocus placeholder="**********">
                                 <div v-if="passErr.length > 0" class="">
                                     <p v-for="e in passErr" class="text-red-500 text-sm mt-2 px-1 py-1 rounded" role="alert">
                                         {{ e }}
@@ -79,7 +79,7 @@
                                 <label class="block text-blue-light text-xs  font-light   " for="name">
                                     Name
                                 </label>
-                                <input class=" text-blue-light rounded appearance-none   w-full  py-2 px-4  leading-tight focus:outline-none  border border-blue-light" :class="(nameErr.length > 0) ? 'is-invalid' : '' " id="name" v-model="name" name="name" autocomplete="name" autofocus placeholder="Hari ....">
+                                <input class=" text-blue-light rounded appearance-none   w-full  py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(nameErr.length > 0) ? 'is-invalid' : '' " id="name" v-model="name" name="name" autocomplete="name" autofocus placeholder="Hari ....">
                                 <div v-if="nameErr.length > 0" class="">
                                     <p v-for="e in nameErr" class="text-red-500 text-sm mt-2 px-1 py-1 rounded" role="alert">
                                         {{ e }}
@@ -90,7 +90,7 @@
                                 <label class="block text-blue-light text-xs font-light   " for="email">
                                     Email
                                 </label>
-                                <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight focus:outline-none  border border-blue-light" :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value="" autocomplete="email" autofocus placeholder="*******@gmail.com">
+                                <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value="" autocomplete="email" autofocus placeholder="*******@gmail.com">
                                 <div v-if="emailErr.length > 0" class="">
                                     <p v-for="e in emailErr" class="text-red-500 text-sm mt-2 px-1 py-1 rounded" role="alert">
                                         {{ e }}
@@ -101,7 +101,7 @@
                                 <label class="block text-blue-light text-xs font-light  " for="password">
                                     Password
                                 </label>
-                                <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight focus:outline-none  border border-blue-light" :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password" name="password" autocomplete="password" autofocus placeholder="**********">
+                                <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(passErr.length > 0) ? 'is-invalid': ''" id="password" type="password" v-model="password" name="password" autocomplete="password" autofocus placeholder="**********">
                                 <div v-if="passErr.length > 0" class="">
                                     <p v-for="e in passErr" class="text-red-500 text-sm mt-2 px-1 py-1 rounded" role="alert">
                                         {{ e }}
@@ -112,7 +112,7 @@
                                 <label class="block text-blue-light text-xs font-light " for="password-confirm">
                                     Confirm Password
                                 </label>
-                                <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight focus:outline-none  border border-blue-light" :class="(passErr.length > 0) ? 'is-invalid': ''" id="password-confirm" type="password" v-model="confirm" autocomplete="new-password" autofocus placeholder="**********">
+                                <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(passErr.length > 0) ? 'is-invalid': ''" id="password-confirm" type="password" v-model="confirm" autocomplete="new-password" autofocus placeholder="**********">
                             </div>
                             <div class="flex flex-col mt-6 w-full ">
                                 <button @click.prevent="validateData()" type="submit" id="regBtn" class="w-full mb-3 font-bold text-lg bg-blue-dark hover:opacity-75 text-white py-2 px-6 rounded">

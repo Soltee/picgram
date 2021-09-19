@@ -30526,7 +30526,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "border-blue-100 border-2 rounded-lg px-4 py-4  flex flex-col justify-center md:border-transparent md:border-dashed "
+            "shadow-2xl md:shadow-none rounded-lg px-4 py-4  flex flex-col justify-center md:border-transparent  "
         },
         [
           _c("div", {}, [
@@ -30617,7 +30617,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              " text-blue-light rounded appearance-none   w-full\n                                py-2 px-4  leading-tight focus:outline-none  border border-blue-light",
+                              " text-blue-light rounded appearance-none   w-full\n                                py-2 px-4  leading-tight border shadow focus:outline-none  ",
                             class: _vm.emailErr.length > 0 ? "is-invalid" : "",
                             attrs: {
                               id: "email",
@@ -30690,7 +30690,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              " text-blue-light rounded appearance-none   w-full   py-2 px-4  leading-tight focus:outline-none  border border-blue-light",
+                              " text-blue-light rounded appearance-none   w-full   py-2 px-4  leading-tight border shadow focus:outline-none  ",
                             class: _vm.passErr.length > 0 ? "is-invalid" : "",
                             attrs: {
                               id: "password",
@@ -30913,7 +30913,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              " text-blue-light rounded appearance-none   w-full  py-2 px-4  leading-tight focus:outline-none  border border-blue-light",
+                              " text-blue-light rounded appearance-none   w-full  py-2 px-4  leading-tight border shadow focus:outline-none  ",
                             class: _vm.nameErr.length > 0 ? "is-invalid" : "",
                             attrs: {
                               id: "name",
@@ -30984,7 +30984,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              " text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight focus:outline-none  border border-blue-light",
+                              " text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  ",
                             class: _vm.emailErr.length > 0 ? "is-invalid" : "",
                             attrs: {
                               id: "email",
@@ -31057,7 +31057,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              " text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight focus:outline-none  border border-blue-light",
+                              " text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  ",
                             class: _vm.passErr.length > 0 ? "is-invalid" : "",
                             attrs: {
                               id: "password",
@@ -31129,7 +31129,7 @@ var render = function() {
                               }
                             ],
                             staticClass:
-                              " text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight focus:outline-none  border border-blue-light",
+                              " text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  ",
                             class: _vm.passErr.length > 0 ? "is-invalid" : "",
                             attrs: {
                               id: "password-confirm",
