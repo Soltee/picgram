@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         $userIds = array_merge($followingsIds, $followersIds);
 
-        $posts = Post::whereIn('user_id', $userIds)->with(['images', 'user.profile'])->latest()->paginate(2);
+        $posts = Post::whereIn('user_id', $userIds)->with(['images', 'user.profile'])->latest()->paginate(6);
         // dd($posts);
         return response()->json([
                 'posts'    => $posts->items(),

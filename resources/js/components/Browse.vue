@@ -1,7 +1,7 @@
 <template>
     <div class="w-full">
         <div v-if="posts.length > 0" class="">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4   gap-6
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3   gap-6
                  mb-4 text-center  flex-wrap w-auto">
                 <div v-for="p in posts" :key="p.id" class="w-full flex flex-col">
         
@@ -14,7 +14,7 @@
         <div v-if="posts.length < 1" class="p-2  mb-2 flex flex-col items-center">
             <svg class="h-16 w-16 text-red-500 mb-4" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 6H4.34a6 6 0 0 1 11.32 0z" /></svg>
-            <p class="text--red-500">No posts.</p>
+            <p class="text-red-400">Oops! Nothing here.</p>
         </div>
         <div v-else class="flex flex-col items-center justify-center">
             <div v-if="loading" class="flex justify-center">
@@ -27,7 +27,10 @@
                 </div>
             </div>
             <div v-else>
-                <button v-if="!last" @click="getPosts()" class="my-3 text-lg font-bold  text-gray-800 rounded-lg">Load More ...</button>
+                <button v-if="!last" @click="getPosts()" class="my-3 text-lg font-bold  text-blue-light rounded-lg">Click for more...</button>
+                <div v-else>
+                     <span class="text-red-400">Oops! no more posts..</span>
+                </div>
             </div>
         </div>
     </div>

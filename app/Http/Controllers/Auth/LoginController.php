@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+
 class LoginController extends Controller
 {
     /*
@@ -43,47 +46,57 @@ class LoginController extends Controller
         return view('welcome')->with('type', 'login');
     }
 
+    /* public function login(Request $request) */
     public function login(Request $request)
     {
+        $data = $request->validate([
+            'email'     => 'required|email',
+            'password'  => 'required|string|min:8'
+        ]);
 
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
-
-            return $this->sendLockoutResponse($request);
+        //Find User By Email
+        $user   = User::where('email' , $data['email'])->first();
+        if(!$user)
+        {   
+            return response()->json([
+                    'message'  => 'The given data was invalid.',
+                    'errors'   => [
+                        'email'  => [
+                                'The credentials doesnot match.'
+                            ]
+                    ]
+                ], 422);
         }
 
-        if ($this->attemptLogin($request)) {
-            return $this->sendLoginResponse($request);
-        }
+        if (!Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $request->input('remember'))) {
+            return response()->json([
+                    'message'  => 'The given data was invalid.',
+                    'errors'   => [
+                        'password'  => [
+                                'The credentials doesnot match.'
+                            ]
+                    ]
+                ], 422);
+        } 
 
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
+        return response()->json([
+                    'message'  => 'The login was successful.',
+                    'login'    => 'ok.'
+                ], 200);
+        
 
-        return $this->sendFailedLoginResponse($request);
     }
 
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
 
-        $this->clearLoginAttempts($request);
-
-        return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->route('home')->with('toast_success', 'You are logged in.');
-    }
-
+    /*
+        * Invalidate Session and logout
+    */
     public function logout(Request $request)
     {
         $this->guard()->logout();
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect('/')->with('toast_success', 'Logged out successfully.');
+        return $this->loggedOut($request) ?: redirect('/')->with('success', 'Logged out successfully.');
     }
 }

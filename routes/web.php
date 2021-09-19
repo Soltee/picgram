@@ -3,7 +3,6 @@
 
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 
-Route::post('/validateData', 'ValidationController@index');
 Route::post('/login', 'Auth\LoginController@login');
 Route::post('/register', 'Auth\RegisterController@register');
 

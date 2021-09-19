@@ -13,6 +13,8 @@ class ValidationController extends Controller
             	'email' => 'required|email|min:4',
             	'password' => 'required|string|min:8',            
         	]);
+
+        	
     	}
 
     	if($request->type == 'register'){

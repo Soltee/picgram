@@ -67,6 +67,7 @@
         <div v-if="posts.length > 0" class="flex flex-col justify-between items-center w-auto">
             <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:grid-cols-4 mb-4 text-center flex-1 w-auto">
                 <div v-for="p in posts" :key="p.id" class="w-full">
+                    
                     <div class="p-2 mb-3 flex flex-col relative">
                         <imageSlider :post="p" :images="p.images"></imageSlider>
                         <svg @click="dropPost(p.id);" v-if="auth.id === user.id" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 text-red-400 h-6 w-6 text-center flex items-center" fill="currentColor" viewBox="0 0 20 20">
@@ -140,7 +141,7 @@
                                 <svg 
                                     v-else 
                                     xmlns="http://www.w3.org/2000/svg" 
-                                    class="w-10 h-10    bg-cover rounded-full text-blue-light group-hover:text-c-white" 
+                                    class="w-10 h-10 bg-cover rounded-full text-blue-light group-hover:text-c-white" 
                                     fill="none" 
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

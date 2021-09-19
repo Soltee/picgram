@@ -1,22 +1,32 @@
 <template>
-    <div>
-        <div v-if="posts">
-            <div class="flex flex-col mb-6" v-for="p in posts">
-                <div class="flex flex-row mb-8">
-                    <a :href="`/profile/${p.user.id}/${p.user.name}`" class="flex flex-row">
-                        <img v-if="p.user.profile.avatar" class="user-img-sm mr-2" :src="`/storage/${p.user.profile.avatar}`">
-                        <svg v-else class="user-img-sm bg-cover rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
-                        <span class="text-gray-500 font-semibold ml-4">{{ p.user.name }}</span>
-                    </a>
+    <div class="mb-16">
+        
+        <div v-if="posts.length > 0" class="">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3   gap-6
+                 mb-4 text-center  flex-wrap w-auto">
+                <div v-for="p in posts" :key="p.id" class="w-full flex flex-col">
+        
+                    <div class="p-2 my-3">
+                        <a :href="`/profile/${p.user.id}/${p.user.name}`" class="flex flex-row items-center group mb-3">
+                                <img v-if="p.user.profile.avatar" class="h-10 w-10 mr-2" :src="`/storage/${p.user.profile.avatar}`">
+                                <svg v-else xmlns="http://www.w3.org/2000/svg" 
+                                    class="text-blue-light group-hover:text-blue-dark h-10 w-10  bg-cover rounded-full" 
+                                    fill="none" 
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="text-blue-light font-semibold ml-4 group-hover:text-blue-dark">{{ p.user.name }}</span>
+                        </a>
+                        <imageSlider :post="p" :images="p.images"></imageSlider>
+                    </div>
                 </div>
-                <imageSlider :post="p" :images="p.images"></imageSlider>
             </div>
         </div>
+        
         <div v-if="posts.length < 1" class="p-2  mb-2 flex flex-col items-center">
             <svg class="h-16 w-16 text-red-500 mb-4" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 6H4.34a6 6 0 0 1 11.32 0z" /></svg>
-            <p class="text--red-500">No feeds.</p>
+            <p class="text-red-500">Oops! nothing is here.</p>
         </div>
         <div v-else class="flex flx-col items-center justify-center">
             <div v-if="loading" class="flex justify-center items-center">
@@ -29,7 +39,10 @@
                 </div>
             </div>
             <div v-else>
-                <button v-if="!last" @click="getPosts()" class="my-3 text-lg font-bold  text-gray-800 rounded-lg">Load More ...</button>
+                <button v-if="!last" @click="getPosts()" class="my-3 text-lg font-bold  text-blue-light rounded-lg">Previous posts ...</button>
+                <div v-else>
+                     <span class="text-red-400">Oops! no more posts..</span>
+                </div>
             </div>
         </div>
     </div>
@@ -42,7 +55,7 @@ export default {
     name: 'home',
     props: [],
     components: {
-        imageSlider
+        imageSlider,
     },
     data() {
         return {
@@ -54,7 +67,14 @@ export default {
             count: null,
             loading: true,
             next: null,
-            last: false
+            last: false,
+            // options: {
+            //     autoplay: false,
+            //     navButtons:true,
+            //     centerMode: true,
+            //     dots: true,
+            //     touch:true,
+            // },
         }
     },
     mounted() {
@@ -63,7 +83,7 @@ export default {
     methods: {
         getPosts() {
             this.loading = true;
-            let paginate = 1;
+            let paginate = 6;
 
             let endpoint = `/u/p?paginate=${paginate}`;
             if (this.next) {
@@ -169,4 +189,22 @@ export default {
     }
 }
 
+/*.agile__actions{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 10;
+}
+.agile__nav-button{
+    height: 48px;
+    width: 48px;
+    color: #2E8BC0;
+    font-size: 32px;
+}
+*/
 </style>

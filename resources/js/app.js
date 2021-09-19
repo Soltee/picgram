@@ -8,6 +8,8 @@ require('./bootstrap');
 
 // window.Vue = require('vue');
 import Vue from "vue";
+// import VueSplide from '@splidejs/vue-splide';
+// Vue.use(VueSplide);
 import { VueMasonryPlugin } from 'vue-masonry';
 Vue.use(VueMasonryPlugin);
 export const serverBus = new Vue();
