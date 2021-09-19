@@ -1,5 +1,4 @@
 module.exports = {
-    purge: false,
     theme: {
         extend: {
             screens: {
@@ -12,31 +11,55 @@ module.exports = {
                 '88': '22em'
             },
             backgroundColor: {
+                'blue' : {
+                    light : '#2E8BC0',
+                    dark  : '#145DA0',
+                    darker : '#0C2D48',
+                },
                 'c': {
-                    'blue': '#6886c5',
                     'white': '#f9f9f9',
-                    'blue-dark': '#014f7e'
+                    'blue-lighter' : '00509D',
+                    'blue-light' : '00509D',
+                    'blue-dark' : '00296B',
                 }
             },
-            color: {
+            colors: {
+                'blue' : {
+                    light : '#2E8BC0',
+                    dark  : '#145DA0',
+                    darker : '#0C2D48',
+                },
                 'c': {
-                    'blue': '#6886c5',
                     'white': '#f9f9f9',
-                    'blue-dark': '#014f7e'
+                    'blue-lighter' : '00509D',
+                    'blue-light' : '00509D',
+                    'blue-dark' : '00296B'
                 }
             },
             textColor: {
+                'blue' : {
+                    light : '#2E8BC0',
+                    dark  : '#145DA0',
+                    darker : '#0C2D48',
+                },
                 'c': {
-                    'blue': '#6886c5',
                     'white': '#f9f9f9',
-                    'blue-dark': '#014f7e'
+                    'blue-lighter' : '00509D',
+                    'blue-light' : '00509D',
+                    'blue-dark' : '00296B'
                 }
             },
             borderColor: {
+                'blue' : {
+                    light : '#2E8BC0',
+                    dark  : '#145DA0',
+                    darker : '#0C2D48',
+                },
                 'c': {
-                    'blue': '#6886c5',
                     'white': '#f9f9f9',
-                    'blue-dark': '#014f7e'
+                    'blue-lighter' : '00509D',
+                    'blue-light' : '00509D',
+                    'blue-dark' : '00296B'
                 }
             }
         }

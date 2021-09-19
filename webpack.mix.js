@@ -20,5 +20,5 @@ mix.js('resources/js/app.js', 'public/js')
         postCss: [tailwindcss('./tailwind.config.js')],
     })
     .purgeCss({
-        enabled: true,
+        enabled: false,
     });
