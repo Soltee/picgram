@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
         ]);
         // factory(Profile::class, 21)->create();
         factory(Post::class, 50)->create();
-        factory(PostImage::class, 100)->create();
-        factory(Comment::class, 100)->create();
+        factory(PostImage::class, 200)->create();
+        factory(Comment::class, 300)->create();
 
         
     }

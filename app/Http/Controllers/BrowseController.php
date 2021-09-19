@@ -43,10 +43,5 @@ class BrowseController extends Controller
         // dd($isFollowing);
 
         return view('posts.show', compact('post', 'liked', 'likedtotal', 'user', 'profile', 'images', 'isFollowing'));
-        // return response()->json([
-        //     'post' => $post,
-        //     'user' => $user,
-        //     'images' => $images
-        // ], 200);
     }
 }
