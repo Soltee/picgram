@@ -39,7 +39,7 @@
                     <div class="flex">
                         <div class="flex flex-row items-center">
                             <button class="mr-3 px-1 py-1 bg-blue-light text-white lg:font-semibold md:font-semibold rounded">Posts</button>
-                            <span class="text-blue-light">{{ posts.length }} </span>
+                            <span class="text-blue-light">{{ total }} </span>
                         </div>
                         <div class="flex flex-row items-center ml-4">
                             <button @click="type = 'followers'; modelStatus = true; getFollow();" class="mr-3 px-1 py-1 bg-blue-light text-white lg:font-semibold md:font-semibold rounded">Followers</button>
@@ -61,14 +61,14 @@
 
         <!--- Posts from the USer -->
         <div class="flex items-center my-6">
-            <h3 class="text-blue-dark text-black font-bold border rounded   border-blue-light px-2 py-1">Recent Posts</h3>
+            <h3 class="text-blue-dark text-black font-bold  px-2 py-1">Recent Posts</h3>
         </div>
 
         <div v-if="posts.length > 0" class="flex flex-col justify-between items-center w-auto">
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:grid-cols-4 mb-4 text-center flex-1 w-auto">
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4 text-center flex-1 w-auto">
                 <div v-for="p in posts" :key="p.id" class="w-full">
                     
-                    <div class="p-2 mb-3 flex flex-col relative">
+                    <div class="p-2 mb-3 flex flex-col relative shadow-lg px-3">
                         <imageSlider :post="p" :images="p.images"></imageSlider>
                         <svg @click="dropPost(p.id);" v-if="auth.id === user.id" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 right-0 text-red-400 h-6 w-6 text-center flex items-center" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" /></svg>
@@ -78,18 +78,22 @@
             <div v-if="loading" class="loader">
             </div>
             <div v-else>
-                <button v-if="total > 1 && hasMore" @click="more = true; getPosts()" class="my-3 text-lg font-bold bg-gray-300 shadow-lg text-gray-800 rounded-lg">Load More ...</button>
+                <button v-if="page" @click="more = true; getPosts()" class="my-3 text-lg font-bold shadow-lg px-2 py-2 text-blue-light rounded-lg">Click to load more ...</button>
+                <div v-else>
+                     <span class="text-red-400">Oops! End of line..</span>
+                </div>
             </div>
         </div>
         <div v-else>
             <div v-if="!loading">
-                <svg class="h-16 w-16 text-red-500 mb-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 6H4.34a6 6 0 0 1 11.32 0z" /></svg>
-                <p class="text-red-500">No Posts.</p>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-red-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-red-400">Oops! Empty. Please upoad some pots.</p>
             </div>
         </div>
 
-        <!-- Followers -->
+        <!-- Followers && Followings -->
         <div v-if="modelStatus" class="fixed inset-0  rounded-lg flex flex-col  justify-center rounded-lg z-40">
             <div class="h-full w-full bg-gray-100 opacity-70" @click="closeModal">
             </div>
@@ -211,20 +215,18 @@ export default {
     methods: {
         getPosts() {
             this.loading = true;
-            let paginate = 10;
-            if (this.more) {
-                paginate + 10;
-            }
+            let paginate = 6;
+            
             let endpoint = `/posts/${this.user.id}?paginate=${paginate}`;
             if (this.page) {
-                endpoint = this.page;
+                endpoint = `${this.page}&paginate=${paginate}`;
             }
-
+            
 
             axios.get(`${endpoint}`)
                 .then(res => {
                     let data = res.data;
-                    if (this.more) {
+                    if (this.page) {
                         data.posts.forEach((post) => {
                             this.posts.unshift(post);
                         })
@@ -232,7 +234,10 @@ export default {
                         this.posts = data.posts;
                     }
                     this.total = data.paginate.total_count;
-                    (data.paginate.next_page_url) ? (this.hasMore = true) : (this.hasMore = false);
+
+                    (data.paginate.next_page_url) ? 
+                        (this.page = data.paginate.next_page_url) : 
+                        (this.page = null);
                     this.loading = false;
                 }).catch((err => {
                     Toast.fire({

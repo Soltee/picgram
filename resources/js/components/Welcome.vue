@@ -52,8 +52,10 @@
                                 </label>
                             </div>
                             <div class="flex flex-col my-4 w-full ">
-                                <button type="submit" id="logBtn" class="w-full mb-1 font-bold text-lg bg-blue-dark hover:opacity-75 text-white py-2 px-6 rounded">
-                                    Login
+                                <button type="submit" id="logBtn" class="w-full mb-1 font-bold text-lg bg-blue-dark hover:opacity-75 text-white py-2 px-6 rounded"
+                                    v-text="(loading) ? 'Loading...' : 'Login'">
+        
+                                    
                                 </button>
                                 <a class="btn btn-link w-full  text-center text-blue-light text-xs" :href="`/password/reset`">
                                     Forgot Your Password?
@@ -117,8 +119,9 @@
                                 <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(passErr.length > 0) ? 'is-invalid': ''" id="password-confirm" type="password" v-model="confirm" autocomplete="new-password" autofocus placeholder="**********">
                             </div>
                             <div class="flex flex-col mt-6 w-full ">
-                                <button type="submit" id="regBtn" class="w-full mb-3 font-bold text-lg bg-blue-dark hover:opacity-75 text-white py-2 px-6 rounded">
-                                    Register
+                                <button type="submit" id="regBtn" class="w-full mb-3 font-bold text-lg bg-blue-dark hover:opacity-75 text-white py-2 px-6 rounded" 
+                                v-text="(loading) ? 'Loading...' : 'Register'">
+                                    
                                 </button>
                             </div>
 
@@ -158,7 +161,8 @@ export default {
             nameErr: [],
             passErr: [],
             emailErr: [],
-            csrf: ""
+            csrf: "",
+            loading : false,
         }
     },
     mounted() {
@@ -183,18 +187,20 @@ export default {
             this.loginModal = !this.loginModal;
         },
         loginRequest(){
-
+            this.loading = true;
             let formData = new FormData;
             formData.append('email', this.email);
             formData.append('password', this.password);
             formData.append('remember', this.remember);
 
             axios.post(`/login`, formData).then(res => {
+                this.loading = false;
                 if (res.status == 200) {
                     window.location.href = "/login?url=login";
                 }
 
             }).catch((err) => {
+                this.loading = false;
                 let errors = err.response.data.errors;
                 this.password = '';
                 this.confirm = '';
@@ -213,6 +219,7 @@ export default {
         
         },
         registerRequest(){
+            this.loading = true;
 
             let formData = new FormData;
             formData.append('email', this.email);
@@ -221,11 +228,15 @@ export default {
             formData.append('password_confirmation', this.confirm);
         
             axios.post(`/register`, formData).then(res => {
+                this.loading = false;
+
                 if (res.status == 200) {
                     window.location.href = "/login?url=verify";
                 }
 
             }).catch((err) => {
+                this.loading = false;
+
                 let errors = err.response.data.errors;
                 this.password = '';
                 this.confirm = '';

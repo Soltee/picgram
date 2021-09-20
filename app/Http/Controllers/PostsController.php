@@ -28,7 +28,7 @@ class PostsController extends Controller
     public function index(User $user){
         $paginate = request()->paginate;
 
-        $posts = Post::latest()->with('images')->where('user_id', $user->id)->paginate($paginate);
+        $posts = auth()->user()->posts()->latest()->with('images')->paginate($paginate);
         
         return response()->json([
             'posts' => $posts->items(),
@@ -128,9 +128,12 @@ class PostsController extends Controller
     }
 
     public function destroy(Post $post){
+        // Storage::delete(['file', 'otherFile']);
         foreach ($post->images as $image) {
             $url = str_replace('http://localhost:8000/', '', $image->url);
+            // $url = str_replace('https://localhost:8000/', '', $image->url);
             unlink($url);
+            
         }
         
         $post->delete();

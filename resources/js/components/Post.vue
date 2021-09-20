@@ -8,13 +8,19 @@
                     <img class="user-img-sm" :src="`/storage/${profile.avatar}`">
                 </a>
                 <a v-else :href="`/profile/${user.id}/${user.name}`">
-                    <svg class="user-img-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                            class="text-blue-light group-hover:text-blue-dark h-10 w-10  bg-cover rounded-full" 
+                            fill="none" 
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
                 </a>
             </div>
-            <div v-if="auth.id !== user.id">
-                <follow-profile :user="user" :follows="hasfollowed"></follow-profile>
-                <p class="text-gray-500 font-thin px-2 mt-2 mb-4 ml-3">{{ post.caption }} </p>
+            <div class="flex flex-col">
+                <div v-if="auth.id !== user.id">
+                    <follow-profile :user="user" :follows="hasfollowed"></follow-profile>
+                </div>
+                <p class="text-blue-light font-thin px-2 mt-2 mb-4 ml-3">{{ post.caption }} </p>
 
             </div>
         </div>
@@ -22,7 +28,7 @@
         <div class="md:w-2/3  mb-4 md:mb-0 h-full md:rounded-l-lg relative">
             
             <div class="">
-            <agile
+            <!-- <agile
                 :options="options"
                 >
                 <div class="slide" 
@@ -35,7 +41,10 @@
                 
                 </div>
             </agile>
-            </div>
+             -->
+                <imageSlider :post="post" :images="post.images"></imageSlider>
+
+             </div>
 
         </div>
 
@@ -46,13 +55,19 @@
                         <img class="user-img-sm" :src="`/storage/${profile.avatar}`">
                     </a>
                     <a v-else :href="`/profile/${user.id}/${user.name}`">
-                        <svg class="user-img-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            class="text-blue-light group-hover:text-blue-dark h-10 w-10  bg-cover rounded-full" 
+                            fill="none" 
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
                     </a>
                 </div>
-                <div v-if="auth.id !== user.id">
-                    <follow-profile :user="user" :follows="hasfollowed"></follow-profile>
-                    <p class="text-gray-500 font-thin px-2 mt-2 mb-4 ml-3">{{ post.caption }} </p>
+                <div class="flex flex-col">
+                    <div v-if="auth.id !== user.id">
+                        <follow-profile :user="user" :follows="hasfollowed"></follow-profile>
+                    </div>
+                    <p class="text-blue-light font-thin px-2 mt-2 mb-4 ml-3">{{ post.caption }} </p>
 
                 </div>
             </div>
@@ -95,7 +110,7 @@
     </div>
 </template>
 <script>
-// import { Carousel, Slide } from 'vue-carousel';
+import imageSlider from './Slider';
 import Toast from './Alert';
 import moment from 'moment';
 import { VueAgile } from 'vue-agile'
@@ -151,6 +166,7 @@ export default {
     },
     components: {
         agile: VueAgile,
+        imageSlider,
     },
     mounted() {
         (this.liked) ? (this.isLiked = true) : (this.isLiked = false);

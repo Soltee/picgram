@@ -38,13 +38,11 @@
 <script>
 import imageSlider from './Slider';
 import Toast from './Alert';
-import VueMasonryWall from "vue-masonry-wall";
 
 export default {
     name: 'browse-post',
     components: {
         imageSlider,
-        VueMasonryWall
     },
     data() {
         return {

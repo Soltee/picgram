@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
 
         factory(User::class, 20)->create();
-        factory(User::class)->create([
+        $user = factory(User::class)->create([
             'name' => "Test",
             'email' => "test@example.com",
             'email_verified_at' => now(),
@@ -28,9 +28,21 @@ class DatabaseSeeder extends Seeder
             'remember_token' => \Illuminate\Support\Str::random(10),
         ]);
         // factory(Profile::class, 21)->create();
-        factory(Post::class, 50)->create();
-        factory(PostImage::class, 200)->create();
-        factory(Comment::class, 300)->create();
+        // $posts = factory(Post::class, 20)->create([
+        //     'user_id'  => $user->id
+        // ]);
+
+        // foreach($posts as $post){
+
+        //     factory(PostImage::class, 50)->create([
+        //         'post_id' =>  $post->id
+        //     ]);
+
+        //     factory(Comment::class, 30)->create([
+        //         'post_id' => $post->id
+        //     ]);
+
+        // }
 
         
     }
