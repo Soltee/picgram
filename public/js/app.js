@@ -20216,7 +20216,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
 
         if (res.status == 200) {
-          window.location.href = "/login?url=login";
+          window.location.href = "/home"; // window.location.href = "/login?url=login";
         }
       })["catch"](function (err) {
         _this.loading = false;
@@ -20249,7 +20249,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.loading = false;
 
         if (res.status == 200) {
-          window.location.href = "/login?url=verify";
+          window.location.href = "/home"; // window.location.href = "/login?url=verify";
         }
       })["catch"](function (err) {
         _this2.loading = false;
@@ -20273,50 +20273,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    //
-    // validateData() {
-    //     let formData = new FormData;
-    //     formData.append('email', this.email);
-    //     formData.append('password', this.password);
-    //     if (this.loginModal) {
-    //         formData.append('remember', this.remember);
-    //         formData.append('type', 'login');
-    //     } else {
-    //         formData.append('name', this.name);
-    //         formData.append('password_confirmation', this.confirm);
-    //         formData.append('type', 'register');
-    //     }
-    //     const logForm = document.getElementById('loginForm');
-    //     const regForm = document.getElementById('registerForm');
-    //     console.log(logForm, regForm);
-    //     axios.post(`/validateData`, formData).then(res => {
-    //         if (res.status == 200) {
-    //             if (this.loginModal) {
-    //                 console.log(logForm);
-    //                 logForm.submit();
-    //             } else {
-    //                 console.log(regForm);
-    //                 regForm.submit();
-    //             }
-    //         }
-    //     }).catch((err) => {
-    //         let errors = err.response.data.errors;
-    //         this.password = '';
-    //         this.confirm = '';
-    //         this.nameErr = '';
-    //         this.emailErr = '';
-    //         this.passErr = '';
-    //         if (errors.name) {
-    //             this.nameErr = errors.name;
-    //         }
-    //         if (errors.email) {
-    //             this.emailErr = errors.email;
-    //         }
-    //         if (errors.password) {
-    //             this.passErr = errors.password;
-    //         }
-    //     });
-    // },
     refreshCsrf: function refreshCsrf() {
       this.csrf = document.head.querySelector('meta[name="csrf-token"]').content;
     }

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Overtrue\LaravelFollow\Followable;
 use Overtrue\LaravelLike\Traits\Liker;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use Notifiable, UsesUuid, Followable, Liker;
 

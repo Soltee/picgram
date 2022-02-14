@@ -6,13 +6,11 @@ Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::post('/register', 'Auth\RegisterController@register');
 
-// Route::get('/redirect', 'SocialiteController@redirect');
-// Route::get('/callback', 'SocialiteController@callback');
 
-Auth::routes(['verify' => true]);
+Auth::routes();
           
 //Authenticated Section
-Route::group(['middleware' =>  'verified'], function(){
+Route::group(['middleware' =>  'auth'], function(){
 
 	Route::get('/home', 'HomeController@home')->name('home');
 	Route::get('/u/p', 'HomeController@postByF');
