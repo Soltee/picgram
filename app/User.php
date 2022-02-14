@@ -6,13 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
-use Overtrue\LaravelFollow\Traits\CanLike;
-use Overtrue\LaravelFollow\Traits\CanFollow;
-use Overtrue\LaravelFollow\Traits\CanBeFollowed;
+use Overtrue\LaravelFollow\Followable;
+use Overtrue\LaravelLike\Traits\Liker;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, UsesUuid, CanLike , CanFollow, CanBeFollowed;
+    use Notifiable, UsesUuid, Followable, Liker;
 
 
     /**
@@ -59,10 +58,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class);
     }
 
-    public function following()
-    {
-        return $this->belongsToMany(Profile::class);
-    }
+    // public function following()
+    // {
+    //     return $this->belongsToMany(Profile::class);
+    // }
 
     public function posts()
     {

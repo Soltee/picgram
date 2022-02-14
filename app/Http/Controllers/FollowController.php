@@ -15,7 +15,6 @@ class FollowController extends Controller
 	
     public function store(User $user)
     {
-    	// dd(auth()->user()->following()->toggle(1));
     	auth()->user()->toggleFollow($user);
     	return response()->json(['success'=>'Ok'], 200);
     }

@@ -6,40 +6,38 @@
 
 require('./bootstrap');
 
-// window.Vue = require('vue');
-import Vue from "vue";
-export const serverBus = new Vue();
+/*
+// Vue.component('browse-posts', require('./components/Browse.vue').default);
+// Vue.component('browse-post', require('./components/Post.vue').default);
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+*/
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue-pomponent(key.split('/').pop().split('.')[0], files(key).default))
+import { createApp } from 'vue'
+const app = createApp({});
 
-Vue.component('welcome-view', require('./components/Welcome.vue').default);
-Vue.component('home-posts', require('./components/Home.vue').default);
-Vue.component('upload', require('./components/UploadPost.vue').default);
-Vue.component('search-model', require('./components/SearchModel.vue').default);
-Vue.component('browse-posts', require('./components/Browse.vue').default);
-Vue.component('browse-post', require('./components/Post.vue').default);
-Vue.component('follow-profile', require('./components/FollowProfile.vue').default);
-Vue.component('user-profile', require('./components/UserProfile.vue').default);
+//Components
+import Browse from './components/Browse';
+import FollowProfile from './components/FollowProfile';
+import Home from './components/Home';
+import LogoutModal from './components/Logout';
+import Post from './components/Post';
+import SearchModel from './components/SearchModel';
+import UploadPost from './components/UploadPost';
+import UserProfile from './components/UserProfile';
+import WelcomeView from './components/Welcome';
 
-Vue.component('logout-modal', require('./components/Logout.vue').default);
+app.component('welcome-view', WelcomeView);
+app.component('search-model', SearchModel);
+app.component('logout-modal', LogoutModal);
+app.component('home-posts', Home);
+app.component('upload', UploadPost);
+app.component('user-profile', UserProfile);
+app.component('follow-profile', FollowProfile);
+app.component('browse-posts', Browse);
+app.component('browse-post', Post);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
-const app = new Vue({
-    el: "#app",
-});
+//Paste to DOM
+app.mount('#app');
 
     

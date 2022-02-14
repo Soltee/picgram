@@ -81,6 +81,13 @@
       0 => 'Overtrue\\LaravelFollow\\FollowServiceProvider',
     ),
   ),
+  'overtrue/laravel-like' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Overtrue\\LaravelLike\\LikeServiceProvider',
+    ),
+  ),
   'realrashid/sweet-alert' => 
   array (
     'providers' => 

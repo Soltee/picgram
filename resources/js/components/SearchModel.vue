@@ -41,12 +41,13 @@
                     v-model="searchKey" 
                     placeholder="Search users">
                 <svg class="absolute right-0 z-10 pr-2 h-8 w-8 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <pathd="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+                    <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
                 </svg>
                 <svg 
                     @click="getData=false; users=[];" 
                     xmlns="http://www.w3.org/2000/svg" 
-                    class="absolute left-0 z-10  pl-2 h-8 w-8 text-red-400 opacity-75"viewBox="0 0 24 24" 
+                    class="absolute left-0 z-10  pl-2 h-8 w-8 text-red-400 opacity-75" 
+                    viewBox="0 0 24 24" 
                     fill="none" 
                     stroke="currentColor" 
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

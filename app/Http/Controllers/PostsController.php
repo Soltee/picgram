@@ -28,7 +28,8 @@ class PostsController extends Controller
     public function index(User $user){
         $paginate = request()->paginate;
 
-        $posts = auth()->user()->posts()->latest()->with('images')->paginate($paginate);
+
+        $posts = $user->posts()->latest()->with('images')->paginate($paginate);
         
         return response()->json([
             'posts' => $posts->items(),

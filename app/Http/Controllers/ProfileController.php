@@ -27,11 +27,12 @@ class ProfileController extends Controller
     {
 
         $profile      = $user->profile;
-        $followings   = count($user->followings()->get());
-        $followers    = count($user->followers()->get());
+
+        $followings   = count($user->followings);
+        $followers    = count($user->followers);
         $isFollowing  = (auth()->user()->isFollowing($user)) ? true : false;
 
-        // $follows = (auth()->user()) ? auth()->user()->isFollowedBy($user) : false;
+        // $follows = (auth()->user()) ? auth()->user()->isFollowing($user) : false;
         // dd($isFollowing);
         return view('profile', compact('user', 'profile', 'isFollowing', 'followings', 'followers'));
     }

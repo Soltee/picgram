@@ -26,8 +26,15 @@
                                 <label class="block text-blue-light text-xs font-light   " for="email">
                                     Email
                                 </label>
-                                <input class=" text-blue-light rounded appearance-none   w-full
-                                    py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value="" autocomplete="email" autofocus placeholder="*******@gmail.com">
+                                <input 
+                                    class="text-blue-light rounded appearance-none   w-full
+                                    py-2 px-4  leading-tight border shadow focus:outline-none  " 
+                                    :class="(emailErr.length > 0) ? 'is-invalid': ''"
+                                    id="email" 
+                                    type="email" 
+                                    v-model="email"
+                                    name="email" 
+                                    autocomplete="email" autofocus placeholder="*******@gmail.com">
                                 <div v-if="emailErr.length > 0" class="">
                                     <p v-for="e in emailErr" class="text-red-500 text-sm mt-2 px-1 py-1 rounded" role="alert">
                                         {{ e }}
@@ -94,7 +101,14 @@
                                 <label class="block text-blue-light text-xs font-light   " for="email">
                                     Email
                                 </label>
-                                <input class=" text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  " :class="(emailErr.length > 0) ? 'is-invalid': ''" id="email" type="email" v-model="email" name="email" value="" autocomplete="email" autofocus placeholder="*******@gmail.com">
+                                <input 
+                                    class="text-blue-light rounded appearance-none   w-full py-2 px-4  leading-tight border shadow focus:outline-none  " 
+                                    :class="(emailErr.length > 0) ? 'is-invalid': ''"
+                                    id="email" 
+                                    type="email" 
+                                    v-model="email" 
+                                    name="email" 
+                                    autocomplete="email" autofocus placeholder="*******@gmail.com">
                                 <div v-if="emailErr.length > 0" class="">
                                     <p v-for="e in emailErr" class="text-red-500 text-sm mt-2 px-1 py-1 rounded" role="alert">
                                         {{ e }}

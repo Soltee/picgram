@@ -1,4 +1,10 @@
 module.exports = {
+    content: [    
+        "./resources/**/*.blade.php",   
+        "./resources/**/*.js",    
+        "./resources/**/*.vue",  
+    ],
+    purge: false,
     theme: {
         extend: {
             screens: {
