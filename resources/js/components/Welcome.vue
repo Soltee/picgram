@@ -64,9 +64,9 @@
         
                                     
                                 </button>
-                                <a class="btn btn-link w-full  text-center text-blue-light text-xs" :href="`/password/reset`">
+                                <!-- <a class="btn btn-link w-full  text-center text-blue-light text-xs" :href="`/password/reset`">
                                     Forgot Your Password?
-                                </a>
+                                </a> -->
                                 
                             </div>
                             <div class="flex justify-center">
